@@ -25,40 +25,44 @@ for k = [1,2,3,4,5]
 	disp('Hello world'); 
 end
 
-% The variable k is called the "loop variable".
-% Given "for k = a:b", the k is initialized to a, and the loop
-% is executed.  When the loop code is completed, the loop variable
-% is incremented to k = a+1 and the loop code is executed again.  
-% This process repeats until k > b.
-
-% Thus "for k = 1:10" starts k at 1.  Each time through the loop the 
-% value of k is increased by 1, until k gets larger than 10.
-%
-% You can see this explicitly by having the loop show the value of k:
+% The variable k is called the "loop variable", and the loop executes 
+% as follow:
+%  1. The loop variable is initialized to the first value in the 
+%     array (k=1), and code in the loop is executed.
+%  2. When the loop code is completed, the next value in the array is 
+%     assigned to the loop variable k (k=2) and the loop code is executed 
+%     again.  
+%  3. This process repeats for each value in the array. When all values 
+%     are exhausted, the loop ends and the code continues on the next 
+%     line below the loop block.
+% 
+% You can see this process explicitly by having the loop show the 
+% value of k:
 
 for k = 1:3
   disp(k) 
 end
 
 
-% You'll notice that the defined range for k after the "for" keyword
-% looks like array colon notation, and it is.  Thus we can define
-% the loop variable range as an array with non-unity steps:
+% Any valid array can be used in a for loop. For example, we can 
+% define the loop variable range as an array with non-unity step:
 
 for k = 2:-.5:0
   disp(k) 
 end
 
-% In fact, the loop variable values can be defined as ANY array,
-% with any valid Matlab values, for example:
+% The array values don't need to be sequential, and can be real 
+% or complex:
 
 for k = [4 0 1 99 pi 2+3i]
   disp(k) 
 end
 
-% or:
+% The array can also be assigned to a variable, and then used in 
+% the for loop as follows:
 
 a = [4 0 1 99 pi 2+3i];
+
 for k = a
   disp(k) 
 end
@@ -66,9 +70,8 @@ end
 % Here Matlab simply iterates through each value in the array a, from
 % a(1) to a(end)
 
-% Since we know that the loop variable k is changing as the loop runs,
-% in a predictable fashion, we can use it in calculations as needed.  For
-% example, the loop below displays the powers of 2 from 1 to 10:
+% The loop variable can be used for calculations within the loop.  
+% For example, the loop below displays the powers of 2 from 1 to 10:
 
 for k = 1:10
   disp(2^k) 
@@ -149,7 +152,9 @@ end
 
 
 
-% Here are some additional loop examples, set up as functions.
+% Here are some additional loop examples, set up as functions 
+% (commented out since we will use mysinN() in the following code, so 
+% the function must be defined at the end of the file):
 
 %%%%%%%%%%% mysin.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -184,12 +189,14 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% Exercise:
-% Write a loop that calculates a 6-term sin() approximation
-% over the range of x = 0 --> 2*pi, and plot the result together with
-% the true sin curve for comparison.  Hint: you need an integer for the
-% index into the array holding your result.  Think about this before
-% we look at the solution below...
+% Example: Write a loop that calculates a 6-term sin() approximation 
+% over the range of x = 0 --> 2*pi, and plot the result together with 
+% the true sin curve for comparison.
+% 
+% Hint: To generate the plot, we will need to store the values in an 
+% array, and thus will need to keep track of the index into the array 
+% as new values are being assigned during each loop iteration.  
+% Think about this before we look at the solution below...
 
 
 % ...
@@ -243,8 +250,8 @@ plot(x,sin_true)
 % WHILE LOOPS
 %
 
-% Unlike the for() loop, which runs through the loop a fixed
-% number of times before stopping, the while() loop executes
+% Unlike the for loop, which runs through the loop a fixed
+% number of times before stopping, the while loop executes
 % continuously as long as the loop argument is true.
 
 a = 0;
@@ -255,7 +262,7 @@ end
 
 2*a
 
-% While() loops can also be used to create a program that never
+% While loops can also be used to create a program that never
 % ends (an infinite loop):
 
 while 1             % 1 = true (0 = false)
@@ -264,13 +271,13 @@ while 1             % 1 = true (0 = false)
 end
 
 
-% while() loops are required when the condition for stopping the loop 
-% changes within the loop itself.  Thus while() loops can do
-% things that for() loops cannot, since for() loops require that
+% Note that while loops are required when the condition for stopping the 
+% loop changes within the loop itself.  Thus while loops can do
+% things that for loops cannot, since for loops require that
 % the start and end points of the loop are pre-defined
 % when the loop is first entered.
 %
-% On the other hand, any for() loop can be re-written as a while()
+% On the other hand, any for() loop can be re-written as a while
 % loop, for example:
 
 a = [-2.5 5.0 54.1 22];
@@ -278,7 +285,7 @@ for k = 1:length(a)       % the index k increments automatically
   disp(a(k))
 end
 
-% equivalent while() loop:
+% equivalent while loop:
 
 a = [-2.5 5.0 54.1 22];
 k = 1;
@@ -288,19 +295,19 @@ while k <= length(a)
 end
 
 
-% Note that in the above while() loops we use comparisons
+% Note that in the above while loops we use comparisons
 % like "<" and "<=".  These are logical comparisons that
 % yields a result that is either true (1) or false (0).  We will
 % talk more about logical comparisons in the next lecture topic.
 
-% Again: a while() loop should be used when the number of times the
+% Again: a while loop should be used when the number of times the
 % loop needs to be executed is dependent on what is happening
 % inside the loop, and a for() loop should be used when the
 % number of times to execute the loop is known before the
 % loop is started.
 
 % For example, here is another version of our mysin() function
-% that uses a while() loop to keep evaluating terms in the 
+% that uses a while loop to keep evaluating terms in the 
 % power series until the newest term is below a defined tolerance
 % limit (compared to our previous version, where the number of
 % iterations was defined before starting the loop):
