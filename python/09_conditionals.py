@@ -218,33 +218,34 @@ match x:
     case _:
         print("x != 10 and x != 20")
 
-
 # The match/case statement accepts composite data structures
 # including iterables and classes.
 
-
-
-
-
 practice = """
-
 Easy
-
 1. Odd or Even: Write a program that checks if a given number is odd or even.
-2. Positive, Negative, or Zero: Write a program to determine if a number is positive, negative, or zero.
+2. Positive, Negative, or Zero: Write a program to determine if a number is 
+   positive, negative, or zero.
 3. Maximum of Two Numbers: Use conditionals to find the larger of two numbers.
-4. Grade Assignment: Write a program to assign grades based on marks: A (90+), B (80–89), C (70–79), and Fail (<70).
+4. Grade Assignment: Write a program to assign grades based on marks: A (90+), 
+   B (80–89), C (70–79), and Fail (<70).
 
 Medium
-5. Divisibility Test: Check if a number is divisible by both 3 and 5, either one, or neither.
-6. Triangle Validity: Write a program to check if three given sides can form a triangle.
+1. Divisibility Test: Check if a number is divisible by both 3 and 5, either 
+   one, or neither.
+2. Triangle Validity: Write a program to check if three given sides can form 
+   a triangle.
 
 Hard
-7. Character Classification: Check if a given character is a vowel, consonant, digit, or special character.
-8. Largest of Three Numbers: Write a program to find the largest of three numbers using nested conditionals.
-9. Roots of a Quadratic Equation: Write a program to determine if a quadratic equation has real, imaginary, or equal roots based on the discriminant.
-10. Calculator: Create a simple calculator that performs addition, subtraction, multiplication, or division based on user input. Use conditionals to handle invalid inputs (like division by zero and non-numerical values).
-
+1. Character Classification: Check if a given character is a vowel, consonant,
+   digit, or special character.
+2. Largest of Three Numbers: Write a program to find the largest of three 
+   numbers using nested conditionals.
+3. Roots of a Quadratic Equation: Write a program to determine if a quadratic 
+   equation has real, imaginary, or equal roots based on the discriminant.
+4. Calculator: Create a simple calculator that performs addition, subtraction, 
+   multiplication, or division based on user input. Use conditionals to handle 
+   invalid inputs (like division by zero and non-numerical values).
 """
 print(practice)
 
