@@ -590,10 +590,10 @@ Easy
    Create an object and access the pi attribute through both the object and the class.
 
 Medium
-5. Class Composition: Create a class Engine with a method start that prints 
+1. Class Composition: Create a class Engine with a method start that prints 
    "Engine started". Create another class Car that contains an Engine object as an 
    attribute and call the start method through the Car object.
-6. Class Inheritance: Create a base class Vehicle an instance attribute max_speed 
+2. Class Inheritance: Create a base class Vehicle an instance attribute max_speed 
    (set during initialization) and a method describe() that prints "Maximum 
    speed = {max_speed} km/h". Then create two subclasses:
    Car: Add an attribute num_doors and override the describe method to include 
@@ -601,31 +601,32 @@ Medium
     Motorcycle: Add an attribute has_sidecar (boolean) and override the describe
     method to include whether it has a sidecar (e.g., "maximum speed = 150 km/h, 
     no sidecar").
-7. Method Overriding: Create a class Person with a method introduce() that prints 
+3. Method Overriding: Create a class Person with a method introduce() that prints 
    "Hello, I'm a person". Create a subclass Engineer that inherits from Person but
    overrides the introduce() method to print "Hello, I'm an engineer".
+
 Hard
-8. Constructors and Destructors: Create a class FileHandler with a constructor 
+1. Constructors and Destructors: Create a class FileHandler with a constructor 
    that takes a file name as an argument, opens the file in write mode, and prints
    "File {filename} opened.", and a destructor that closes the file and prints 
    "File {filename} closed.".
-9.  Custom Magic Method: __add__: Modify the Point class so that the + operator
-    can be used to add two Point objects. The result should be a new Point with 
-    the sum of the x and y values.
-10. Class Attribute vs Instance Attribute: Create a class Book with a class 
-    attribute library_name = "Central Library" and an instance attribute title. 
-    Create two book objects and demonstrate the difference between class and instance
-    attributes.
-11. Dynamic Attribute Addition: Create a class Student and an object of the 
-    class. Dynamically add an attribute grade to the object and set its value to "A".
-12. Method Chaining: Create a class Builder with methods set_height, set_width, 
-    and set_color. Each method should return the object itself to allow method 
-    chaining.
-13. Composition with Multiple Components: Create a class House that contains objects
-    of classes Room, Door, and Window. Define appropriate methods in each class and 
-    show how the House class interacts with these components. Include appropriate
-    class attributes and constructor / destructor code that will keep track of the 
-    number of Room, Door, and Window objects as they are declared and deleted.
+2. Custom Magic Method: __add__: Modify the Point class so that the + operator
+   can be used to add two Point objects. The result should be a new Point with 
+   the sum of the x and y values.
+3. Class Attribute vs Instance Attribute: Create a class Book with a class 
+   attribute library_name = "Central Library" and an instance attribute title. 
+   Create two book objects and demonstrate the difference between class and instance
+   attributes.
+4. Dynamic Attribute Addition: Create a class Student and an object of the 
+   class. Dynamically add an attribute grade to the object and set its value to "A".
+5. Method Chaining: Create a class Builder with methods set_height, set_width, 
+   and set_color. Each method should return the object itself to allow method 
+   chaining.
+6. Composition with Multiple Components: Create a class House that contains objects
+   of classes Room, Door, and Window. Define appropriate methods in each class and 
+   show how the House class interacts with these components. Include appropriate
+   class attributes and constructor / destructor code that will keep track of the 
+   number of Room, Door, and Window objects as they are declared and deleted.
 """
 print(practice)
 
