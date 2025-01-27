@@ -64,7 +64,7 @@ print('---------------------------------------')
 
 # Floor division returns an integer, dropping values after the radix:
 
-5 / 2		# 2.5
+5 / 2		 # 2.5
 5 // 2    # 2
 
 # The molulus operator returns the remainder after division:
@@ -196,35 +196,54 @@ print('PRACTICE PROBLEMS')
 print('---------------------------------------')
 
 practice = """
-1. Prompt the user to enter side lengths a, b, and c of a triangle, then
-   calculate and display the perimeter of the triangle.
-2. Prompt the user to enter the slope (m) and y-axis intercept (b) for
-   a line defined by y = m*x + b, then calculate and display the x-axis
-   intercept. 
+Arithmetic and Assignment Operators
+1. Basic Arithmetic: Compute the result of the following expressions 
+   and store them in variables:
+   5 + 3
+   12 - 7
+   4 * 6
+   20 / 4
+2. Floor Division: Calculate 17 // 3 and store the result in a variable.
+   What is the difference between / and //?
+3. Modulus: Compute the remainder when 23 is divided by 5.
+4. Exponentiation: Compute 2 raised to the power of 5 using the ** operator.
+5. Mixed Operations: Calculate 5 % 2 + 3 * 2 - 8 / 4**1.5, and add 
+   parentheses to emphasize the correct operator precedence.
+6. Assignment: Create a variable x and assign it the value 10. 
+   Update its value using combined assignment and arithmetic operators to:
+   Add 5
+   Subtract 3 
+   Multiply by 2
+   Divide by 4
+   Raise to the power of 0.5 (square root)
 
-Find the length and angle of the vector from point (2, 2) to point (6,10) 
+Comparison Operators
+1. Equal and Not Equal: Write expressions to compare the following pairs 
+   of values and store the results in variables:
+   Is 5 equal to 5?
+   Is 7 not equal to 10?
+2. Greater Than and Less Than: Evaluate whether:
+   15 is greater than 10.
+   4 is less than 2.
+3. Greater Than or Equal To: Write an expression to check if 7 is greater than or 
+   equal to 7.
+4. Combined Arithmetic and Comparison: Evaluate whether the result of 8 * 3 
+   is greater than 25.
 
-
-11. Calculate the value of y (y = x^2 + 6x + 9). Try to use different x values and figure out at what x value y is going to be 0.
-
-12. Find the length of 'python' and 'dragon' and make a falsy comparison statement.
-
-
-16. Find the length of the text _python_ and convert the value to float and convert it to string
-
-17. Even numbers are divisible by 2 and the remainder is zero. How do you check if a number is even or not using python?
-
-18. Check if the floor division of 7 by 3 is equal to the int converted value of 2.7.
-
-19. Check if type of '10' is equal to type of 10
-
-20. Check if int('9.8') is equal to 10
-
-
-
-
-
-
+Boolean Operators
+1. AND Operator: Evaluate whether the following two statements are both true:
+   10 > 5
+   8 < 12
+2. OR Operator: Evaluate whether at least one of the following statements is true:
+   15 < 10
+   5 != 3
+3. NOT Operator: Reverse the following Boolean expressions:
+   10 == 10
+   7 < 3
+4. Boolean Chain Comparison: Check if 5 < 10 < 15. What does this expression mean?
+5. Combined Booleans: Assign intergers to variables x and y, and write an
+   expression to evaluate if x is simultaneously greater than y, greater than 
+   zero, and even, or y is both odd and less than 20.
 """
 print(practice)
 
