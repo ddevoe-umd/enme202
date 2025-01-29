@@ -95,6 +95,11 @@ lookfor dot
 % Fractional powers
 2^0.5
 
+% Scientific notation
+1e6
+12e2
+2e-2
+
 % Increase number of significant digits displayed
 format long
 2^0.5
