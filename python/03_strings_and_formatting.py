@@ -60,6 +60,22 @@ print(s123)
 
 
 print()
+print('String input')
+print('---------------------------------------')
+
+# The input(p) function displays a prompt (p) to the user, and returns
+# a string value given by the user's input:
+
+name = input('Enter your name: ')
+print(name)
+
+
+val = input('Enter an integer value: ')
+val = int(val)     # convert string to integer
+print(val)
+
+
+print()
 print('String Indexing and Slicing')
 print('---------------------------------------')
 
@@ -102,11 +118,11 @@ print(last_two_chars)
 
 # Indexing with a step: [start, end+1, step]
 backwards = 'zyxwvutsrq' 
-print(count[0:6:2])
-print(count[0:7:2])
-print(count[0:-1:2])
-print(count[0::2])
-print(count[::2])
+print(backwards[0:6:2])
+print(backwards[0:7:2])
+print(backwards[0:-1:2])
+print(backwards[0::2])
+print(backwards[::2])
 
 
 print()
@@ -202,7 +218,7 @@ print('ABC 123'.isupper())          # True
 quote = 'Beam me up Scotty'
 print(quote.startswith('Beam'))     # True
 print(quote.startswith('beam'))     # False
-print(challenge.startswith('B'))    # True
+print(quote.startswith('B'))        # True
 
 # join()
 # Add the string between each element of a list of strings, and
