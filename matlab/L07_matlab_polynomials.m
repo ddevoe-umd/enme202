@@ -2,19 +2,18 @@
 %  ENME202 Matlab
 %
 
-% ==========================================================================
-
-%
 %  POLYNOMIALS
 %
 
-% FUNCTION TOPICS:
-%    polyval() -- Evaluate a polynomial for a given input value
-%    roots()   -- Find the roots of a polynomial
-%    conv()    -- Multiply polynomials (convolution)
-%    deconv()  -- Divide polynomials (deconvolution)
-%    poly()    -- Create a polynomial from its roots
-%    polyfit() -- Create a polynomial to fit data points
+% ==========================================================================
+
+% POLYNOMIAL FUNCTIONS:
+%    polyval(p,x)   -- Evaluate a polynomial array p at a given x value
+%    roots(p)       -- Find the roots of a polynomial p
+%    conv(p1,p2)    -- Multiply polynomials p1 and p2 (convolution)
+%    deconv(p1,p2)  -- Divide polynomial p1 by p2 (deconvolution)
+%    poly(r)        -- Return a polynomial from roots array r
+%    polyfit(x,y,s) -- Return a polynomial or order s fitting x,y data arrays 
 
 % Polynomials can be represented in Matlab by arrays of coefficients,
 % starting with the highest power of x.
@@ -23,8 +22,7 @@
 
 p = [2 8 12 8];
 
-% polyval() evaluates a polynomial at a specified point, i.e. for
-% a specific numerical value of the independent variable:
+% polyval(p,x) evaluates a polynomial array p at a specified x value:
 
 polyval(p, 0)     % evaluate p(x) @ x=0
 
@@ -48,7 +46,7 @@ polyval(p, x)     % returns an array with length(x) values
 
 % The REAL reason for using Matlab's polynomial representation
 % is that you can use a host of other polynomial functions.
-% Let's check some of those out.
+% Let us check some of those out.
 
 %
 %  ROOTS 
@@ -62,10 +60,10 @@ p = [1 0 0 0 -1]
 % represented by zeros in the appropriate position of the 
 % coefficient array.
 %
-% The roots() function will find the roots (zeros) of an 
-% arbitrary order polynomial.  Since there are as many roots
+% roots(p) function will find the roots (zeros) of a
+% polynomial p.  Since there are as many roots
 % as the order of p (highest power of x), roots() will 
-% return an *array* with all the roots:
+% return an array with all roots.
 
 r = roots(p)     % +/-1, +/-i (4 roots)  
 
@@ -91,7 +89,7 @@ polyval(p, r(1))      % ans = -1.5987e-014
 
 p1 = [1 2 3];     % p1(x) = x^2+2x+3
 p2 = [3 1];       % p2(x) = 3x+1
-p3 = p1 + p2;     % Won't work -- arrays are different lengths
+p3 = p1 + p2;     % Will not work -- arrays are different lengths
 
 % Need to "pad" the shorter coefficient array with leading zeros
 % to make it the same length as the longer array in order to enable 
@@ -136,7 +134,7 @@ r = roots(p)        % --> -2, -1+/-i
 % factored form by multiplying together all N of the first 
 % order factors (x-r(k)), where k = 1, 2, ..., N.
 %
-% Let's start with the just two roots (since conv only takes
+% Start with the just two roots (since conv only takes
 % two arguments):
 
 p1 = conv([1 -r(1)],[1 -r(2)])
@@ -150,7 +148,7 @@ p2 = conv(p1,[1 -r(3)])        % ans = [1 4 6 4]
 
 p    % [2 8 12 8] = 2 * p2
 
-% Note that the original polynomial isn't "monic", so we need to
+% Note that the original polynomial is not "monic", so we need to
 % multiply the product of the factors by the coef of the highest
 % power of x to recover the original polynomial:
 
@@ -161,7 +159,7 @@ p    % [2 8 12 8] = 2 * p2
 
 2 * conv( conv([1 -r(1)], [1 -r(2)]), [1 -r(3)])
 
-% Ok, well that was a lot of work!!  Now, let's do it the
+% Ok, well that was a lot of work!!  Now do it the
 % easy way.
 %
 % poly() is a built-in command to expand a polynomial as the
@@ -211,7 +209,7 @@ spots = sunspots(:,2);  % slice 2nd column
 
 plot(year, spots)
 
-% Let's look only at the data since 1980. An easy way to do this
+% Look only at the data since 1980. An easy way to do this
 % is with the find() function:
 
 idx = find(year==1980);   % returns a single index
@@ -230,13 +228,13 @@ plot(year, spots, 'o-')
 xlabel('Year')
 ylabel('# of sunspots')
 
-% The polyfit() function returns an array of coefficients for
+% The polyfit(x,y,s) function returns an array of coefficients for
 % the polynomial that best fits the given data (least squares).
 % 
 % 3 arguments:
 %   x coordinates of data
 %   y coordinates of data
-%   order of the polynomial to fit
+%   order s of the polynomial to fit
 
 % Convert the year to a relative year (since 1980).
 % The reason for this will be explained shortly:
@@ -248,7 +246,7 @@ pp = polyfit(delta_year, spots, 3);
 % Recall that he polyval() function converts a polynomial
 % to an array of y-axis values for a given array of x-values
 %
-% Let's use this to evaluate the polynomial against the 
+% Use this to evaluate the polynomial against the 
 % original x data coordinates to see how well the function
 % fits the data:
 
@@ -256,7 +254,7 @@ hold on
 fit = polyval(pp, delta_year);
 plot(year, fit, 'r-')
 
-% Not so well here for a third order poly, try higher order:
+% Not a great fit for a third order poly, so try higher order:
 
 pp = polyfit(delta_year, spots, 5);
 fit = polyval(pp, delta_year);
@@ -285,8 +283,7 @@ hold on
 plot(year,polyval(pp,year),'b:')
 
 % What happened?   The polynomial is trying to fit data far from 
-% the origin, without any intervening data to "guide" the fit, resulting
-% in a poor fit.
+% the origin, without any intervening data to "guide" the fit.
 
 %
 %  POLYNOMIAL DIVISION
@@ -302,13 +299,14 @@ plot(year,polyval(pp,year),'b:')
 % q(x) is the "quotient" polynomial
 % r(x) is the "remainder" polynomial
 
-p1 = [2 6 8 4];           % p1(x) = 2x^3+6x^2+8x+4 
-p2 = [1 2 2];             % p2(x) = x^2+2x+2
+p1 = [2 6 8 4];           % p1(x) = 2x^3 + 6x^2 + 8x + 4 
+p2 = [1 2 2];             % p2(x) = x^2 + 2x + 2
 [q,r] = deconv(p1,p2) 
 
-% If you do this by hand, you should find that
-% p1(x)/p2(x) = x+4 here with remainder -2x-4
-% so q(x) = x+4 for this problem, and r(x) = -2x-4
+% If you do problem this by hand, you will find that
+% p1(x)/p2(x) = x+4 with remainder -2x-4
+% so q(x) = x+4     --> q = [1 4]
+% and r(x) = -2x-4  --> r = [-2 -4]
 
 
 % Given q,r we can reconstruct the original polynomial as:
