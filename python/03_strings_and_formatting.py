@@ -37,14 +37,14 @@ print(s)
 # Strings can also contain non-space white characters including
 # tabs and newline characters using "escape sequences":
 s1 = 'start\t1 tab\t\t\t3 tabs'      # tab escape sequence: \t
-s2 = 'this is a\n multiline string'  # newline escape sequence: \n
+s2 = 'this is a\nmultiline string'  # newline escape sequence: \n
 print(s1)
 print(s2)
 
 # Strings can contain non-alphanumeric Unicode characters using
 # the unicode escape sequence (\u) with the appropriate unicode
 # character value, for example 03A9 for capital omega:
-omega_string = 'The omega symbol is \u03A9'
+omega_string = 'Omega symbol: \u03A9'
 print(omega_string)
 
 # Find the number of characters in a string using len()
@@ -63,7 +63,7 @@ print()
 print('String input')
 print('---------------------------------------')
 
-# The input(p) function displays a prompt (p) to the user, and returns
+# Remember that input(p) displays a prompt (p) to the user, and returns
 # a string value given by the user's input:
 
 name = input('Enter your name: ')
@@ -81,9 +81,11 @@ print('---------------------------------------')
 
 # Strings are _iterable_ data structures. One consequence is that we
 # can index into a string to pull out one or more specific characters.
-# Note:
-#   * use square brackets for indexing
-#   * index values start at 0
+#
+# Use square brackets for indexing
+#
+# Index values start at 0
+
 word = 'Python'
 first_char = word[0]
 last_char = word[5]
@@ -95,6 +97,9 @@ last_char = word[-1]
 second_to_last_char = word[-2]
 print(last_char)
 print(second_to_last_char)
+
+# However, we cannot "wrap around" the end of the string:
+print(word[-2:2])    # yields an empty string
 
 # Multiple characters can be accessed by "slicing" a string
 # using paired index values: [start, end+1]
@@ -124,6 +129,8 @@ print(backwards[0:-1:2])
 print(backwards[0::2])
 print(backwards[::2])
 
+# Negative (backwards) steps also work:
+print(backwards[5:1:-1])
 
 print()
 print('String Methods')
@@ -150,12 +157,12 @@ s.join(iterable)
 
 # capitalize()
 # Return a new string with the first letter capitalized
-welcome = "bienvenido bienvenue willkommen स्वागत 欢迎 добро пожаловать"
+welcome = "bienvenido bienvenue willkommen"
 print(welcome.capitalize())
 
 # title()
 # Returns a new string with the first letters of all words capitalized
-languages = "Spanish French German Hindi Chinese Russian"
+languages = "Spanish French German"
 print(welcome.title())
 print(languages.title())
 

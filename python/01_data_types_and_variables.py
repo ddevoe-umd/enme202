@@ -21,8 +21,8 @@ print(type(5.27))    # floating point (float)
 print(type(5 + 8j))  # complex value (complex)
 
 # We won't work with complex values in Python, but some of the functionality
-# we will cover later in the course for Matlab also applies to Python, 
-# (e.g. finding the magnitude, real part, or imaginary part of a complex vector).
+# is similar to Matlab (e.g. finding the magnitude, real part, or 
+# imaginary part of a complex vector).
 
 # Python is a strongly-typed language (intermingling of different 
 # variable types is restricted), but numerical values can be 
@@ -52,11 +52,12 @@ print("this isn't not a string")
 print('that wasn\'t good grammar')
 
 # A string is not just a sequence of characters. It is a "member" of
-# the Sting "class" and an "iterable" object that has access to
+# the String "class" and an "iterable" object that has access to
 # a number of functions and "class methods" (we will soon learn what 
 # all of this means).
-# For example, a string can be passed as an argument to the len()
-# function to determine the number of characters in the string:
+#
+# A string can be passed as an argument to the len() function
+# to determine the number of characters in the string:
 
 print(len('let\'s count'))
 
@@ -76,26 +77,22 @@ print('---------------------------------------')
 # is actually a *reference* to a memory address where the value is stored.
 #
 # Python variable can only contain alpha-numeric characters (a-z, A-Z, 0-9)
-# and the underscore character (_). No other characters are permitted=.
+# and the underscore character (_). No other characters are permitted.
 #
-# By convention, we use "snake-case" for standard Python variables:
-#  this_is_snake_case
+# By convention, standard Python variables use "snake-case":
+#
+#   this_is_snake_case
 #
 # Variable names are case-sensitive (myvar, Myvar, and myVar are all
 # different names)
 
 # The assignment operator (=) assigns a value (RHS) to variable (LHS). When
 # using the assignment operator to define the value stored in a variable,
-# we say the variable is being "declared".
+# we say the variable is being "declared":
 
-x = 5    # assign the value 5 to a variable named x
-type(x)  # int
-
-this_class = "ENME202"
-type(this_class)
-
-this_variable_name_is_very_short = False
-type(this_variable_name_is_very_short)
+x = 5    # assign interger to a variable named x
+this_course = "ENME202"    # assign a string
+this_variable_name_is_very_short = False    # assign a bool
 
 # Multiple variables can be defined on a single line:
 
@@ -127,18 +124,18 @@ print('x = ',x,type(x))    # now x = 10 (int)
 print(22 + int("33"))
 
 # Another common example is using type converstion to "clip" values 
-# after the radixin a float by converting the value to an int:
+# after the radix in a float by converting the value to an int:
 
 print(int(123.456))
 
-# Convert ints/floats to complex:
+# Convert ints or floats to complex:
 print(complex(7, 2.2))
 
 # Another important elemental data type is None. None is *not* equivalent 
 # to 0, False, or an empty string. The None keyword is used to define
 # a null value:
 
-type(None)    # NoneType
+print(type(None))    # NoneType
 
 # A variable of type NoneType tells us that no value has been assigned.
 
@@ -169,7 +166,7 @@ print('---------------------------------------')
 
 practice = """
 In several problems you will need to use basic mathematical operators
-(+, -, *). We will talk about operators in the next code deck, but 
+(+, -, *). We will talk about operators in the next code file, but 
 for now just note that these operators return a value based on their
 functionality that can be assigned to a variable. For example, 
 "x = 10 + 1" will assign a value of 11 to the variable x.
