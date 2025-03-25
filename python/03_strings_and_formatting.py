@@ -69,7 +69,6 @@ print('---------------------------------------')
 name = input('Enter your name: ')
 print(name)
 
-
 val = input('Enter an integer value: ')
 val = int(val)     # convert string to integer
 print(val)
@@ -103,8 +102,8 @@ print(word[-2:2])    # yields an empty string
 
 # Multiple characters can be accessed by "slicing" a string
 # using paired index values: [start, end+1]
-first_three_chars = word[0:2]
-word_without_first_and_last_chars = word[1:4]
+first_three_chars = word[0:3]
+word_without_first_and_last_chars = word[1:5]
 middle_of_word = word[2:3]
 print(first_three_chars)
 print(word_without_first_and_last_chars)
