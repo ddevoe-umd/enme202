@@ -172,7 +172,7 @@ print(languages.swapcase())
 # count(substr, start=.., end=..)
 # Return the number of occurrences of substr in s,
 # optionally give the starting and ending position to test
-story = 'extreme text exageration'
+story = 'extreme text exaggeration'
 print(story.count('ex'))
 print(story.count('ex', 3, -1))   # can use negative indices
 print(story.count('ex', 5))       # omit ending index
