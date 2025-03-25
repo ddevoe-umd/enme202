@@ -218,32 +218,32 @@ Arithmetic and Assignment Operators
    Raise to the power of 0.5 (square root)
 
 Comparison Operators
-1. Equal and Not Equal: Write expressions to compare the following pairs 
+7. Equal and Not Equal: Write expressions to compare the following pairs 
    of values and store the results in variables:
    Is 5 equal to 5?
    Is 7 not equal to 10?
-2. Greater Than and Less Than: Evaluate whether:
+8. Greater Than and Less Than: Evaluate whether:
    15 is greater than 10.
    4 is less than 2.
-3. Greater Than or Equal To: Write an expression to check if 7 is greater than or 
+9. Greater Than or Equal To: Write an expression to check if 7 is greater than or 
    equal to 7.
-4. Combined Arithmetic and Comparison: Evaluate whether the result of 8 * 3 
-   is greater than 25.
+10. Combined Arithmetic and Comparison: Evaluate whether the result of 8 * 3 
+    is greater than 25.
 
 Boolean Operators
-1. AND Operator: Evaluate whether the following two statements are both true:
-   10 > 5
-   8 < 12
-2. OR Operator: Evaluate whether at least one of the following statements is true:
-   15 < 10
-   5 != 3
-3. NOT Operator: Reverse the following Boolean expressions:
-   10 == 10
-   7 < 3
-4. Boolean Chain Comparison: Check if 5 < 10 < 15. What does this expression mean?
-5. Combined Booleans: Assign intergers to variables x and y, and write an
-   expression to evaluate if x is simultaneously greater than y, greater than 
-   zero, and even, or y is both odd and less than 20.
+11. AND Operator: Evaluate whether the following two statements are both true:
+    10 > 5
+    8 < 12
+12. OR Operator: Evaluate whether at least one of the following statements is true:
+    15 < 10
+    5 != 3
+13. NOT Operator: Invert the following Boolean expressions:
+    10 == 10
+    7 < 3
+14. Boolean Chain Comparison: Check if 5 < 10 < 15.
+15. Combined Booleans: Assign integers to variables x and y, and write an
+    expression to evaluate if x is simultaneously greater than y, greater than 
+    zero, and even, or y is both odd and less than 20.
 """
 print(practice)
 
