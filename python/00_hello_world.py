@@ -24,9 +24,12 @@ print("hello world")
 
 print("hello", "world")
 
-# Sometimes we want multiple print lines to generate output
-# on the same line. To do this, add a second "end" argument to 
-# the print statement as follows:
+# By default, the print() function adds a newline character 
+# to the end of the string argument. However, sometimes
+# we want multiple print lines to generate output on the
+# same line. To do this, add a second "end" argument to 
+# replace the default newline with a _null string_
+# as follows:
 
 print("hello world...", end='')
 print("and hello again ")
