@@ -37,7 +37,7 @@ print(s)
 # Strings can also contain non-space white characters including
 # tabs and newline characters using "escape sequences":
 s1 = 'start\t1 tab\t\t\t3 tabs'      # tab escape sequence: \t
-s2 = 'this is a\nmultiline string'  # newline escape sequence: \n
+s2 = 'this is a\nmultiline string'   # newline escape sequence: \n
 print(s1)
 print(s2)
 
@@ -115,9 +115,9 @@ print(last_two_chars)
 
 # If the slicing range starts or ends at the first of last character,
 # that value of the range may be ommitted
-first_three_chars = word[:2]
+first_two_chars = word[:2]
 last_two_chars = word[-2:]
-print(first_three_chars)
+print(first_two_chars)
 print(last_two_chars)
 
 # Indexing with a step: [start, end+1, step]
@@ -191,13 +191,13 @@ print(story.find('t'))
 print(story.rfind('t'))
 
 # isalnum()
-# Return True is string contains only alphanumeric characters
+# Return True is string contains only _alphanumeric_ characters
 print('abc123'.isalnum())    # True
 print('abc 123'.isalnum())   # False
 print('abc+123'.isalnum())   # False
 
 # isalpha()
-# Return True if strong contains only alphanbetic characters
+# Return True if strong contains only _alphabetic_ characters
 print('abc123'.isalpha())    # False
 print('abcABC'.isalpha())    # True
 print('abc ABC'.isalpha())   # False
