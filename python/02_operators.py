@@ -9,7 +9,6 @@ Comparison operators
 Comparison operations using Booleans
 """
 
-
 print("""
 Arithmetic operators:
 --------------------
@@ -107,7 +106,7 @@ x //= 2  # same as x = x // 2 (x is now 2)
 x **= 3  # same as x = x ** 2 (x is now 8)
 x %= 3   # same as x = x % 3 (x is now 2)
 
-# Assignment operators work for other arithmetic data types:
+# Assignment operators work for all arithmetic data types:
 
 complex_val = 2 + 6j
 complex_val *= -3j     # (2 + 6j) * (-3j) = 18 - 6j
@@ -183,7 +182,7 @@ False == False   # True
 # context. For example:
 
 True + 1 	# yields 2 since True is type cast to 1
-False - 1   # yields -1 since False is type case to 0
+False - 1   # yields -1 since False is type cast to 0
 
 # This makes the following comparions valid:
 
@@ -217,6 +216,8 @@ Arithmetic and Assignment Operators
    Divide by 4
    Raise to the power of 0.5 (square root)
 
+For all of the following problems, display the boolean result (True or False) for each comparison:
+
 Comparison Operators
 7. Equal and Not Equal: Write expressions to compare the following pairs 
    of values and store the results in variables:
@@ -241,9 +242,10 @@ Boolean Operators
     10 == 10
     7 < 3
 14. Boolean Chain Comparison: Check if 5 < 10 < 15.
-15. Combined Booleans: Assign integers to variables x and y, and write an
+15. Combined Booleans: Assign integers to variables x and y, and write a single
     expression to evaluate if x is simultaneously greater than y, greater than 
-    zero, and even, or y is both odd and less than 20.
+    zero, and even, or y is both odd and less than 20. Test the expression using
+    x,y = 10,13
 """
 print(practice)
 

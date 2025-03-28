@@ -8,7 +8,6 @@ Variables and the assignment operator
 User Input
 """
 
-
 print()
 print('Elemental data types: int, float, complex, bool, str')
 print('---------------------------------------')
@@ -171,14 +170,14 @@ for now just note that these operators return a value based on their
 functionality that can be assigned to a variable. For example, 
 "x = 10 + 1" will assign a value of 11 to the variable x.
 
-1. Declare variables called first_name and last_name by assigning string
-   values given by your first name and last name.
+1. Using a single line of code, declare variables called first_name and last_name by 
+   assigning string values given by your first name and last name.
 2. Using the len() function, declare a variable called char_count that
    holds the total number of characters contained in first_name and last_name.
 3. Print the data type of char_count and first_name.
 4. Using appropriate variable names, calculate the area and circumference
    of a circle with a radius of 1.0 m. Display the results (including units)
-   in a single line using the print() function.
+   using a single print() statement.
 5. Repeat step 4, but ask the user to enter a value for the radius.
 """
 print(practice)

@@ -70,7 +70,7 @@ name = input('Enter your name: ')
 print(name)
 
 val = input('Enter an integer value: ')
-val = int(val)     # convert string to integer
+val = int(val) + 1     # convert string to integer
 print(val)
 
 
@@ -88,12 +88,12 @@ print('---------------------------------------')
 word = 'Python'
 first_char = word[0]
 last_char = word[5]
-print(first_char)
-print(last_char)
+print(first_char)   # 'P'
+print(last_char)    # 'n'
 
 # Negative index allow us to index from the *end* of a string
-last_char = word[-1]
-second_to_last_char = word[-2]
+last_char = word[-1]    # 'n'
+second_to_last_char = word[-2]   #  'o'
 print(last_char)
 print(second_to_last_char)
 
@@ -101,8 +101,8 @@ print(second_to_last_char)
 print(word[-2:2])    # yields an empty string
 
 # Multiple characters can be accessed by "slicing" a string
-# using paired index values: [start, end+1]
-first_three_chars = word[0:3]
+# using paired index values: [start : end+1]
+first_three_chars = word[0:3]    # 'Pyt'
 word_without_first_and_last_chars = word[1:5]
 middle_of_word = word[2:3]
 print(first_three_chars)
@@ -120,7 +120,7 @@ last_two_chars = word[-2:]
 print(first_two_chars)
 print(last_two_chars)
 
-# Indexing with a step: [start, end+1, step]
+# Indexing with a step: [start : end+1 : step]
 backwards = 'zyxwvutsrq' 
 print(backwards[0:6:2])
 print(backwards[0:7:2])
@@ -153,6 +153,8 @@ s.split(delimiter)
 s.splitlines()
 s.join(iterable)
 """
+
+dir('string')    # Display all attributes and methods for the string class
 
 # capitalize()
 # Return a new string with the first letter capitalized
@@ -355,17 +357,22 @@ practice = """
 
 Easy
 
-1. Write a Python program to concatenate two strings, add a space between them, and print the result.
-2. Write a program that takes a string input and prints its length.
-3. Write a program to print the first and last characters of a given string.
-4. Given a string, extract and print the substring that starts at index 2 and ends at index 5.
+1. Write Python code to concatenate two strings "one" and "two", add a space between them, and print the result.
+2. Write Python code that reverses the sequence of characters in the string "abcde".
+3. Write Python code to print the first and last characters of string "my string".
+4. Given a string s = "my string", extract and print the substring that starts at index 2 and ends at index 5.
 
 Medium
-5. Palindrome Check: Write a function to check if a given string is a palindrome.
-6. String Replacement: Replace all occurrences of the word "Python" with "Engineering" in a given string.
-7. Count Substring Occurrences: Write a program that counts how many times the substring "abc" appears in a given string.
-8. String Formatting: Create a formatted string using f-strings to display a name and age, given the variables name and age.
-9. Vowel Count: Write a program to count the number of vowels in a given string.
+5. Palindrome Check: write a single line of code to check (display True or False) if a given string is a palindrome,
+   regardless of capitalization for the string. Test the code using "Able was I ere I saw Elba" (True) and
+   "Not a palindrome" (false).
+6. String Replacement: Replace all occurrences of the word "python" with "snake" in the string 
+   s = "One python, two pythons, three pythons".
+7. Count Substring Occurrences: Write code that displays the number of times the substring "abc" appears in the string 
+   "abrabcbaccababccabc".
+8. String Formatting: Use an f-string to create and display the string "Shear stress on element 12 = 1.566 Pa"  
+   given the following variables: element_number, stress = 12, 1.566983.
+9. Vowel Count: Write a program to count the number of vowels in the string "elephant puree".
 
 Hard -- problems may require require loops and conditionals!
 10. Anagram Check: Write a function to check if two strings are anagrams of each other.
