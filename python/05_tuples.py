@@ -111,7 +111,7 @@ print(t.count(5))
 
 # index(val)
 # Return the first index of tuple element with value equal to val
-print(t.index(2))
+print(t.index(6))
 
 
 print()

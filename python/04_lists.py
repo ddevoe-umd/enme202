@@ -31,8 +31,8 @@ print('---------------------------------------')
 # Declare an empty list using list()
 empty = list()
 
-# Add some elements to the empty list using append(), noting that the 
-# sequence is maintained
+# Add some elements to the empty list using append(), which places each new
+# value at the end of the list:
 empty.append('foo')   # first element
 empty.append('bar')
 empty.append('123')
@@ -47,6 +47,11 @@ fruits = ['banana', 'orange', 'grape', 'blueberry', 'lemon', 'peach', 'lime']
 # Print the list and it's length using len()
 print(f'Fruits: {fruits}')
 print(f'Number of fruits: {len(fruits)}')
+
+# Lists are heterogeneous:
+stuff = ['string', 3.1415, 10, 2+4j, ['list', 'in', 'list']]
+print(f'Stuff: {stuff}')
+print(f'Elements in stuff: {len(stuff)}')
 
 
 print()
@@ -89,6 +94,7 @@ print(fruits)
 fruits[::3] = ['cherry', 'cranberry', 'apricot']
 
 
+
 print()
 print('in')
 print('---------------------------------------')
@@ -98,8 +104,11 @@ print('---------------------------------------')
 # The syntax "value in list" returns True if the value is in
 # the list, otherwise False.
 is_in_fruits = "carrot" in fruits       # False
-is_in_fruits = "mango" in fruits        # False
 is_in_fruits = "blueberry" in fruits    # True
+
+val = 6
+is_in_number_list = val in [2,4,6]
+is_less_than_five = val in range(6)
 
 
 
@@ -188,10 +197,10 @@ fruits = ['banana', 'orange', 'grape', 'blueberry', 'lemon', 'peach', 'lime']
 del fruits[0]     
 print(fruits)
 
-del fruits[1:3]     
+del fruits[1:3]     # remove elements at index 1 and 2
 print(fruits)
 
-del fruits    # remove the entire list from memory and delete the list name
+del fruits          # remove entire list from memory and delete the list name
 
 # extend(newlist)
 # Add newlist to the end of list (nothing is returned)

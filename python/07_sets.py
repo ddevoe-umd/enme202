@@ -27,7 +27,7 @@ print('---------------------------------------')
 s_empty = set()
 print(f's_empty = {s_empty}')
 
-# Creating a set with initial values:
+# Creating a set with initial values using curly brackets:
 s_init = {'item1', 'item2', 'item3'}
 print(f's_init = {s_init}')
 
@@ -105,6 +105,7 @@ veggies = {'carrot', 'lettuce', 'brocolli'}
 foods.update(veggies)
 print(foods)
 
+
 print()
 print('Removing Elements From a Set:')
 print('---------------------------------------')
@@ -129,6 +130,7 @@ print(s_init)
 # The set variable itself can be deleted from memory using the del command:
 del s_init
 print('s_init' in globals())
+
 
 print()
 print('Converting Between Lists and Sets:')
@@ -163,6 +165,7 @@ foods = fruits.union(veggies)
 print(foods)
 print(fruits)
 
+
 print()
 print('Set Intersection:')
 print('---------------------------------------')
@@ -172,7 +175,7 @@ print('---------------------------------------')
 # Use intersection() to play a card game. The dealer is holding a set of 8
 # unique cards. The player guesses 2 of the cards, and wins when 
 # at least 2 of the guesses are held by the dealer. Use intersection() to
-# find the number of gussed cards in the dealer's hand:
+# find the number of guessed cards in the dealer's hand:
 dealer_hand = {2,3,5,6,7,9,11,13}
 player_guess = {6,7,8}
 print(f'number of correct guesses = {len(dealer_hand.intersection(player_guess))}')

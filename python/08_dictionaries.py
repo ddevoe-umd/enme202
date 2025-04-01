@@ -21,7 +21,7 @@ print('---------------------------------------')
 # Declare an empty dictionary, and add key,value pair entries
 demo_dict = {}                       # declare an empty dictionary
 demo_dict["words"] = "hi there"      # add a string
-demo_dict"count"] = 99              # add an integer
+demo_dict["count"] = 99              # add an integer
 demo_dict["list"] = ["bar", 25]      # add a list
 demo_dict[4] = "foobar"              # use an integer key
 print(demo_dict)
@@ -94,7 +94,7 @@ print('---------------------------------------')
 # Referencing a dictionary key that does not exist raises an error.
 # To avoid this, use the get() method which returns None (NoneType data
 # type) if the key does not exist
-d = {"foobar":123, "this":"that", 2:(123, 'x')}
+d = {"foobar":123, "this":"that", 2:(123, 'x'), 0:1.23}
 # print(d['nope'])     <--- this would raise an error, so instead do the following:
 print(d.get('nope'))   # None
 
@@ -105,16 +105,19 @@ print('---------------------------------------')
 
 # pop(key)
 # Removes the item with the specified key, and return the value for that key
-
+x = d.pop('foobar')
+print(x)
 
 # popitem()
 # Removes the item that was last inserted into the dictionary (be careful,
 # in earlier versions of Python popitem() would remove a random item)
-
+x = d.popitem()
+print(x)
 
 # del dict[key]
 # Remove an item with specified key name (nothing is returned)
-
+del d['this']
+print(d)
 
 # clear()
 # Clear the dictionary items (leaving an empty dict)
