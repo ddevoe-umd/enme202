@@ -124,7 +124,7 @@ not > and > or
 
 # Build truth tables for each of the Boolean operators:
 
-print('  x  | not x ')
+print('\n  x  | not x ')
 print('-----|-----|--------')
 x = 0
 print(f'  {x}  |  {int(not x)}')
@@ -132,7 +132,7 @@ x = 1
 print(f'  {x}  |  {int(not x)}')
 
 
-print('  x  |  y  | x and y')
+print('\n  x  |  y  | x and y')
 print('-----|-----|--------')
 x,y = 0, 0 
 print(f'  {x}  |  {y}  |   {int(x and y)}')
@@ -144,7 +144,7 @@ x,y = 1, 1
 print(f'  {x}  |  {y}  |   {int(x and y)}')
 
 
-print('  x  |  y  | x or y')
+print('\n  x  |  y  | x or y')
 print('-----|-----|--------')
 x,y = 0, 0 
 print(f'  {x}  |  {y}  |   {int(x or y)}')
@@ -156,7 +156,7 @@ x,y = 1, 1
 print(f'  {x}  |  {y}  |   {int(x or y)}')
 
 
-print('  x  |  y  | XOR(x,y)')
+print('\n  x  |  y  | XOR(x,y)')
 print('-----|-----|--------')
 x,y = 0, 0 
 print(f'  {x}  |  {y}  |   {int((x and not y) or (y and not x))}')
@@ -202,8 +202,8 @@ print('match / case Statements')
 print('---------------------------------------')
 
 # The match/case statement tries to match an input value to a sequence of 
-# possible case values. The code block under the first matching case statement
-# will be executed. 
+# possible case values. The code block under the _first_ matching case statement
+# will be executed (after which the match block ends). 
 
 # A case value of _ will always match the input value, allowing a
 # corresponding block of code to execute if all previous case values
@@ -219,7 +219,7 @@ match x:
         print("x != 10 and x != 20")
 
 # The match/case statement accepts composite data structures
-# including iterables and classes.
+# including iterables.
 
 practice = """
 Easy

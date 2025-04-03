@@ -20,20 +20,20 @@ print('---------------------------------------')
 # Basic for loops syntax:
 
 for loop_variable in iterable: 
-  # Do something.
-  # Never modify the iterable within the loop!
+    # Do something.
+    # Never modify the iterable within the loop!
 
 # An iterable is a data structure that can be “iterated over”. Many Python data
 # structures including strings, lists, tuples, and dictionaries are iterables. 
 
-# Let's start constructing loops with lists as the iterable data structure.
-# When used in a loop definition statement, Python will iterate through each element
+# Let's start constructing for loops with lists as the iterable data structure.
+# When used with the in keyword, Python will iterate through each element
 # of the list, sequentially assigning eachlist value to the loop variable for each
 # pass through the list.
 
 my_string = 'among these barren crags'
 for letter in my_string:
-	print(letter,end=',')
+	print(letter, end=',')
 
 my_list = ['cat', 'window', 'defenestrate']
 for item in my_list:
@@ -62,8 +62,8 @@ for i in [0,1,2,3,4,5,6,7,8,9]:
 # quickly becomes impractical. Instead, we can use the range() function to
 # generate an iterable data structure with the desired values on the fly
 #
-# The range() function returns an iterable of integers, using the following
-# syntax options:
+# The range() function returns an iterable of integers, by default starting at 0,
+# using the following syntax options:
 #
 # range(end+1)
 # range(start, end+1)
@@ -213,9 +213,9 @@ print()
 print('while Loops:')
 print('---------------------------------------')
 
-# _While_ loops are necessary to define loops where the number of iterations is
+# _While_ loops are necessary when the number of loop iterations is
 # not know ahead of time, but rather is defined by a condition that changes
-# while we are in the loop:
+# within the loop:
 
 a = -10
 while a <= 10:
