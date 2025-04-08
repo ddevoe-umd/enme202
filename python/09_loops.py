@@ -127,6 +127,7 @@ for x in range(2,6):        # outer loop, x=2,3,4,5
         print(f'{x}, {y}')
         if x + y > 5:
             break  # exit inner loop, go to next x value
+    print('.')
 
 
 # The else statement after a for loop defines a block of code that will
@@ -167,7 +168,7 @@ knights = {
   'robin': 'the brave' }
 
 for item in knights.items():          # items() returns an iterable of tuples
-  print('%s %s' % (item[0], item[1])) 
+  print(f'{item[0]}, {item[1]}') 
 
 for (a, b) in knights.items():        # same idea but unpack the tuple
   print(a, b)
@@ -200,9 +201,9 @@ print()
 print('Looping Through Paired Lists Using zip():')
 print('---------------------------------------')
 
-# zip() takes 2 iterables of equal length as arguments, and generates
-# a new iterable of tuples, with each tuple containing paired values from each
-# of the input iterables:
+# zip() takes 2 or more iterables of equal length as arguments, and generates
+# a new iterable of tuples, with each tuple containing corresponding values 
+# from each of the input iterables:
 
 letters = ['A', 'B', 'C', 'D', 'E']                    
 numbers = [1, 2, 3, 4, 5]
@@ -213,6 +214,16 @@ for letter, number in zip(letters, numbers):
 
 print(combined)
 print(combined['C'])
+
+
+# Another zip() example with more than 2 iterables:
+
+vec1 = [2,4,7]
+vec2 = [0,1,0]
+vec3 = [1,5,9]
+
+for (v1,v2,v3) in zip(vec1, vec2, vec3):
+    print(v1 + v2 + v3)
 
 
 print()
@@ -235,11 +246,12 @@ while True:
         break
 
 
+
 print()
 print('PRACTICE PROBLEMS')
 print('---------------------------------------')
 
-practice = """
+"""
 Easy
 1. Print Numbers: Write a for loop to print numbers from 1 to 10.
 2. Sum of Numbers: Use a while loop to calculate the sum of numbers 
@@ -276,7 +288,6 @@ Hard
     multiplication table (1 to 10) in grid format. Use string formatting
     to align the table elements appropriately.
 """
-print(practice)
 
 
 
