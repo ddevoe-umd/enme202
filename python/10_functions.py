@@ -105,7 +105,7 @@ def quad_eval(coefs, x):
 	if len(coefs) != 3:
 		print('improper coefficient list')
 		return(None)
-	[a,b,c] = coefs
+	(a,b,c) = coefs           # unpacking
 	return(a*x**2 + b*x + c)
 
 print(quad_eval([2,1,2], -1))
@@ -230,9 +230,9 @@ print(add(*vals))    # This is valid since vals has been unpacked
 # We can combine regular arguments with packed arguments by
 # placing starred variables at the end of the argument list:
 
-def my_join(delimeter, *strings):
-	result = strings[0]
-	for s in strings[1:]:        # start at 2nd string to join
+def my_join(delimeter, *args):
+	result = args[0]
+	for s in args[1:]:        # start at 2nd string to join
 		result += delimeter + s
 	return(result)
 
@@ -250,8 +250,8 @@ def print_dict(**kwargs):
 
 print_dict(key1='A', key2='B', key3='C', key4='D')
 
-# As with args for packed tuples, Using _kwargs_ as the name of the 
-# packed dictionary is not required, but is used by convention.
+# Using _args_ or _kwargs_ as the name of the packed variables
+# is not required, but is convention.
 
 
 
@@ -357,7 +357,7 @@ print(add(1,2))
 add = lambda x,y: x+y
 print(add(1,2))
 
-# Lambda functions can be used inside other functions, allowing us to
+# Lambda functions can be returned by another function, allowing us to
 # define new functions "on the fly".  
 
 def power(x):
@@ -370,8 +370,8 @@ sqrt = power(1/2)  # create a new function called sqrt()
 print(sqrt(81))
 
 # This is an example of _closure_, a concept we will cover later in the
-# context of higher-order functions. Briefly, we will see that regular 
-# functions (not just lambda functions) can also be defined within another
+# context of _higher-order functions_. Briefly, we will see that any 
+# functions (not just lambda functions) can be defined within another
 # function and returned by that function.
 #
 # Lambda functions and closure are often confused for one another, since
