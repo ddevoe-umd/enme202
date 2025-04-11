@@ -247,46 +247,56 @@ while True:
 
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
-
 """
-Easy
-1. Print Numbers: Write a for loop to print numbers from 1 to 10.
-2. Sum of Numbers: Use a while loop to calculate the sum of numbers 
-   from 1 to 20.
-3. Iterate Over a String: Write a for loop to print each character of the 
-   string "Engineering" on a new line.
-4. Countdown: Use a while loop to print a countdown from 10 to 1.
+PRACTICE PROBLEMS
 
-Medium
-5. Factorial: Write a for loop to calculate the factorial of a given number.
-6. Even Numbers: Use a while loop to print all even numbers between 1 and 50.
-7. Multiplication Table: Write a for loop to display the multiplication table
-   of a given number.
-8. Reverse a List: Use a for loop to print the elements of a list in 
-   reverse order.
-
-Hard
-9. Sum of Digits: Use a while loop to calculate the sum of the digits of 
-   a given number (e.g., 123 → 6).
-10. Prime Numbers: Write a for loop to print all prime numbers 
-    between 1 and 100.
-11. Taylor series: Use a while loop to find the first 5 terms of the 
-    Taylor series expansion for sin(x), and use the result to estimate 
-    sin(pi/4).
-12. Repeat the previous problem, but continue taking Taylor series terms 
-    until the different between successive terms is less than 1e-4
-13. Pattern Printing: Write a nested for loop to print the following 
-    pattern for n=4:
+1. Use a for loop to calculate the sum of numbers from 1 to 20.
+2. Use a while loop to calculate the sum of numbers from 1 to 20.
+3. Use a for loop to print each character of the string "ENME202" on a new line.
+4. Use a while loop to print a countdown from 10 to 1.
+5. Use a for loop to calculate the factorial of 12, without using math.factorial().
+6. Use a while loop to print all positive integers whose factorial is less than 1000
+   (ok to use math.factorial() for this problem).
+7. Use a for loop to print the list ['a','b','c',1,2,3] in reverse order (do not
+   using the list reverse() method or list slicing to perform the inversion).
+8. Use a while loop to calculate the sum of the digits of a given number 
+   (e.g. given 123 the result is 1+2+3 = 6).
+9. Use nested for loops to print all prime numbers between 1 and 100.
+10. Use a for loop to find the first 5 terms of the Taylor series expansion for 
+    cos(x), and use the result to estimate cos(pi/4).
+11. Repeat the previous problem using a while loop to continue taking Taylor series
+    terms until the different between successive terms is less than 1e-6.
+12. Use nested for loops to print N lines of the following pattern:
     *
     **
     ***
     ****
-14. Multiplication table: Use nested for loops to generate a 
-    multiplication table (1 to 10) in grid format. Use string formatting
-    to align the table elements appropriately.
+    Demonstrate this for 10 lines. You _must_ use nested for loops (hint: consider
+    using the loop variable in the outer loop when defining the inner loop's iterable).
+13. Use nested for loops to generate a multiplication table (1 to 10) in grid format. 
+    Use string formatting to align the table elements appropriately.
+14. A sensor is used to measure a voltage every 0.5 s, with measured voltage values 
+    stored in the following Python list:
+        v = [2.41, 2.22, 2.53, 0, 3.14, 2.98, 1.66, 2.43]
+    Use a for loop and the enumerate() function to display the measurement time and 
+    voltage for all readings with the following example format:
+        t = 0: V = 2.41
+        t = 0.5: V = 2.22
+        etc. 
+15. A different sensor system records voltage values at random time points, and stores
+    the time and voltage values in separate lists:
+        t = [0.6, 1.7, 4.6, 12.2, 15.0, 31.9, 33.2, 52.6]
+        v = [2.41, 2.22, 2.53, 0, 3.14, 2.98, 1.66, 2.43]
+    Use a for loop and the zip() function to display these values in the same format
+    as the previous problem.
+16. Use a for loop and the enumerate() function to calculate the following expression:
+         N
+         Σ (2^i * p(i))
+        i=0
+    where p = [1,2,3,...] is the list of positive integers. You _must_ use enumerate()
+    to generate values of i in this problem (even though there are easier ways to 
+    solve this).
+
 """
 
 
