@@ -84,6 +84,12 @@ print('---------------------------------------')
 # '.py' extension.  For example, if we have a module 'mymodule.py', it is
 # imported as 'import mymodule'.
 
+# Note that module names cannot start with a number (like this file!). There
+# is a way around this using the __module__() function as in the following
+# example:
+#   newmod = __module__('123newmod')
+# You are not responsible for this detail in ENME202.
+
 # Often we have code that should have a set of actions when run from the
 # command line that are +not+ executed when being imported as a module.
 # Code execution only on direct execution can be controlled is the
@@ -113,7 +119,7 @@ print('---------------------------------------')
 # be avoided!
 
 # The canonical solution for sharing globals across multiple modules is to create
-# a special module named config.py that contains the globals.  The config 
+# a special module named config.py that contains *all* globals.  The config 
 # module can then be imported into all other modules that need access to the
 # global variables
 
