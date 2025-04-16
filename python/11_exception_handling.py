@@ -4,8 +4,8 @@
 """ 
 Topics
 ------
-try / except blocks
-else, finally blocks
+try / except Blocks
+else, finally Blocks
 Raising Exceptions
 """
 
@@ -61,11 +61,11 @@ except Exception as e:  # division by zero
 #    SyntaxError          parsing error (cannot catch errors in base code)
 #    NameError            local or global name (e.g. variable) is not found
 #    IndexError           out-of-range access an index of a sequence
-#    ModuleNotFoundError  cannot find a module that you're trying to import
+#    ModuleNotFoundError  cannot find a module being imported
+#    ImportError          error on module import (e.g. due to code error in module)
 #    AttributeError       access an attribute or method that does not exist
 #    KeyError             access a dictionary key that doesn't exist
 #    TypeError            operation on object(s) of inappropriate type
-#    ImportError          attempt to import module that cannot be found
 #    ZeroDivisionError    attempt to divide by zero
 #    FileNotFoundError    attempt to read or write to a file that does not exist
 #    ValueError           function receives argument of correct type but 
