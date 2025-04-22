@@ -18,7 +18,7 @@ print('---------------------------------------')
 #
 #    [i for i in iterable]
 #
-# List comprehension is compact, easily readable, and significantly faster 
+# List comprehension is compact, easily readable, and **significantly faster**
 # than using a regular loop. 
 
 # Say we want to generate a list of numbers from another list, where the each
@@ -36,6 +36,8 @@ print(sq_vals)
 
 sq_vals = [v**2 for v in vals]
 print(sq_vals)
+
+# From the Zen of Python: “Flat is better than nested”!
 
 # List comprehension can be applied to any iterable object:
 
@@ -62,7 +64,11 @@ for x in v1:
 	for y in v2:
 		result.append(x*y)
 
-# Here is the same result using list comprehension:
+# An aside: the result is a 1D list (rather than a 2D matrix, which is what the cross
+# product should yield).  Can you think of a way to modify this code to yield
+# the desired 2D data structure?
+
+# Here is the same 1D result using list comprehension:
 
 [x*y for x in v1 for y in v2]
 #    ^^^^^^^^^^^ ^^^^^^^^^^^
@@ -77,8 +83,8 @@ flat_array = [val for row in array for val in row]
 print(flat_array)
 
 
-# Another way to work with a multiple lists is using zip() which
-# "packages" paired values from each list as tuples:
+# Another way to work with multiple lists is using zip() (recall that zip()
+# "packages" paired values from each list as tuples):
 
 added_lists = [x+y for x,y in zip(v1, v2)]
 print(added_lists)
