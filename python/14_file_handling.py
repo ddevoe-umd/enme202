@@ -10,28 +10,34 @@ JSON Files
 CSV Files
 """
 
-
 print()
 print('File Operations:')
 print('---------------------------------------')
-
 
 # To access a file for reading, a file object must be created:
 
 f = open("myfile.txt")
 
 # The file must be located in the current working directory (the directory
-# from which the Python code was run), or the path to the file must
+# from which the Python code was run).  Alternately, the path to the file can
 # be specified in the open() function
 
 # Use the read() method to read the contents of the file (from the current
-# position to the end) into a string that including newline characters:
+# position, to the end) into a single _string_ including newline characters:
 
 contents = f.read()
+print(type(contents))
 print(contents)
 
-# Files should (must!) always be closed when finished with read/write operations:
+# Files should always be closed when finished with file access:
 f.close()
+
+# File content can also be read one line at a time using the
+# readline() method:
+f = open("myfile.txt")
+for idx in range(3):
+    print(f'line {idx+1}: {f.readline()}')
+
 
 # Files can be opening for both reading and writing using one of the
 # followig file opening modes:
@@ -51,35 +57,36 @@ f.close()
 # Check to see that the text was written:
 f = open("myfile.txt")
 contents = f.read()
+f.close()
 print(contents)
 
-# The current position in the file is set to 0 when the file is opened. We can
-# place the position programatically using the seek() method.
-#
-# seek(n) sets the file position to n bytes (n = 0 for start of file,
-# 1 byte per character):
+# The current position in the file is set to 0 (start) when a file is first 
+# opened. We can change the position using the seek() method, where
+# seek(n) sets the file position to n bytes from the start of the file:
 f = open("myfile.txt")
 f.seek(5)              # move the current file position to the 6th byte
 remainder = f.read()   # read the remainder of the file     
-print(remainder)
 f.close()
+print(remainder)
 
-# Text encoding is platform-dependent (e.g. cp1252 in Windows, utf-8 for just 
-# about everything else). Specifying encoding make your code more robust:
-f = open('myfile.txt', mode = 'r', encoding = 'utf-8')
-
+# The number of bytes used by each character depends on the text encoding format
+# (e.g. utf-8, utf-16, ascii, etc.).  Specifying text encoding format can make 
+# your code more robust:
+# f = open('myfile.txt', mode = 'r', encoding = 'utf-8')
 
 
 print()
 print('Opening Files Using _with_:')
 print('---------------------------------------')
 
-# Python’s _with_ statement can be used to simplify the syntax for handling
-# errors with file I/O. The file will automatically close at end of the _with_
-# block _even if an exception is raised_. 
+# Python’s _with_ statement simplifies file I/O. The file will automatically close
+# at end of the _with_ block, even if an exception is raised. 
 
-with open("test.txt", mode = 'w+') as f:
-  f.write("hello there")
+with open("test.txt", 'w') as f:
+    f.write("hello there")
+
+with open("test.txt") as f:
+    print(f.read())
 
 
 print()
@@ -92,7 +99,36 @@ print('---------------------------------------')
 
 with open('myfile.txt') as f:
 	for line in f:
-        print(line.strip())   # use strip() to remove newlines
+        print(line.strip())   # use strip() to remove newline characters
+
+
+# Advanced: an _iterator_ is a bit different than an _iterable_. The former supports
+# the __next__() method, which returns the next element. For example, we can manually 
+# step through the first 3 lines of the file as follows:
+
+with open('myfile.txt') as f:
+    print(next(f))
+    print(next(f))
+    print(next(f))
+
+# As an aside, an iterator can be constructed from *any* iterable using the 
+# iter() function:
+
+my_list = [1, 2, 3, 4, 5]
+my_list_as_iterator = iter(my_list)
+print(next(my_list_as_iterator))
+print(next(my_list_as_iterator))
+print(next(my_list_as_iterator))
+
+# The __next__() method will raise a StopIteration exception if there are no 
+# further elements available.
+
+try:
+    print(next(my_list_as_iterator))
+    print(next(my_list_as_iterator))
+    print(next(my_list_as_iterator))
+except Exception as e:
+    print(type(e))
 
 
 print()
@@ -111,7 +147,7 @@ import json
 # Keys must be strings (typically in double quotes).
 #
 # Values can be any of:
-#    objects (enclosed in curly braces {})
+#    objects (same as Python dictionaries, enclosed in curly braces {})
 #    lists (enclosed in square brackets [])
 #    strings
 #    numbers
@@ -126,14 +162,14 @@ my_dict_as_json = json.dumps(my_dict)
 print(my_dict_as_json)
 
 # Notice that the integer key in my_dict was converted to a string in the
-# JSON representation of the dictionary.
+# JSON representation of the dictionary, since JSON object keys must be strings.
 
 # The resulting JSON value is just a string:
 print(my_dict_as_json.split(':'))
 
 # Here is an example of a more complex dictionary converted to JSON:
 my_dict = {'k_list': [1,2,3], 'k_dict': {'A':1, 'B':2}, 'k_dict_list_tuple': {'a':[4,5,6], 'b':(7,8,9)}, 'k_bool':False}
-my_dict_as_json = json.dumps(my_dict,)
+my_dict_as_json = json.dumps(my_dict)
 print(my_dict_as_json)
 
 # The result is hard to parse!  Let's make it easier to interpret by
@@ -145,7 +181,7 @@ print(my_dict_as_json)
 
 # Great, now we know how to convert a dictionary to a JSON string.  How do
 # we store this data in a JSON file?  We could open a file for writing, and 
-# the write the string to the file, but the _json.dump()_ method simplifies
+# the write the string to the file, but the json.dump() method simplifies
 # this process.  The syntax for json.dump() is:
 #
 #    json.dump(dict, file)
@@ -198,7 +234,7 @@ import csv
 # separated by commas.  For example, consider a CSV file with the
 # following format:
 
-with open('data.csv', 'w+') as f:
+with open('data.csv', 'w') as f:
     print(f.write('1,2,3\n4,5,6\n7,8,9'))
 
 # Convert the data in this file into a 2D list:
@@ -213,12 +249,9 @@ print(array)
 
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
+"""
+PRACTICE PROBLEMS
 
-practice = """
-Easy
 1. Reading a File: Open a file named example.txt in read mode and print 
    its contents line by line.
 2. Writing to a File: Create a new file named output.txt and write the 
@@ -227,40 +260,35 @@ Easy
   "This is an additional line.".
 4. File Existence Check: Write a program that checks if a file named 
    data.txt exists in the current directory.
-
-Medium
-1. Counting Lines in a File: Write a program to count the number of lines
+5. Counting Lines in a File: Write a program to count the number of lines
    in a file named example.txt.
-2. Reading Specific Lines: Open example.txt and print only the first 3 lines.
-3. Copying a File: Write a program to copy the contents of source.txt into 
+6. Reading Specific Lines: Open example.txt and print only the first 3 lines.
+7. Copying a File: Write a program to copy the contents of source.txt into 
    a new file named destination.txt.
-4. Word Count: Write a program that counts the number of words in example.txt.
-5. File Modes: Experiment with file modes (r, w, a, r+, etc.) by opening 
+8. Word Count: Write a program that counts the number of words in example.txt.
+9. File Modes: Experiment with file modes (r, w, a, r+, etc.) by opening 
    a file and observing the results of writing and reading.
-6. Parsing Lines in a File: Write Python code to calculate the sum of all
-   values in data.txt, which contains one numerical value on each line. 
-
-Hard
-1. Reading a File Backwards: Write a program to read and print the lines 
-   of example.txt in reverse order (last line to first).
-2. CSV File Handling: Use the Python csv module to write a list of 
-   dictionaries [{‘name’: 'Alice', 'age': 25}, {'name': 'Bob', 'age': 30}]
-   to a CSV file named people.csv. Then, read the CSV file and print the 
-   contents.
-3. JSON File Handling: Repeat the previous problem using a JSON file and 
-   Python json module.
-4. File Splitter: Write a program that splits a large file into smaller
-   files of N lines each.
-5. Word Frequency Counter: Read example.txt and count the frequency 
-   of each word, ignoring case. Save the results in word_frequency.txt.
-   File Searcher: Write a program that searches for a specific word in 
-   example.txt and prints the line numbers where the word is found.
-6. Binary File Handling: Create a program to write and read binary data to
-   a file. For example, write a list of integers as binary data and read it
-   back.
+10. Parsing Lines in a File: Write Python code to calculate the sum of all
+    values in data.txt, which contains one numerical value on each line. 
+11. Reading a File Backwards: Write a program to read and print the lines 
+    of example.txt in reverse order (last line to first).
+12. CSV File Handling: Use the Python csv module to write a list of 
+    dictionaries [{‘name’: 'Alice', 'age': 25}, {'name': 'Bob', 'age': 30}]
+    to a CSV file named people.csv. Then, read the CSV file and print the 
+    contents.
+13. JSON File Handling: Repeat the previous problem using a JSON file and 
+    Python json module.
+14. File Splitter: Write a program that splits a large file into smaller
+    files of N lines each.
+15. Word Frequency Counter: Read example.txt and count the frequency 
+    of each word, ignoring case. Save the results in word_frequency.txt.
+    File Searcher: Write a program that searches for a specific word in 
+    example.txt and prints the line numbers where the word is found.
+16. Binary File Handling: Create a program to write and read binary data to
+    a file. For example, write a list of integers as binary data and read it
+    back.
 
 """
-print(practice)
 
 
 
