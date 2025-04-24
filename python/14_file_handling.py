@@ -237,7 +237,23 @@ import csv
 with open('data.csv', 'w') as f:
     print(f.write('1,2,3\n4,5,6\n7,8,9'))
 
-# Convert the data in this file into a 2D list:
+# Alternately, if we have our data in a 2D list, we can write it to
+# a file using the csv.writer() method:
+data_2d = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+with open("data.csv", 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerows(data_2d)
+
+# The newline='' option in the open() function is prevents Python from 
+# inserting extra blank lines between rows when writing to a CSV file
+# (especially on Windows).
+
+# Now go the other direction -- read data from the file into a 2D list
+# using the csv.reader() method:
 
 with open('data.csv') as f:
     array = []
