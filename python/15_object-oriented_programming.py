@@ -7,6 +7,7 @@ Object-Oriented Programming
 Defining a Class
 Object Declaration
 Instance Methods
+Class Methods
 Method Chaining
 Magic (Dunder) Methods
 Class Composition
@@ -33,19 +34,19 @@ print('---------------------------------------')
 # Attributes and methods defined in a class are available to every instance of that
 # class, but attribute values can differ between objects instantiated from the same class.
 # In this sense, the class acts as a cookie cutter to shape multiple cookies (objects)
-# which can then be "decorated" in different ways (different attribute values).
+# which can then be "decorated" in different ways (given different attribute values).
 #
-# Advantages of object-oriented programming:
-# Classes/objects abstract the code design process: 
+# There are many advantages to object-oriented programming (OOP)!
+# 1. Classes/objects abstract the code design process: 
 #   - bundle data (attributes) and functions (methods) together
 #   - provides a more logical structure to the code
-#   - makes large programs easier to plan and implement.
-# Classes can hide their internals from other programmers.
-# Classes can be extended through inheritance to create new classes with expanded
-#   functionality as needs grow.
-# Classes are easily re-used across multiple codes
-# Maintaining object-oriented code is easier than procedural code, since changes
-#   are fully modular
+#   - large programs become easier to plan and implement.
+# 2. Classes can hide their internals from other programmers.
+# 3. Classes can be extended through inheritance to create new classes with expanded
+#    functionality as needs grow.
+# 4. Classes are easily re-used across multiple codes.
+# 5. Maintaining object-oriented code is easier than procedural code, since changes
+#    are fully modular
 
 
 print()
@@ -60,8 +61,13 @@ print('---------------------------------------')
 #        # class attributes defined in main block
 #
 #        def __init__(self):
-#            #  instance attributes defined constructor
+#            # class constructor (optional)
+#            # instance attributes are defined here
+#            # stuff to do when creating an object goes here
+#
 #        def __del__(self):
+#            # class destructor (optional)
+#            # stuff to do when deallocating an object from memory goes here
 #
 #        # other class methods defined in the main block
 
@@ -72,8 +78,8 @@ print('---------------------------------------')
 # The __del__ function is called the class _destructor_. The destructor is run each 
 # time class instance is deleted from memory.
 #
-# The _self_ parameter in __init__ and __del__ references the particular instance of the class 
-# being declared.
+# The _self_ parameter in __init__ and __del__ references the instance of the class 
+# being operated on.
 #
 # The constructor and destructor methods are optional.
 
@@ -132,6 +138,7 @@ p2 = Point(-12.5, 0, 7)
 print(f'{p1.x}, {p1.y}, {p1.z}')
 print(f'{p2.x}, {p2.y}, {p2.z}')
 
+
 # ---------------
 # Default attribute values
 # ---------------
@@ -147,17 +154,20 @@ class Point:
         self.y = y
         self.z = z
 
-p3 = Point()
-print(f'{p3.x}, {p3.y}, {p3.z}')
+p1 = Point(1,2,3)
+print(f'{p1.x}, {p1.y}, {p1.z}')
 
-p4 = Point(y=3)
-print(f'{p4.x}, {p4.y}, {p4.z}')
+p2 = Point()
+print(f'{p2.x}, {p2.y}, {p2.z}')
+
+p3 = Point(y=3)
+print(f'{p3.x}, {p3.y}, {p3.z}')
 
 # Attribues of a given object can be changed at any time:
 
-p4.x = -1
-p4.z = 0
-print(f'{p4.x}, {p4.y}, {p4.z}')
+p1.x = -1
+p1.z = 0
+print(f'{p1.x}, {p1.y}, {p1.z}')
 
 
 
@@ -170,9 +180,10 @@ print('---------------------------------------')
 # instance method must be _self_, allowing the method to access attribute
 # values for the particular instance calling the method.
 #
-# Here is an expanded Point class with 2 instance methods:
-#  length()  -- return the length of a vector from the origin to the point
-#  as_string() -- return point values in a string as "(x,y,z)"
+# Here is an expanded Point class with 3 instance methods:
+#  distance()  -- return the distance between the Point and a second Point
+#  length()    -- return the distance from the origin to the Point
+#  as_string() -- return Point values in a string as "(x,y,z)"
 
 class Point:
     """3D Cartesian point class"""   # doc string
@@ -180,15 +191,23 @@ class Point:
         self.x = x
         self.y = y
         self.z = z
+    def distance(self, Point):
+        # distance to a second Point
+        return(((self.x-Point.x)**2 + (self.y-Point.y)**2 + (self.z-Point.z)**2)**(1/2))
     def length(self):
-        return((self.x**2 + self.y**2 + self.z**2)**(1/2))
+        # distance from origin to the Point
+        return(self.distance(Point(0,0,0)))
     def as_string(self):
         return(f'({self.x},{self.y},{self.z})')
 
 p1 = Point(10, 4, 6)
-print(f'distance to {p1.as_string()} = {p1.length()}')
+print(f'length of {p1.as_string()} = {p1.length()}')
 
-# Remember that we said heterogenous built-in data types like lists can hold
+p2 = Point(-8, 7, 14)
+print(f'distance between {p1.as_string()} and {p2.as_string()} = {p1.distance(p2)}')
+
+
+# Remember that heterogenous built-in data types like lists can hold
 # elements of any valid data type.  This inludes custom class objects!  Here we
 # form a list of Point values, and iterate through the list to display info
 # for each Point:
@@ -261,11 +280,11 @@ print()
 print('Magic (Dunder) Methods:')
 print('---------------------------------------')
 
-# All classes, including both built-in and custom classes, have a number
-# of built-in class methods called _magic methods_.  These methods are also
-# known as _dunder_ methods since they are surrounded by Double UNDERscores.
+# All classes, including both built-in and custom classes, have a number of built-in 
+# class attributes and methods called _magic attributes/methods_ (also known 
+# as _dunder_ attributes/methods since they are surrounded by Double UNDERscores).
 
-# The dir() function returns a list of all magic methods available for
+# The dir() function returns a list of all magic attributes/methods available for
 # a given class:
 
 print(dir(Point))
@@ -275,7 +294,7 @@ print(dir(Point))
 #    __name__   Class name
 #    __module__ Module where class is defined ("__main__" or name of imported module)
 #    __bases__  Tuple of all base classes the current class inherits from
-#    etc...
+#    and more...
 
 print(Point.__dict__)
 print(Point.__doc__)
@@ -296,6 +315,81 @@ print(my_function.__name__)
 
 print(dir(dict))
 
+
+# ---------------
+# Classes as iterables and iterators
+# ---------------
+
+# Magic methods can give custom classes access to complex operations built into Python.
+# For example, we can make class instances +iterable+ using the __iter__ method
+# and iter() function, which together define how iterating through the object should occur.
+
+# Here is a simple example of an iterable class:
+
+class CountDown:
+    def __init__(self, max):
+        self.max = max
+
+    def __iter__(self):  # Make the class iterable
+        return iter(range(self.max, -1, -1))  # Return an iterator over the range
+
+for val in CountDown(5):
+    print(val)
+
+# A somewhat more complex iterable class example:
+
+class ListOfLists:
+    def __init__(self, vals):
+         self.vals = vals
+
+    def __iter__(self):  
+        # Use a generator to create an iterator to return via iter():
+        second_value_list = (item[1] for item in self.vals)  
+        return iter(second_value_list)
+
+data = [(1, 'a', 9, 'x'), (2, 'b'), (3, 'c', 7)]
+my_list = ListOfLists(data)
+for entry in my_list:
+    print(entry)
+
+# Note that in the above example, "(item[1] for item in self.vals)" looks like
+# list comprehension, but it is not!  This is actually a _generator_, which is similar
+# to list comprehension but is more memory-efficient for cases where we don't need
+# to store the entire list in memory at once.
+
+
+# Instead of making an _iterable_, which uses iter() to return an iterator, the class 
+# itself can instatiate _iterators_ that will support the use of next() to manually
+# step through the data.
+#
+# Redo CountDown as an iterator:
+
+class CountDown:
+    def __init__(self, max):
+        self.current = max
+
+    def __iter__(self):
+        return self      # iterators should return themselves
+
+    def __next__(self):  
+    # _next__ makes the class an _iterator_, defining the next value to be returned at
+    # each iteration, and raising a StopIteration exception when there are no more values
+        if self.current <0:
+            raise StopIteration
+        self.current -= 1
+        return self.current+1
+
+# Use as iterable:
+counter = CountDown(5)
+for number in counter:
+    print(number)
+
+# Use as iterator:
+counter = CountDown(5)
+print('first value: ', end='')
+print(next(counter))
+print('second value: ', end='')
+print(next(counter))
 
 
 print()
@@ -549,18 +643,16 @@ print()
 print('Destructors:')
 print('---------------------------------------')
 
+# We can manually deallocate memory for any variable by using the _del_ 
+# command, which will run the __del__() method before releasing the memory.
+#
 # Destructors are used to perform cleanup activities before an object is 
 # deallocated from memory. This can include closing files, releasing network
 # connections, or freeing up other resources.
 #
-# Python's garbage collector automatically handles memory management, so you 
-# don't typically need to manually deallocate memory in destructors, but be
-# careful: The exact timing of destructor execution is not guaranteed, as it is 
-# managed by the garbage collector. Also, circular references can prevent 
-# objects from being destroyed, leading to memory leaks.
-#
-# We can manually deallocate memory for any variable by using the _del_ 
-# command, which will run the __del__() method before releasing the memory:
+# Python's garbage collector automatically handles memory management, but 
+# the exact timing of destructor execution is not guaranteed, as it is 
+# managed by the garbage collector. 
 
 class Cow:
     def __init__(self):
