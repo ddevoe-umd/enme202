@@ -90,7 +90,7 @@ print()
 print('Object Declaration:')
 print('---------------------------------------')
 
-# Once defined, the Point class is a +new data type+ available in our code. A variable
+# Once defined, the Point class is a new data type available in our code. A variable
 # of type Point is called an _object_ or _instance_ of the Point class.
 # Let's declare a few Point objects, and change their attribute values:
 
@@ -203,6 +203,31 @@ for p in points:
 
 
 print()
+print('Class Methods:')
+print('---------------------------------------')
+
+# Class methods apply to the class itself (rather than instances), and are denoted
+# by a _decorator_ to the function as shown below. Class methods are used to access 
+# or modify class-level data, such as class attributes, or to create "factory methods"
+# that return class instances with specific configurations, as in this example:
+
+class Point:
+    def __init__(self, x=0, y=0, z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+    @classmethod           # decorator
+    def point123(cls):
+        return cls(1,2,3)
+
+# The _cls_ argument is the Point class itself, and the method above instantiates the
+# class using values of x,y,z = 1,2,3 to create a new object:
+
+new_point = Point.point123()
+
+
+
+print()
 print('Method Chaining:')
 print('---------------------------------------')
 
@@ -278,9 +303,12 @@ print('Class Composition:')
 print('---------------------------------------')
 
 # Composition: "has a"
-# Composition involves defining classes that contain objects of other classes, 
+# Composition involves defining classes that contain instances of other classes, 
 # thereby extending the new class by giving access to attributes and methods 
 # from the other class.
+
+# Here is a new Triangle class that contains 3 Point objects, thereby extending
+# the Point class by composition:
 
 class Triangle:
     def __init__(self, p1=(0,0), p2=(0,0), p3=(0,0)):
@@ -370,8 +398,8 @@ print('---------------------------------------')
 # allowing simultaneous access to the interfaces of each base class in the new 
 # derived class. 
 #
-# We will not cover this topic in ENME202 beyond recognizing
-# that multiple inheritance is supported by Python.
+# We will not cover this topic in ENME202 beyond recognizing that multiple 
+# inheritance is supported by Python.
 
 
 print()
@@ -420,13 +448,13 @@ print('---------------------------------------')
 #
 # ...and many more!
 #
-# We can override these magic methods using custom class methods, allowing us to 
+# We can override these magic methods using custom instance methods, allowing us to 
 # control how each operator processes our objects:
 
 class Vector:
     """n-dimensional vector"""
-    def __init__(self, *args):
-        self.coordinates = args
+    def __init__(self, *args):    # pack arguments into a tuple
+        self.coordinates = args     
 
     def __add__(self, other):
         # Make sure both objects are Vectors:
@@ -448,8 +476,12 @@ class Vector:
     def __str__(self):
         return f'Vector: {self.coordinates}'
 
-v1 = Vector(1,12,4,7)
-v2 = Vector(-9,0,6,6)
+v1 = Vector(1,2,3)
+v2 = Vector(6,0,9)
+print(v1 + v2)
+
+v1 = Vector(1,12,4,7,3)
+v2 = Vector(-9,0,6,6,0)
 print(v1 + v2)
 
 
@@ -464,12 +496,22 @@ class Vector:
             result = [x + y for x, y in zip(self.coordinates, other.coordinates)]
         elif isinstance(other, float) or isinstance(other, int):
             result = [x + other for x in self.coordinates]
+        else:
+            raise TypeError("Values must be Vector + Vector or Vector + float")
         return Vector(*result)    
     def __str__(self):
         return f'Vector: {self.coordinates}'
 
 v = Vector(1,12,4,7)
 print(v + 20)
+
+# Now trigger an exception:
+
+try:
+    v + 'x'
+except Exception as e:
+    print(e)
+
 
 # Because the arguments in __add__ are ordered as (self, other), this implementation
 # will work for Vector + float, but not for float + Vector.  To handle both
@@ -512,13 +554,13 @@ print('---------------------------------------')
 # connections, or freeing up other resources.
 #
 # Python's garbage collector automatically handles memory management, so you 
-# don't typically need to explicitly deallocate memory in destructors.
-# The exact timing of destructor execution is not guaranteed, as it is 
+# don't typically need to manually deallocate memory in destructors, but be
+# careful: The exact timing of destructor execution is not guaranteed, as it is 
 # managed by the garbage collector. Also, circular references can prevent 
 # objects from being destroyed, leading to memory leaks.
 #
 # We can manually deallocate memory for any variable by using the _del_ 
-# command.
+# command, which will run the __del__() method before releasing the memory:
 
 class Cow:
     def __init__(self):
@@ -542,17 +584,18 @@ print('---------------------------------------')
 # Class Attributes are directly within the class body, outside of any methods.
 
 class Cow:
-    herd_size = 0
+    herd_size = 0         # declare a class attribute
     def __init__(self):
         Cow.herd_size += 1
         if Cow.herd_size == 1:
             print('The first cow has joined the herd')
+        else:
+            print('Another cow has joined')
     def __del__(self):
         Cow.herd_size -= 1
         print('We lost a cow')
         if Cow.herd_size <= 0:
             print('The herd is gone')
-            Cow.herd_size = 0
     def speak(self):
         print("Moo")
 
@@ -574,12 +617,11 @@ print('---------------------------------------')
 # (_attribute_name or _method_name) to indicate that it is intended for internal
 # use within the class only.
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
 
-practice = """
-Easy
+
+"""
+PRACTICE PROBLEMS
+
 1. Defining a Class and Object Declaration: Define a class Car with an attribute 
    color. Create an object of this class and set its color to "red".
 2. Instance Method: Add an instance method drive to the Car class that prints 
@@ -588,12 +630,10 @@ Easy
    returns the car’s color when the object is printed.
 4. Class Attribute: Define a class Circle with a class attribute pi = 3.14. 
    Create an object and access the pi attribute through both the object and the class.
-
-Medium
-1. Class Composition: Create a class Engine with a method start that prints 
+5. Class Composition: Create a class Engine with a method start that prints 
    "Engine started". Create another class Car that contains an Engine object as an 
    attribute and call the start method through the Car object.
-2. Class Inheritance: Create a base class Vehicle an instance attribute max_speed 
+6. Class Inheritance: Create a base class Vehicle an instance attribute max_speed 
    (set during initialization) and a method describe() that prints "Maximum 
    speed = {max_speed} km/h". Then create two subclasses:
    Car: Add an attribute num_doors and override the describe method to include 
@@ -601,34 +641,31 @@ Medium
     Motorcycle: Add an attribute has_sidecar (boolean) and override the describe
     method to include whether it has a sidecar (e.g., "maximum speed = 150 km/h, 
     no sidecar").
-3. Method Overriding: Create a class Person with a method introduce() that prints 
+7. Method Overriding: Create a class Person with a method introduce() that prints 
    "Hello, I'm a person". Create a subclass Engineer that inherits from Person but
    overrides the introduce() method to print "Hello, I'm an engineer".
-
-Hard
-1. Constructors and Destructors: Create a class FileHandler with a constructor 
+8. Constructors and Destructors: Create a class FileHandler with a constructor 
    that takes a file name as an argument, opens the file in write mode, and prints
    "File {filename} opened.", and a destructor that closes the file and prints 
    "File {filename} closed.".
-2. Custom Magic Method: __add__: Modify the Point class so that the + operator
+9. Custom Magic Method: __add__: Modify the Point class so that the + operator
    can be used to add two Point objects. The result should be a new Point with 
    the sum of the x and y values.
-3. Class Attribute vs Instance Attribute: Create a class Book with a class 
-   attribute library_name = "Central Library" and an instance attribute title. 
+10. Class Attribute vs Instance Attribute: Create a class Book with a class 
+    attribute library_name = "Central Library" and an instance attribute title. 
    Create two book objects and demonstrate the difference between class and instance
-   attributes.
-4. Dynamic Attribute Addition: Create a class Student and an object of the 
-   class. Dynamically add an attribute grade to the object and set its value to "A".
-5. Method Chaining: Create a class Builder with methods set_height, set_width, 
-   and set_color. Each method should return the object itself to allow method 
-   chaining.
-6. Composition with Multiple Components: Create a class House that contains objects
-   of classes Room, Door, and Window. Define appropriate methods in each class and 
-   show how the House class interacts with these components. Include appropriate
-   class attributes and constructor / destructor code that will keep track of the 
-   number of Room, Door, and Window objects as they are declared and deleted.
+    attributes.
+11. Dynamic Attribute Addition: Create a class Student and an object of the 
+    class. Dynamically add an attribute grade to the object and set its value to "A".
+12. Method Chaining: Create a class Builder with methods set_height, set_width, 
+    and set_color. Each method should return the object itself to allow method 
+    chaining.
+13. Composition with Multiple Components: Create a class House that contains objects
+    of classes Room, Door, and Window. Define appropriate methods in each class and 
+    show how the House class interacts with these components. Include appropriate
+    class attributes and constructor / destructor code that will keep track of the 
+    number of Room, Door, and Window objects as they are declared and deleted.
 """
-print(practice)
 
 
 
