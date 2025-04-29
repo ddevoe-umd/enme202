@@ -91,6 +91,7 @@ class Point:
         self.y = 0
         self.z = 0
 
+
 print()
 print('Object Declaration:')
 print('---------------------------------------')
@@ -106,7 +107,7 @@ print(f'{p1.x}, {p1.y}, {p1.z}')
 p2 = Point()
 p2.x = -12.5
 p2.y = 0
-p2.x = 7
+p2.z = 7
 print(f'{p2.x}, {p2.y}, {p2.z}')
 
 
@@ -175,8 +176,8 @@ class Point:
         self.x = x
         self.y = y
         self.z = z
-    def distance(self, Point):      # distance to a second Point
-        return(((self.x-Point.x)**2 + (self.y-Point.y)**2 + (self.z-Point.z)**2)**(1/2))
+    def distance(self, p):      # distance to a second Point
+        return(((self.x-p.x)**2 + (self.y-p.y)**2 + (self.z-p.z)**2)**(1/2))
     def length(self):               # distance from origin to the Point
         return(self.distance(Point(0,0,0)))
     def stringify(self):
