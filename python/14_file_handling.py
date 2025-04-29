@@ -1,4 +1,4 @@
-# Overall Topic
+# File Handling
 
 """ 
 Topics
@@ -37,6 +37,7 @@ f.close()
 f = open("myfile.txt")
 for idx in range(3):
     print(f'line {idx+1}: {f.readline()}')
+f.close()
 
 
 # Files can be opening for both reading and writing using one of the
@@ -147,7 +148,7 @@ import json
 # Keys must be strings (typically in double quotes).
 #
 # Values can be any of:
-#    objects (same as Python dictionaries, enclosed in curly braces {})
+#    objects (similar to Python dictionaries, enclosed in curly braces {})
 #    lists (enclosed in square brackets [])
 #    strings
 #    numbers
