@@ -38,15 +38,15 @@ print('---------------------------------------')
 #
 # There are many advantages to object-oriented programming (OOP)!
 # 1. Classes/objects abstract the code design process: 
-#   - bundle data (attributes) and functions (methods) together
-#   - provides a more logical structure to the code
-#   - large programs become easier to plan and implement.
+#    - bundle together related attributes and methods.
+#    - provide a more logical structure to the code.
+#    - large programs become easier to plan and implement.
 # 2. Classes can hide their internals from other programmers.
 # 3. Classes can be extended through inheritance to create new classes with expanded
 #    functionality as needs grow.
 # 4. Classes are easily re-used across multiple codes.
 # 5. Maintaining object-oriented code is easier than procedural code, since changes
-#    are fully modular
+#    are fully modular.
 
 
 print()
@@ -54,22 +54,21 @@ print('Defining a Class:')
 print('---------------------------------------')
 
 # The _class_ keyword is used to create a class definition.  By convention use PascalCase
-# for class names, e.g. MyClass.  The basic class definition uses the following syntax:
+# for class names.  The basic class definition uses the following syntax:
 
-#    class ClassName:
-#
-#        # class attributes defined in main block
-#
-#        def __init__(self):
-#            # class constructor (optional)
-#            # instance attributes are defined here
-#            # stuff to do when creating an object goes here
-#
-#        def __del__(self):
-#            # class destructor (optional)
-#            # stuff to do when deallocating an object from memory goes here
-#
-#        # other class methods defined in the main block
+class ClassName:
+    # class attributes and class methods (if any) are defined in main block
+
+    def __init__(self):
+         # class constructor (optional)
+         # instance attributes are defined in constructor
+         # stuff to do when creating a new object goes here
+         pass
+
+    def __del__(self):
+         # class destructor (optional)
+         # stuff to do when deallocating an object from memory goes here
+         pass
 
 # The __init__ function (with double-underscores) is called the class _constructor_
 # or _instantiation method_.  The constructor is run each time a new member of the
@@ -96,25 +95,19 @@ print()
 print('Object Declaration:')
 print('---------------------------------------')
 
-# Once defined, the Point class is a new data type available in our code. A variable
+# The Point class is now a new data type available in our code. A variable
 # of type Point is called an _object_ or _instance_ of the Point class.
 # Let's declare a few Point objects, and change their attribute values:
 
 p1 = Point()
-p1.x = 10
-p1.y = 4
-p1.x = 6
+print(f'{p1.x}, {p1.y}, {p1.z}')
 
+# Attribues of a given object can be changed at any time:
 p2 = Point()
 p2.x = -12.5
 p2.y = 0
 p2.x = 7
-
-p3 = Point()
-
-print(f'{p1.x}, {p1.y}, {p1.z}')
 print(f'{p2.x}, {p2.y}, {p2.z}')
-print(f'{p3.x}, {p3.y}, {p3.z}')
 
 
 # ---------------
@@ -134,9 +127,7 @@ class Point:
         self.z = z
 
 p1 = Point(10, 4, 6)
-p2 = Point(-12.5, 0, 7)
 print(f'{p1.x}, {p1.y}, {p1.z}')
-print(f'{p2.x}, {p2.y}, {p2.z}')
 
 
 # ---------------
@@ -163,13 +154,6 @@ print(f'{p2.x}, {p2.y}, {p2.z}')
 p3 = Point(y=3)
 print(f'{p3.x}, {p3.y}, {p3.z}')
 
-# Attribues of a given object can be changed at any time:
-
-p1.x = -1
-p1.z = 0
-print(f'{p1.x}, {p1.y}, {p1.z}')
-
-
 
 print()
 print('Instance Methods:')
@@ -183,41 +167,38 @@ print('---------------------------------------')
 # Here is an expanded Point class with 3 instance methods:
 #  distance()  -- return the distance between the Point and a second Point
 #  length()    -- return the distance from the origin to the Point
-#  as_string() -- return Point values in a string as "(x,y,z)"
+#  stringify() -- return Point values in a string as "(x,y,z)"
 
 class Point:
-    """3D Cartesian point class"""   # doc string
+    """3D Cartesian point class"""       # doc string
     def __init__(self, x=0, y=0, z=0):
         self.x = x
         self.y = y
         self.z = z
-    def distance(self, Point):
-        # distance to a second Point
+    def distance(self, Point):      # distance to a second Point
         return(((self.x-Point.x)**2 + (self.y-Point.y)**2 + (self.z-Point.z)**2)**(1/2))
-    def length(self):
-        # distance from origin to the Point
+    def length(self):               # distance from origin to the Point
         return(self.distance(Point(0,0,0)))
-    def as_string(self):
+    def stringify(self):
         return(f'({self.x},{self.y},{self.z})')
 
 p1 = Point(10, 4, 6)
-print(f'length of {p1.as_string()} = {p1.length()}')
+print(f'length of {p1.stringify()} = {p1.length()}')
 
 p2 = Point(-8, 7, 14)
-print(f'distance between {p1.as_string()} and {p2.as_string()} = {p1.distance(p2)}')
+print(f'distance between {p1.stringify()} and {p2.stringify()} = {p1.distance(p2)}')
 
 
-# Remember that heterogenous built-in data types like lists can hold
-# elements of any valid data type.  This inludes custom class objects!  Here we
-# form a list of Point values, and iterate through the list to display info
-# for each Point:
+# Remember that heterogenous built-in data types like lists can hold any valid data type,
+# including custom class objects.  Here we form a list of Point values, and iterate through 
+# the list to display info for each Point:
 
 p2 = Point(-12.5, 0, 7)
 p3 = Point()
 p4 = Point(y=3)
 points = [p1, p2, p3, p4]
 for p in points:
-    print(f'distance to {p.as_string()} = {p.length()}')
+    print(f'distance to {p.stringify()} = {p.length()}')
 
 
 
@@ -317,12 +298,12 @@ print(dir(dict))
 
 
 # ---------------
-# Classes as iterables and iterators
+# Classes as iterables
 # ---------------
 
 # Magic methods can give custom classes access to complex operations built into Python.
 # For example, we can make class instances +iterable+ using the __iter__ method
-# and iter() function, which together define how iterating through the object should occur.
+# which, together with the iter() function, define how iterating through an object should occur.
 
 # Here is a simple example of an iterable class:
 
@@ -336,7 +317,7 @@ class CountDown:
 for val in CountDown(5):
     print(val)
 
-# A somewhat more complex iterable class example:
+# A more complex (and contrived) iterable class example:
 
 class ListOfLists:
     def __init__(self, vals):
@@ -353,14 +334,18 @@ for entry in my_list:
     print(entry)
 
 # Note that in the above example, "(item[1] for item in self.vals)" looks like
-# list comprehension, but it is not!  This is actually a _generator_, which is similar
+# list comprehension, but this is actually a _generator_, which is similar
 # to list comprehension but is more memory-efficient for cases where we don't need
 # to store the entire list in memory at once.
 
 
+# ---------------
+# Classes as iterators
+# ---------------
+
 # Instead of making an _iterable_, which uses iter() to return an iterator, the class 
-# itself can instatiate _iterators_ that will support the use of next() to manually
-# step through the data.
+# itself can instatiate _iterators_ that support the use of next() to manually
+# iterate through the data elements.
 #
 # Redo CountDown as an iterator:
 
@@ -379,7 +364,7 @@ class CountDown:
         self.current -= 1
         return self.current+1
 
-# Use as iterable:
+# Use as iterable (recall that all iterators are also iterables):
 counter = CountDown(5)
 for number in counter:
     print(number)
@@ -440,12 +425,11 @@ print('---------------------------------------')
 #    The base class _interface_ (methods, properties, and attributes)
 #    The base class _implementation_ (code that implements the class interface)
 #
-# The super() function gives access to methods and attributes of the parent
-# class.
+# The super() function gives access to methods and attributes of the parent class.
 
 class Vector:
     """n-dimensional vector"""
-    def __init__(self, *args):
+    def __init__(self, *args):      # pack all argument values into a tuple
         self.coordinates = args
     def magnitude(self):
         return math.sqrt((sum(c**2 for c in self.coordinates)))
@@ -542,12 +526,12 @@ print('---------------------------------------')
 #
 # ...and many more!
 #
-# We can override these magic methods using custom instance methods, allowing us to 
+# We can override magic methods using custom instance methods, allowing us to 
 # control how each operator processes our objects:
 
 class Vector:
     """n-dimensional vector"""
-    def __init__(self, *args):    # pack arguments into a tuple
+    def __init__(self, *args):
         self.coordinates = args     
 
     def __add__(self, other):
@@ -570,10 +554,16 @@ class Vector:
     def __str__(self):
         return f'Vector: {self.coordinates}'
 
+# First test the raising of exceptions when adding:
 v1 = Vector(1,2,3)
-v2 = Vector(6,0,9)
-print(v1 + v2)
+v2 = Vector(4,5)
+try:
+    v3 = v1 + v2    # unmatched lengths (ValueError)
+    v3 = v1 + 1     # wrong type of 2nd argument (TypeError)
+except Exception as e:
+    print(e)
 
+# Now demonstrate adding & displaying vectors:
 v1 = Vector(1,12,4,7,3)
 v2 = Vector(-9,0,6,6,0)
 print(v1 + v2)
