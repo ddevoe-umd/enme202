@@ -133,6 +133,7 @@ print(f"(x << 10) =       {  x<<10        :b}")
 print(f"(x << 10) >> 10 = { (x<<10) >> 10 :b}")
 
 
+
 print()
 print('Complement Operator (Bitwise NOT):')
 print('---------------------------------------')
@@ -148,27 +149,45 @@ print(f"x | ~x =          { x | ~x :b}")
 #
 # Thus ~x will always invert the sign of x (when interpreting
 # x as an integer).
-
+#
 # This result may not be what you were expecting.
 # ~x yields "one's complement" of x, meaning each bit
-# is flipped **including the leading bit** that determines
-# if the value is positive or negative: the computer 
-# represents a positive number with a leading '0', and a 
-# negative number with a leading '1'.
+# is flipped **including all leading bits** that determines
+# if the value is positive or negative: Python
+# represents a positive number with leading '0' values, and a 
+# negative numbers with leading '1' values.
 #
 # Thus one's complement of a positive number will flip the
-# leading zero into a leading 1 (due to bit inversion),
+# leading zeros into leading ones (due to bit inversion),
 # thus making the value negative.
-
+#
 # To make matters more confusing, values are represented
 # by the computer using "two's complement", which is
-# defined by inverting all bits and then adding 1:
+# defined by taking one's complement (flipping bits) and 
+# adding 1.
+#
+# How does Python know that 11111010 is -6 and not -3 (in other
+# words, how does it inow that this bit:
+#                                |
+#                            11111010
+# is part of the number and not just a leading 1 indicating a negative
+# value)?  In languages such as C++, which have fixed-length 
+# binary values, the answer would be that the system has to keep
+# track of the number of relevant bits, but this is not the case
+# in Python, which uses infinite-precision signed integers, and
+# performs bitwise operations on actual integers, with the result
+# automatically being a valid Python integer rather than a raw bit
+# pattern.
 
-print( 0b100)   # 0000100
-print(~0b100)   # 1111011 <-- but this is -5 via two's complement
-                #             (5 = 0b0000101, flip bits, add 1...)
+# Here is an example:
 
-# Just remember that ~ simply flips the bits of a binary word, 
+print( 0b110)   #  6 base 10
+print(~0b110)   # -7 base 10 via two's complement:
+                #    flip bits:       001 (one complement)
+                #    subtract 1:      000
+                #    flip bits again: 111 = 7 (negative)
+
+# Just remember that bitwise NOT flips all bits of a binary word, 
 # but the result is interpreted using two's complement. As a result,
 # when you +display+ the result using either bin() or string formatting
 # it will not appear "correctly" (although it will still work the 
@@ -178,6 +197,7 @@ print(~0b100)   # 1111011 <-- but this is -5 via two's complement
 print(bool(x & ~x))
 print(bool(x | ~x))
 print(bool(~0b1111 & 0b1111))
+
 
 
 print()

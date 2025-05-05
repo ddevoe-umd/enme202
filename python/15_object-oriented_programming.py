@@ -194,7 +194,6 @@ print(f'distance between {p1.stringify()} and {p2.stringify()} = {p1.distance(p2
 # including custom class objects.  Here we form a list of Point values, and iterate through 
 # the list to display info for each Point:
 
-p2 = Point(-12.5, 0, 7)
 p3 = Point()
 p4 = Point(y=3)
 points = [p1, p2, p3, p4]
@@ -243,19 +242,18 @@ class Point:
         self.x = x
         self.y = y
         self.z = z
-    def set_x(self, val):
-        self.x = val
+    def double_x(self, val):
+        self.x *= 2
         return self        # need to return self for chaining
-    def set_y(self, val):
-        self.y = val
+    def double_y(self, val):
+        self.y *= 2
         return self        # need to return self for chaining
-    def set_z(self, val):
-        self.z = val
+    def double_z(self, val):
+        self.z *= 2
         return self        # need to return self for chaining
 
-p = Point()
-p.set_x(2).set_y(3).set_z(-1)
-print(f'{p.x}, {p.y}, {p.z}')
+p = Point(1,2,3)
+p.double_x().double_y().double_z()    # chained methods
 
 
 print()
@@ -320,17 +318,17 @@ for val in CountDown(5):
 
 # A more complex (and contrived) iterable class example:
 
-class ListOfLists:
+class ListOfTuples:
     def __init__(self, vals):
          self.vals = vals
 
     def __iter__(self):  
         # Use a generator to create an iterator to return via iter():
-        second_value_list = (item[1] for item in self.vals)  
+        second_value_list = (item[1] for item in self.vals)
         return iter(second_value_list)
 
 data = [(1, 'a', 9, 'x'), (2, 'b'), (3, 'c', 7)]
-my_list = ListOfLists(data)
+my_list = ListOfTuples(data)
 for entry in my_list:
     print(entry)
 
@@ -358,7 +356,7 @@ class CountDown:
         return self      # iterators should return themselves
 
     def __next__(self):  
-    # _next__ makes the class an _iterator_, defining the next value to be returned at
+    # __next__ makes the class an _iterator_, defining the next value to be returned at
     # each iteration, and raising a StopIteration exception when there are no more values
         if self.current <0:
             raise StopIteration
@@ -522,8 +520,8 @@ print('---------------------------------------')
 # operators.  For example:
 #
 # __str__     Defines what is sent to standard output by print()
-# __add__     Defines what is returned by the addition operator (+)
 # __float__   Defines what is returned by type conversion using float()
+# __add__     Defines what is returned by the addition operator (+)
 #
 # ...and many more!
 #
@@ -536,7 +534,7 @@ class Vector:
         self.coordinates = args     
 
     def __add__(self, other):
-        # Make sure both objects are Vectors:
+        # Make sure _other_ is a Vector:
         if not isinstance(other, Vector):
             raise TypeError("Can only add Vector to another Vector")
         # Make sure Vectors are the same length:
@@ -570,8 +568,8 @@ v2 = Vector(-9,0,6,6,0)
 print(v1 + v2)
 
 
-# What if we want to add a Vector and a float (interpreted as
-# adding the float to each element of the Vector)?
+# What if we want to add a Vector and a scalar number (float or int), interpreted
+# as adding the number to each element of the Vector)?
 
 class Vector:
     def __init__(self, *args):
@@ -599,7 +597,7 @@ except Exception as e:
 
 
 # Because the arguments in __add__ are ordered as (self, other), this implementation
-# will work for Vector + float, but not for float + Vector.  To handle both
+# will work for Vector + number, but not for number + Vector.  To handle both
 # cases, the __add__ method must be supplemented with the +reverse add+ method,
 # __radd__:
 
@@ -647,15 +645,21 @@ print('---------------------------------------')
 
 class Cow:
     def __init__(self):
-        print("...")
+        print("A wild cow appears...")
     def __del__(self):
         print("Goodby cold cruel world")
     def speak(self):
         print("Moo")
 
-a = Cow()
-a.speak()
-del a
+def cow_life_cycle():
+    the_cow = Cow()
+    the_cow.speak()
+
+cow_life_cycle()
+
+# Note that the destructor is called when the Cow goes out of scope
+# after the function ends. We could also call the destructor manually
+# via "del the_cow" or "the_cow.__del__()".
 
 
 print()
@@ -688,6 +692,7 @@ print(f'The herd size is {Cow.herd_size}')
 del c1
 print(f'The herd size is {Cow.herd_size}')
 del c2
+print(f'The herd size is {Cow.herd_size}')
 
 
 print()
