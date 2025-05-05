@@ -16,11 +16,12 @@ print('---------------------------------------')
 
 """
 Bitwise operators compare or evaluate individual bits within _binary words_
-(sequences of binary values).  In other words, while boolean operators
-work with single True/False values, bitwise operators can be applied to
-multiple boolean values within binary words.  
+(sequences of binary values).  Unlike Boolean operators, which yield single
+True/False values, bitwise operators act on multiple values within a pair
+of binary words to yield a new binary word, where each bit in the new sequence
+is determined by comparing the corresponding bits in the initial word pair.
 
-Here is a summary of bitwise operators in Python:
+Summary of bitwise operators:
 
 x & y    AND
 x | y    OR
@@ -39,15 +40,24 @@ print('---------------------------------------')
 # Values of +all+ types are stored in the computer as binary words.
 # Thus it is a misnomer to talk about "declaring" a binary value.
 # Rather, we want to be able to understand how to create a value
-# with the desired bit sequence for a given binary word.
+# correspomding to a bit sequence that defines the desired binary word.
 
-# Declare a binary word using int():
-x = int('0101',2)  # 4-bit base-2 word: 0101 (b2) = 5 (b10)
+# The int() function can be used to convert values from different
+# number bases to base 10, providing one option for converting between
+# binary (base 2) and decimal (base 10). The function has the form:
+#
+#   int(value_as_string, base)
+#
+# Example: convert 0101 (base 2) to decimal:
+x = int('0101',2)  # 0101 (b2) = 5 (b10)
 
-# Declare a binary word using 0b syntax:
+# We can also directly declare binary values by preceeding a binary
+# value with _0b_ as follows:
 y = 0b0110         # 0110 (b2) = 6 (b10)
 
-# How to display a binary word?
+# Displaying either variable using print() will show a base 10 value!
+# We cam display a binary word by either using the bin() function, or
+# using string formatting:
 print(x) # --> 5
 print(bin(x)) # --> 0b101
 print("{:b}".format(x))  # --> 101
@@ -73,7 +83,9 @@ print('Operator Precedence:')
 print('---------------------------------------')
 
 """
-Operation precedence (descending order):
+Bitwise operators have precedence over both comparisons and logical 
+(Boolean) operators. Operation precedence (descending order):
+
    **      (Exponent)
    +x, -x  (Unary addition, Unary subtraction)
    ~x      (Bitwise NOT)
@@ -100,6 +112,8 @@ print()
 print('Bit Shifting:')
 print('---------------------------------------')
 
+# Bit shifting "pushes" each bit either left (<<) or right (>>).
+x = 0b0101
 print(f"x << 1 =       { x<<1 :04b}")
 print(f"x >> 2 =       { x>>2 :04b}")
 print(f"x & (x << 1) = { x & (x<<1) :04b}")
@@ -109,11 +123,8 @@ print(f"x ^ (x << 1) = { x ^ (x<<1) :04b}")
 x >>= 1
 print(f"After x >>= 1, x = {x:04b}")
 
-# Reset x...
-x = 0b0101
-print(f"x = { x :04b}") 
-
 # Right bit shifting – extra bits roll off and are forgotten:
+x = 0b0101
 print(f"(x >> 3) << 3 =   { (x>>3) <<3 :04b}") 
 
 # Left bit shifting – bits are remembered (word length 
@@ -121,11 +132,23 @@ print(f"(x >> 3) << 3 =   { (x>>3) <<3 :04b}")
 print(f"(x << 10) =       {  x<<10        :b}")
 print(f"(x << 10) >> 10 = { (x<<10) >> 10 :b}")
 
+
+print()
+print('Complement Operator (Bitwise NOT):')
+print('---------------------------------------')
+
 # Now try the complement operator (~): 
 print(f"x | ~x =          { x | ~x :b}")
 
 # x | ~x = -1 for any x
+# 
+# or equivalently, if x is an integer:
+# 
+# ~x = -(x+1) for any x
 #
+# Thus ~x will always invert the sign of x (when interpreting
+# x as an integer).
+
 # This result may not be what you were expecting.
 # ~x yields "one's complement" of x, meaning each bit
 # is flipped **including the leading bit** that determines
@@ -145,14 +168,12 @@ print( 0b100)   # 0000100
 print(~0b100)   # 1111011 <-- but this is -5 via two's complement
                 #             (5 = 0b0000101, flip bits, add 1...)
 
-# Note that ~x will always invert the sign of x: ~x = -(x+1)
-#
-# Just remember that ~ simply flips the bits
-# of a binary word, but the result is interpreted using
-# two's complement so that when you try to **display** the
-# result it will not appear "correctly" (although
-# it will still work the way you expect "under the hood"
-# when comparing binary words of appropriate length):
+# Just remember that ~ simply flips the bits of a binary word, 
+# but the result is interpreted using two's complement. As a result,
+# when you +display+ the result using either bin() or string formatting
+# it will not appear "correctly" (although it will still work the 
+# way you expect "under the hood" when comparing binary words of 
+# appropriate length):
 
 print(bool(x & ~x))
 print(bool(x | ~x))
@@ -163,9 +184,8 @@ print()
 print('Bit Masks:')
 print('---------------------------------------')
 
-# How do we get ~ to display the expected result
-# without creating a negative value?  Use a bit mask to 
-# force a leading "0" bit:
+# How do we get ~ to display the expected result without creating
+# a negative value?  Use a bit mask to force a leading "0" bit:
 
 x    = 0b11110000
 mask = 0b11111111
@@ -178,41 +198,90 @@ print(f"~x & mask = { ~x & mask :08b}")
 print(f'x | (~x & mask) = { x | (~x & mask) :08b}')
 
 
-# Bit mask example: state tracking
+"""
+Bit Fields
+"""
 
-# Say x is a "bit field" with 5 states we want to track:
-x = 0b00000  
+# Bit fields are used to store multiple binary values in our code such
+# as system states or flags as individual bits of a binary word. 
 
-# Let mask1 and mask2 be bitmasks used to manipulate the field:
-mask1 = 0b00110
-mask2 = 0b10001
+# Suppose code is being developed to control a mechatronic device with
+# the following 4 boolean flags:
+#   bit 0: Power on
+#   bit 1: Error
+#   bit 2: Overheated
+#   bit 3: Battery low
 
-# Turn bit 2 and 3 on:
-x |= mask1
-print(f'x = { x :05b}')
+# Create bit masks (using bit shifting) to define which bit
+# in the status bit field is associated with each state:
+POWER        = 1 << 0  # 0b0001
+ERROR        = 1 << 1  # 0b0010
+OVERHEATED   = 1 << 2  # 0b0100
+BATTERY_LOW  = 1 << 3  # 0b1000
 
-# Turn bit 1 and 5 on: 
-x |= mask2
-print(f'x = { x :05b}')
+# Initial status: Power ON, Error ON, Battery low ON => 0b1011
+status = POWER | ERROR | BATTERY_LOW
 
-# Flip state of bit 5:
-x ^= 1<<4
-print(f'x = { x :05b}')
+# Bitwise AND can be used to check flag status (do you see why 
+# this works?):
+def check_status():
+   print(f'\nCurrent status bit field: {status:04b}')
+   if status & POWER:
+      print('- Device is powered ON')
+   else:
+      print('- Device is powered OFF')
 
-# Turn bit 2 off: 
-x &= 0b11101
-print(f'x = { x :05b}')
+   if status & ERROR:
+      print('- Error detected')
+   else:
+      print('- No errors detected')
+   if status & OVERHEATED:
+      print('- Device is overheated')
+   else:
+      print('- Temperature normal')
 
-# Turn bit 2 and 3 off:
-x &= ~mask1
-print(f'x = { x :05b}')
+   if status & BATTERY_LOW:
+      print('- Battery level is low')
 
-# Flip states of bits 1 and 2:
-x ^= 0b00011
-print(f'x = { x :05b}')
+check_status()
 
-# Check each state in sequence by shifting
-# a single bit to probe each state:
-for i in range(5):
-    print(f"State {i} = {+bool(x & 1<<i)}")
-    # unary addition used to convert bool to int
+# Bitwise operators can also be applied to directly modify the flags
+# without using any conditionals or other code. 
+
+# Set a flag (turn flag on):
+status |= POWER            # Set power ON
+status |= ERROR            # Set error flag ON
+check_status()
+
+# Set multiple flags at the same time:
+status |= POWER | ERROR # Set both power and error flags
+check_status()
+
+# Clear a flag (turn flag off):
+status &= ~ERROR           # Clear error flag (turn OFF)
+status &= ~POWER           # Clear power flag
+check_status()
+
+# Clear Multiple Flags at the same time:
+status &= ~(POWER | ERROR)   # Clear both power and error flags
+check_status()
+
+# Toggle a flag (flip on/off):
+status ^= BATTERY_LOW      # Toggle battery low flag
+status ^= POWER            # Toggle power state
+check_status()
+
+# Toggle multiple flags at the same time:
+status ^= POWER_ON | BATTERY_LOW 
+check_status()
+
+# Clear all flags while saving status of a selected flag:
+status &= ERROR            # Turn all flags off but keep ERROR state unchanged
+check_status()
+
+# Clear all flags while saving status of multiple selected flags:
+status &= (ERROR | POWER)  # Turn all flags off but keep ERROR & POWER unchanged
+check_status()
+
+
+
