@@ -68,8 +68,10 @@ print(f"{x:b}")
 # leading zeros. If we know the word length, use string formatting
 # to control output appearance:
 
-print(f"{x:04b}")  # format output 4 char long using "0" for padding.
+print(f"{0b1010:04b}")  # format output 4 char long using "0" for padding.
 
+x = 0b0101
+y = 0b0110
 print(f"x =     { x   :04b}") 
 print(f"y =     { y   :04b}") 
 print(f"x & y = { x&y :04b}") 
