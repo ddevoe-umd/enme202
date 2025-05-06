@@ -58,10 +58,10 @@ y = 0b0110         # 0110 (b2) = 6 (b10)
 # Displaying either variable using print() will show a base 10 value!
 # We cam display a binary word by either using the bin() function, or
 # using string formatting:
-print(x) # --> 5
-print(bin(x)) # --> 0b101
-print("{:b}".format(x))  # --> 101
-print(f"{x:b}")
+print(x)                 # --> 5
+print(bin(x))            # --> "0b101"
+print("{:b}".format(x))  # --> "101"
+print(f"{x:b}")          # --> "101"
 
 # Hang on...we defined x as a 4-bit word, but only 3 bits appear in 
 # the output.  This is because Python does not keep track of 
