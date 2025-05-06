@@ -702,7 +702,7 @@ print('---------------------------------------')
 # Python does not have true private attributes or methods.  However, you can use
 # naming conventions to indicate that an attribute or method should not be 
 # accessed directly from outside the class using a single leading underscore 
-# (_attribute_name or _method_name) to indicate that it is intended for internal
+# (_attribute or _method) to indicate that it is intended for internal
 # use within the class only.
 
 
