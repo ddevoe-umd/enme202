@@ -40,7 +40,7 @@ print('---------------------------------------')
 # Values of +all+ types are stored in the computer as binary words.
 # Thus it is a misnomer to talk about "declaring" a binary value.
 # Rather, we want to be able to understand how to create a value
-# correspomding to a bit sequence that defines the desired binary word.
+# correspomding to a particular bit sequence.
 
 # The int() function can be used to convert values from different
 # number bases to base 10, providing one option for converting between
@@ -169,7 +169,7 @@ print(f"x | ~x =          { x | ~x :b}")
 # adding 1.
 #
 # How does Python know that 11111010 is -6 and not -3 (in other
-# words, how does it inow that this bit:
+# words, how does it know that this bit:
 #                                |
 #                            11111010
 # is part of the number and not just a leading 1 indicating a negative
