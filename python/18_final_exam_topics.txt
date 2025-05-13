@@ -1,0 +1,161 @@
+#
+# ENME202 FINAL EXAM:
+#
+
+Tue May 20, 1:30-3:30pm
+Closed notes
+No calculators or other electronics
+Question types:
+    True/False
+    Multiple Choice
+    Multiple Options
+    Matching
+    Code Output
+    Python <-> MATLAB Code Selection
+    Single-line code generation
+
+
+#
+# PYTHON TOPICS:
+#
+
+# Python Data Types and Variables
+
+Elemental data types (int, float, complex, bool, str)
+Variables and the assignment operator
+User Input
+
+# Python Operators
+
+Arithmetic operators
+Assignment operators
+Comparison operators
+Comparison operations using Booleans
+
+# Python Strings
+
+String Basics
+String Indexing and Slicing
+String Methods
+String Formatting
+
+# Lists
+
+List Declaration
+List Indexing and Slicing
+Copying Lists
+Other List Methods
+
+# Tuples
+
+Tuple Declaration
+Indexing and Slicing Tuples
+Converting Tuples to Lists
+Copying Tuples
+Deleting Tuples
+Tuple Methods
+
+# Sets
+
+Set Declaration
+Adding Elements to a Set
+Removing Elements From a Set
+Converting Between Lists and Sets
+Joining Sets
+Set Intersection
+Subsets and Supersets
+Checking Set Overlap
+
+# Python Dictionaries
+
+Dictionary Basics
+Extracting Dictionary Keys and Values
+Copying Dictionaries
+Referencing Non-Existent Keys Using get()
+Removing Items from a Dictionary
+
+# Conditionals and Boolean Operators
+
+if / elif / else Statements
+Nested if Statements
+Boolean (Logical) Operators
+Using Boolean Operators in if Statements
+
+# Loops
+
+for Loops
+The range() Function
+Nested for Loops
+break, continue, else Statements
+pass Statement
+Structured Data Types as Loop Indices
+Looping with Index Values Using enumerate()
+while Loops
+
+# User-Defined Functions
+
+Function syntax
+Returning multiple values
+Default argument values
+Passing an arbitrary number of arguments (packing & unpacking)
+Documentation strings (docstrings)
+Variable Scope
+
+# Exception Handling
+
+try / except Blocks
+else, finally Blocks
+Raising Exceptions
+
+# Python Modules
+
+Importing Modules
+Custom Modules
+config Module for Multi-File Global Variables 
+
+# List Comprehension
+
+List Comprehension Basics
+List Comprehension with Multiple Iterables
+List Comprehension with Conditionals
+
+# File Handling
+
+File Operations
+Opening Files Using with
+Files as Iterators
+JSON Files
+CSV Files
+
+# Object-Oriented Programming
+
+Object-Oriented Programming
+Defining a Class
+Object Declaration
+Instance Methods
+Class Methods
+Method Chaining
+Magic (Dunder) Methods and Instances
+Class Composition
+Class Inheritance
+Multiple Inheritance
+Method Overriding
+Overriding Magic Methods
+Class Attributes
+Private Attributes and Methods
+
+# Bitwise Operators
+
+Bitwise Operator Summary
+Converting Between Base 2 and Base 10
+Declaring and Displaying Binary Words
+Operator Precedence
+Bit Shifting
+Bit Masks
+
+# Higher-Order Functions
+
+Basics of Higher-Order Functions
+Closures
+Function Decorators
+Built-in Higher Order Functions: map(), filter(), reduce()
