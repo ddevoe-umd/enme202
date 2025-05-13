@@ -12,7 +12,7 @@ Question types:
     Matching
     Code Output
     Python <-> MATLAB Code Selection
-    Single-line code generation
+    Single-line Code Generation
 
 
 #
@@ -66,10 +66,10 @@ Set Intersection
 Subsets and Supersets
 Checking Set Overlap
 
-# Python Dictionaries
+# Dictionaries
 
 Dictionary Basics
-Extracting Dictionary Keys and Values
+Extracting Keys and Values
 Copying Dictionaries
 Referencing Non-Existent Keys Using get()
 Removing Items from a Dictionary
