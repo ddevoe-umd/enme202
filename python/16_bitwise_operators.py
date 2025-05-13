@@ -4,6 +4,7 @@
 Topics
 ------
 Bitwise Operator Summary
+Converting Between Base 2 and Base 10
 Declaring and Displaying Binary Words
 Operator Precedence
 Bit Shifting
@@ -32,6 +33,33 @@ x >> n   shift bits right n places (same as dividing by 2**y)
 
 """
 
+print()
+print('Converting Between Base 2 and Base 10:')
+print('---------------------------------------')
+
+"""
+Our written system for base 10 (decimal) numbers uses 10 digits (0,1,2,...,9) to 
+represent the value. To interpret a multi-digit number we learn at an early age to
+evaluate each "power of 10" in the number, with the lowest power at the right end
+of the number (ones column) and increasing powers going left (tens column, hundreds
+column, etc.). By this convention, we interpret a decimal number like 479 as follows:
+
+479 = 4*10^2 + 7*10^1 + 9*10^0
+    = 4*100  + 7*10   + 9*1 
+    = 400    + 70     + 9
+
+This same convention applies to *any* number base, inluding base 2 (binary). 
+For base 2, we only have 2 digits (0 and 1). For example, a binary value of
+11010 is interpreted as a base 10 number like this:
+
+110110 = 1*2^5 + 1*2^4 + 0*2^3 + 1*2^2 + 1*2^1 + 0*2^0
+       = 1*32  + 1*16  + 0*8   + 1*4   + 1*2   + 0*1
+       = 54
+
+This approach can be applied to any number base system such as octal (base 8),
+hexadecimal (base 16), etc.
+
+"""
 
 print()
 print('Declaring and Displaying Binary Words:')
@@ -248,6 +276,7 @@ status = POWER | ERROR | BATTERY_LOW
 # this works?):
 def check_status():
    print(f'\nCurrent status bit field: {status:04b}')
+
    if status & POWER:
       print('- Device is powered ON')
    else:
@@ -257,6 +286,7 @@ def check_status():
       print('- Error detected')
    else:
       print('- No errors detected')
+
    if status & OVERHEATED:
       print('- Device is overheated')
    else:
@@ -268,7 +298,7 @@ def check_status():
 check_status()
 
 # Bitwise operators can also be applied to directly modify the flags
-# without using any conditionals or other code. 
+# without using any conditionals, and without affecting other status bits. 
 
 # Set a flag (turn flag on):
 status |= POWER            # Set power ON
