@@ -23,13 +23,13 @@ print(type(5 + 8j))  # complex value (complex)
 # is similar to Matlab (e.g. finding the magnitude, real part, or 
 # imaginary part of a complex vector).
 
-# Python is a strongly-typed language (intermingling of different 
+# Python is a ++strongly-typed++ language (intermingling of different 
 # variable types is restricted), but numerical values can be 
 # mixed together:
 
 print(4 + 5.27 + (5+8j))    # yields (14.27+8j)
 
-# Python is also a dynamically-typed language: the value type is determined 
+# Python is also a ++dynamically-typed++ language: the value type is determined 
 # by context (type declarations are generally not required). 
 
 # Unlike C-family languages, numerical data types have infinite precision!
@@ -50,27 +50,21 @@ print("this isn't not a string")
 
 print('that wasn\'t good grammar')
 
-# A string is not just a sequence of characters. It is a "member" of
-# the String "class" and an "iterable" object that has access to
-# a number of functions and "class methods" (we will soon learn what 
-# all of this means).
-#
 # A string can be passed as an argument to the len() function
 # to determine the number of characters in the string:
 
 print(len('let\'s count'))
 
-# We will later learn about more complex ways to format and manipulate
-# strings.
-#
-# More generally, we will learn about various other built-in data 
-# structures that can combine elemental data types in various ways.
+# A string is not just a sequence of characters. It is a "member" of
+# the String "class" and an "iterable" object that has access to
+# a number of methods (functions) associated with the String class 
+# (we will soon learn what all of this means).
+
 
 
 print()
 print('Variables and the assignment operator:')
 print('---------------------------------------')
-
 
 # Variables are names used to store values in computer memory. A variable
 # is actually a *reference* to a memory address where the value is stored.
@@ -128,10 +122,11 @@ print(22 + int("33"))
 print(int(123.456))
 
 # Convert ints or floats to complex:
+
 print(complex(7, 2.2))
 
-# Another important elemental data type is None. None is *not* equivalent 
-# to 0, False, or an empty string. The None keyword is used to define
+# Another important elemental data type is None (NoneType). None is *not* 
+# equivalent to 0, False, or an empty string. The None keyword is used to define
 # a null value:
 
 print(type(None))    # NoneType
