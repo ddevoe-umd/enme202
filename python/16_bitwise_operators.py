@@ -22,6 +22,14 @@ True/False values, bitwise operators act on multiple values within a pair
 of binary words to yield a new binary word, where each bit in the new sequence
 is determined by comparing the corresponding bits in the initial word pair.
 
+
+Why do we care about bitwise operators?  Bit fields, bit masks, bit flags, 
+finite state machines, graphics operations, compression, encryption, 
+communications, etc.
+
+Recall that there is no standard or maximum binary word length in Python, so
+binary words can be any length
+
 Summary of bitwise operators:
 
 x & y    AND
@@ -213,9 +221,24 @@ print(f"x | ~x =          { x | ~x :b}")
 
 print( 0b110)   #  6 base 10
 print(~0b110)   # -7 base 10 via two's complement:
-                #    flip bits:       001 (one complement)
+                #    flip bits:       001 (one's complement)
                 #    subtract 1:      000
                 #    flip bits again: 111 = 7 (negative)
+
+# The main difference between 1′s complement and 2′s complement is 
+# that 1′s complement has two representations of 0 (zero):
+#   00000000, which is positive zero (+0), and
+#   11111111, which is negative zero (-0)
+# whereas in 2′ s complement, there is only one representation for 
+# zero — 00000000 (0) because if we add 1 to 11111111 (-1), we 
+# get 100000000, which is nine bits long. Since only eight bits are 
+# allowed, the left-most bit is discarded (overflowed), leaving 
+# 00000000 (-0) which is the same as positive zero.
+#
+# For this reason 2′s complement is generally used when performing
+# arithmetic operations, and 1’s complement is generally used when
+# performing binary inversion.
+
 
 # Just remember that bitwise NOT flips all bits of a binary word, 
 # but the result is interpreted using two's complement. As a result,

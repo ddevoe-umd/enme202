@@ -8,6 +8,7 @@ String Basics
 String Indexing and Slicing
 String Methods
 String Formatting
+String Formatting with Different Number Systems
 """
 
 print()
@@ -97,9 +98,6 @@ second_to_last_char = word[-2]   #  'o'
 print(last_char)
 print(second_to_last_char)
 
-# However, we cannot "wrap around" the end of the string:
-print(word[-2:2])    # yields an empty string
-
 # Multiple characters can be accessed by "slicing" a string
 # using paired index values: [start : end+1]
 first_three_chars = word[0:3]    # 'Pyt'
@@ -109,9 +107,37 @@ print(first_three_chars)
 print(word_without_first_and_last_chars)
 print(middle_of_word)
 
+"""
+Think about it this way:
+* The index is defined by the character sequence value
+* The slicing range is defined by the values between characters:
+
+  H   e   l   l   o
+^---^---^---^---^---^
+0   1   2   3   4   5
+    |_______|
+     'Hello'[1:3] == 'el'
+
+  H   e   l   l   o
+^---^---^---^---^---^
+0   1   2   3   4   5
+    |___|
+     'Hello'[1:2] == 'e'
+
+  H   e   l   l   o
+^---^---^---^---^---^
+0   1   2   3   4   5
+      |
+     'Hello'[1] == 'e'
+
+"""
+
 # Slicing with negative indices is allowed
 last_two_chars = word[-2:6]
 print(last_two_chars)
+
+# However, we cannot "wrap around" the end of the string:
+print(word[-2:2])    # yields an empty string
 
 # If the slicing range starts or ends at the first of last character,
 # that value of the range may be ommitted
@@ -347,6 +373,39 @@ print('break')
 print('now',end='\t')
 print('with',end='\t')
 print('tabs')
+
+
+
+print()
+print('String Formatting with Different Number Systems:')
+print('---------------------------------------')
+
+# We can can  use string formatting to display values in number systems 
+# using different bases:
+
+# b -> binary (base 2)
+# o -> octal (base 8)
+# d -> decimal (base 10)
+# x -> hexadecimal (base 16)
+# X -> hexadecimal (base 16) upper case
+
+print(f'{0x40:02d}')    # display hex as decimal
+print(f'{0x40:08b}')    # display hex as binary
+print(f'{0b1111:02X}')  # display binary as hex (upper case)
+print(f'{0o31:02d')     # display octal as decimal
+
+"""
+ Decimal     Binary        Octal    Hexadecimal
+    1       00000001        001         01
+    2       00000010        002         02
+    4       00000100        004         04
+    8       00001000        010         08
+    16      00010000        020         10
+    32      00100000        040         20
+    64      01000000        100         40
+    128     10000000        200         80
+"""
+
 
 
 print()
