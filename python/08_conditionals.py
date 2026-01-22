@@ -106,7 +106,7 @@ x or y     # True
 not x      # False
 
 if not ((x > 20 and y < 50) or z < 0):
-		 # do something
+    pass
 
 # There is no "exclusive or" (XOR) Boolean operator in Python.
 # The caret symbol (^) is the _bitwise_ XOR (bitwise operators will be 
@@ -238,13 +238,14 @@ the remaining conditions are _not_ checked.
 7. Find the largest of three numbers using nested conditionals.
 8. Given the coefficients of the quadratic equation ax^2 + bx + x, write code 
    to determine the quadratic equation has real, imaginary, or equal roots. 
-9. Create a simple calculator that performs addition, subtraction, 
-   multiplication, or division based on user input. Each input is in the form
-   of "value operator value", e.g. "12.5 * 9" or "4+5". Your code must be
+9. Create a simple calculator function that performs addition, subtraction, 
+   multiplication, or division of integers based on user input. Each input is in
+   the form of "value operator value", e.g. "12 * 9" or "4+5". Your code must be
    able to handle input with and without spaces between the input elements, and
    use conditionals to handle invalid inputs (like division by zero and 
-   non-numerical values). You will need to think carefully about how to pull 
-   out the operator and individual values from the user input!
+   non-numerical values). The operators +, -, *, and / must all be supported.
+   You will need to think carefully about how to pull out the operator and
+   individual values from the user input!
 """
 
 

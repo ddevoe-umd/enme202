@@ -99,7 +99,7 @@ print('---------------------------------------')
 # are included in the string.
 
 with open('myfile.txt') as f:
-	for line in f:
+    for line in f:
         print(line.strip())   # use strip() to remove newline characters
 
 
@@ -108,7 +108,7 @@ with open('myfile.txt') as f:
 # step through the first 3 lines of the file as follows:
 
 with open('myfile.txt') as f:
-    print(next(f))
+    print(next(f))     # next(f) is the same as f.__next__()
     print(next(f))
     print(next(f))
 

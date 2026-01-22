@@ -323,8 +323,8 @@ x/X = hexadecimal (lower/upper case)
 
 In each case, the formatted string length and numerical precision
 is specified as "width.precision" where:
-	width = minimum string length (adds leading spaces if needed)
-	precision = # digits after the radix
+    * width = minimum string length (adds leading spaces if needed)
+    * precision = # digits after the radix
 """
 
 # float, str, and int values to use in strings:
@@ -392,7 +392,7 @@ print('---------------------------------------')
 print(f'{0x40:02d}')    # display hex as decimal
 print(f'{0x40:08b}')    # display hex as binary
 print(f'{0b1111:02X}')  # display binary as hex (upper case)
-print(f'{0o31:02d')     # display octal as decimal
+print(f'{0o31:02d}')     # display octal as decimal
 
 """
  Decimal     Binary        Octal    Hexadecimal
@@ -408,11 +408,8 @@ print(f'{0o31:02d')     # display octal as decimal
 
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
-
-practice = """
+"""
+PRACTICE PROBLEMS
 
 Easy
 
@@ -439,9 +436,6 @@ Hard -- problems may require require loops and conditionals!
 12. Longest Word: Write a program that finds and prints the longest word in a given sentence.
 13. String Compression: Implement a function that compresses a string using the counts of repeated characters (e.g., "aaabbc" → "a3b2c1").
 14. Custom Sorting: Write a function to sort a list of strings by their last character. If two strings have the same last character, sort them by their length.
-
-
 """
-print(practice)
 
 

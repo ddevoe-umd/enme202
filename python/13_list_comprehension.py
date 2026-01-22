@@ -29,7 +29,7 @@ vals = [1, 2, 5, 7]
 
 sq_vals = []
 for v in vals:
-	sq_vals.append(v**2)
+    sq_vals.append(v**2)
 print(sq_vals)
 
 # Here is the same result using list comprehension:
@@ -49,6 +49,13 @@ new_list_3 = [idx%3 + x for idx, x in enumerate(range(15))]  # enumerate object 
                                                              # (with unpacked tuple)
 new_list_4 = [k.upper() for k in {'a':1, 'b':2}]        # dictionary as iterable
 
+# The concept of list comprehension can also be applied to dictionaries,
+# as seen below. Note how zip is required in this case to generate paired
+# keys and values for the dictionary:
+
+new_dict = [key, value for key, value in zip(['a','b','c'], range(3))]
+
+
 print()
 print('List Comprehension with Multiple Iterables:')
 print('---------------------------------------')
@@ -61,8 +68,8 @@ v1 = [2, 4, 8]
 v2 = [4, 3, -9]
 result = []
 for x in v1:
-	for y in v2:
-		result.append(x*y)
+    for y in v2:
+        result.append(x*y)
 
 # An aside: the result is a 1D list (rather than a 2D matrix, which is what the cross
 # product should yield).  Can you think of a way to modify this code to yield
@@ -137,7 +144,7 @@ PRACTICE PROBLEMS
 
 1. Basic List Comprehension: Write a list comprehension to create a list of 
    squares of numbers from 1 to 10.
-2. Filter Even Numbers: Use a list comprehension to create a list of even 
+2. Filter Even Numbers: Use list comprehension to create a list of even 
    numbers from 1 to 20.
 3. String Lengths: Given a list of words ["apple", "banana", "cherry"], 
    use a list comprehension to create a list of their lengths.
@@ -145,7 +152,7 @@ PRACTICE PROBLEMS
    ["hello", "world"] to ["HELLO", "WORLD"].
 5. Names to list: Given a list of names, use list comprehension to create a new
    list with each element being another list with 2 elements given by the first and
-   last names: [["James","Joyce", ["Gene","Wolfe"], ["George,Orwell"]] given the list 
+   last names: [["James","Joyce"], ["Gene","Wolfe"], ["George,Orwell"]] given the list 
    ["James Joyce", "Gene Wolfe", "George Orwell"]
 6. Extract Initials: Given a list of names, use list comprehension to extract 
    the first letter of each name: ['JJ', 'GW', 'GO'] given the list 
@@ -156,7 +163,7 @@ PRACTICE PROBLEMS
    (x, y) where x is from [1, 2, 3] and y is from [4, 5].
 9. Replace Negative Numbers: Given a list numbers = [-5, 3, -1, 2], use a list 
    comprehension to create a new list where all negative numbers are replaced by 0.
-10. Filter Words by Length: Given a list of words ["cat", "dog", "elephant", "fox"],
+10. Filter Words by Length: Given a list of words ["cat", "dog", "elephant", "frog"],
     use a list comprehension to create a new list containing only the words with 
     more than three letters.
 11. Find Common Elements: Given two lists list1 = [1, 2, 3, 4] and 

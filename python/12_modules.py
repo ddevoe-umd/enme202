@@ -125,11 +125,9 @@ print('---------------------------------------')
 
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
-
 """
+PRACTICE PROBLEMS
+
 There are no practice problems for this topic, but it is strongly recommended 
 that you review the basics of working with built-in and custom Python modules
 """

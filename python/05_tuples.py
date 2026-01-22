@@ -114,34 +114,18 @@ print(t.count(5))
 print(t.index(6))
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
+"""
+PRACTICE PROBLEMS
 
-practice = """
-
-Easy
-1. Access Elements: Given the tuple numbers = (10, 20, 30, 40, 50), write a program to print the first element and the last element.
-2. Tuple Length: Write a program to determine and print the length of the tuple colors = ("red", "green", "blue", "yellow").
-3. Index of an Element: Find and print the index of "blue" in the tuple colors = ("red", "blue", "green").
-4. Check Membership: Write a program to check if the string "apple" is in the tuple fruits = ("apple", "banana", "cherry").
-
-Medium
-5. Concatenate Tuples: Combine two tuples tuple1 = (1, 2, 3) and tuple2 = (4, 5, 6) and print the resulting tuple.
-6. Tuple Slicing: Given the tuple letters = ("a", "b", "c", "d", "e"), extract and print the subtuple ("b", "c", "d").
-7. Immutable Tuples: Try to change the second element of the tuple fruits = ("apple", "banana", "cherry") to "orange" and observe the error.
-8. Nested Tuple Access: Access and print the value 4 from the nested tuple matrix = ((1, 2), (3, 4), (5, 6)).
-9. Single-Element Tuple: Create a tuple with a single element "apple" and print its type to confirm it is a tuple.
-
-Hard
-10. Unpacking a Tuple: Given the tuple point = (4, 5), unpack its values into variables x and y in a single line of code.
-11. Swap Values: Use tuple unpacking to swap the values of two variables, a = 10 and b = 20.
-12. Tuple with Mixed Data Types: Create a tuple with mixed data types (e.g., ("hello", 42, 3.14)) and print each element by its position.
-13. Reverse a Tuple: Reverse the tuple numbers = (1, 2, 3, 4, 5) using slicing.
-14. Tuple Conversion: Convert the list numbers = [10, 20, 30] into a tuple.
+1. Immutable Tuples: Try to change the second element of the tuple fruits = ("apple", "banana", "cherry")
+   to "orange" and observe the error.
+2. Single-Element Tuple: Create a tuple with a single value "x", and print its type to confirm it is a tuple.
+3. Given the tuple point = (4, 5), use "iterable unpacking" to assign the tuple values to variables 
+   x and y in a single line of code (google "iterable unpacking" if you don't know how to do this).
+4. Convert the tuple n = (10, 20, 30) into a list.
+5. Convert the list n = [1, 2, 3] into a tuple.
 
 """
-print(practice)
 
 
 

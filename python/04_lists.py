@@ -15,13 +15,13 @@ Lists are an essential data structure in Python, allowing the coder
 to reference multiple values with a single variable name.
 
 Lists are _heterogeneous_, _ordered_, and _mutable_:
-	- Heterogeneous structures can contain multiple different 
-	  data types (both elemental types such as ints, float, strings,
-	  and structured data types such as other lists)
-	- In an ordered data structure, the sequence of values within
-	  the structure is fixed
-	- Values stored in a mutable data structure may be changed at
-	  any time.
+    - Heterogeneous structures can contain multiple different 
+      data types (both elemental types such as ints, float, strings,
+      and structured data types such as other lists)
+    - In an ordered data structure, the sequence of values within
+      the structure is fixed
+    - Values stored in a mutable data structure may be changed at
+      any time.
 """
 
 print()
@@ -249,35 +249,31 @@ print(even)
 # sorted list without modifying the original list.
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
-
-practice = """
+"""
+PRACTICE PROBLEMS
 
 Easy
-1. Access Elements: Given the list numbers = [10, 20, 30, 40, 50], write code to print the first element and the last element.
-2. List Length: Write a program to determine and print the length of the list colors = ["red", "green", "blue", "yellow"].
-3. Modify an Element: Change the second element of the list fruits = ["apple", "banana", "cherry"] to "orange".
-4. Concatenate Lists: Combine list1 = [1, 2, 3] and list2 = [4, 5, 6].
+1. Given the list n = [10, 20, 30, 40, 50], write code to print the first element and the last element.
+2. Print the number of elements in the list from problem 1.
+3. Change the second element of the list from problem 1 to "apple".
+4. Concatenate list1 = [1, 2, 3] and list2 = [4, 5, 6] into a single list.
 
 Medium
-5. Slicing: Given the list letters = ["a", "b", "c", "d", "e"], extract ["b", "c", "d"] as a new list.
-6. Check Membership: Write a program to check if the number 5 is in the list numbers = [1, 2, 3, 4, 5].
-7. Append Element: Add the string "grape" to the list fruits = ["apple", "banana"] and print the updated list.
-8. Remove Element: Remove the element "banana" from the list fruits = ["apple", "banana", "cherry"].
-9. Index of Element: Find the index of "blue" in the list colors = ["red", "blue", "green"].
+Given letters = ["a", "b", "c", "d", "e"], do the following:
+5. Slicing: extract ["b", "c", "d"] as a new list.
+6. Check Membership: Write a program to check if "x" is in the original list.
+7. Append Element: Add the string "z" to the original list so that it is the 3rd element in the new list.
+8. Remove Element: Remove the element "b" from the original list.
+9. Find the index of "d" in the original list.
 
 Hard
-10. Nested List Access: Given the list matrix = [[1, 2], [3, 4], [5, 6]], print the element 4.
-11. List Copy: Create a copy of the list original = [10, 20, 30].
-12. Replace Sublist: Replace the sublist ["b", "c"] in the list letters = ["a", "b", "c", "d", "e"] with ["x", "y", "z"].
-13. List of Strings: Create a list of strings representing the days of the week (["Monday", "Tuesday", ...]).
-14. Reverse a List: Reverse the list numbers = [1, 2, 3, 4, 5] using slicing and print the reversed list.
-15. Find Maximum: Use the max() function to find and print the largest number in the list numbers = [10, 50, 20, 40].
+Given v = [[1, 2, 5], [3, [0, 4, 0]], [5, 6]]:
+10. Nested List Access: Print "4" by indexing into v.
+11. Create a deep copy of v assigned to a new variable v_copy.
+12. Replace [5,6] in v with a new value of -1.
+13. Reverse the order of the elements in v.
+14. Find Maximum: display the largest value in the list n = [10, 50, 20, 40].
 
 """
-print(practice)
-
 
 

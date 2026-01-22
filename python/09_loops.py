@@ -33,7 +33,7 @@ for loop_variable in iterable:
 
 my_string = 'among these barren crags'
 for letter in my_string:
-	print(letter, end=',')
+    print(letter, end=',')
 
 my_list = ['cat', 'window', 'defenestrate']
 for item in my_list:
@@ -45,10 +45,10 @@ for item in my_list:
 my_dict = {'thing 1':'left', 'thing 2': 'right'}
 
 for item in my_dict:
-	print(item)
+    print(item)
 
 for key in my_dict.keys():
-	print(my_dict[key])
+    print(my_dict[key])
 
 
 print()
@@ -60,7 +60,7 @@ print('---------------------------------------')
 # creating a list with the desired values, for example:
 
 for i in [0,1,2,3,4,5,6,7,8,9]:
-	print(f'{i}^2 = {i**2}')
+    print(f'{i}^2 = {i**2}')
 
 # What if the loop variable needs to go to 100?  1e3?  1e6?  This manual approach
 # quickly becomes impractical. Instead, we can use the range() function to
@@ -74,10 +74,10 @@ for i in [0,1,2,3,4,5,6,7,8,9]:
 # range(start, end+1, step)
 
 for i in range(10):
-	print(f'{i}^2 = {i**2}')
+    print(f'{i}^2 = {i**2}')
 
 for idx in range(0,6):
-	print(idx)
+    print(idx)
 
 for x in range(2, 15, 3):
     print(x)
@@ -272,7 +272,7 @@ PRACTICE PROBLEMS
     ***
     ****
     Demonstrate this for 10 lines. You _must_ use nested for loops (hint: consider
-    using the loop variable in the outer loop when defining the inner loop's iterable).
+    using the loop variable from the outer loop when defining the inner loop's iterable).
 13. Use nested for loops to generate a multiplication table (1 to 10) in grid format. 
     Use string formatting to align the table elements appropriately.
 14. A sensor is used to measure a voltage every 0.5 s, with measured voltage values 

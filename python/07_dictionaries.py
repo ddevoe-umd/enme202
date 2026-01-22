@@ -1,4 +1,4 @@
-# Python Dictionaries
+# Dictionaries
 
 # A dicionary data structure consists of a collection of _unordered_ 
 # and _mutable_ (key : value) pairs. Each key within a dictionary must be
@@ -8,9 +8,9 @@
 TOPICS
 ------
 Dictionary Basics
-Extracting Dictionary Keys and Values
+Extracting Keys and Values
 Copying Dictionaries
-Referencing Non-Existent Keys
+Referencing Non-Existent Keys Using get()
 Removing Items from a Dictionary
 """
 
@@ -126,7 +126,7 @@ print(d)
 
 
 """
-PROBLEMS
+PRACTICE PROBLEMS
 
 Easy
 1. Create a dictionary with keys "name", "age", and "city" and corresponding values "Alice", 25, and "New York".

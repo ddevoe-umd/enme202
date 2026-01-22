@@ -27,19 +27,19 @@ print('---------------------------------------')
 
 # Example of division by zero error:
 try:
-	x = 9/0
+    x = 9/0
 except:
-	print('error occurred, setting x to default value')
-	x = 1
+    print('error occurred, setting x to default value')
+    x = 1
 print(x)
 
 # Example of type mismatch error:
 try:
-	val = 20
-	string = 'hello'
-	print(val + string)
+    val = 20
+    string = 'hello'
+    print(val + string)
 except:
-	print('oops, something went wrong!')
+    print('oops, something went wrong!')
 
 # In these examples we know when an error has occurred, but we don't
 # know what the error was!  To display the error, we can capture the
@@ -47,10 +47,10 @@ except:
 # and print it's type and/or details:
 
 try:
-	x = 1/0
+    x = 1/0
 except Exception as e:  # division by zero
-	print(type(e))      # check the Exception type
-	print(e)            # view the error details
+    print(type(e))      # check the Exception type
+    print(e)            # view the error details
 
 # Individual except blocks can be defined to handle different kinds
 # of Exception values.
@@ -59,6 +59,7 @@ except Exception as e:  # division by zero
 #    Value                Raised when...
 #    -----                ---------------
 #    SyntaxError          parsing error (cannot catch errors in base code)
+#    KeyboardInterrupt    user hits ctrl-c
 #    NameError            local or global name (e.g. variable) is not found
 #    IndexError           out-of-range access an index of a sequence
 #    ModuleNotFoundError  cannot find a module being imported
@@ -74,23 +75,23 @@ except Exception as e:  # division by zero
 # Multiple specific Exception types can be caught and handled separately:
 
 try:
-	x = int(input('Enter a value: '))
-	a = 1/x
-	b = [1,2,3][x]
-	c = x + 'abc'
-	d = int(str(x) + 1)
+    x = int(input('Enter a value: '))
+    a = 1/x
+    b = [1,2,3][x]
+    c = x + 'abc'
+    d = int(str(x) + 1)
 except ZeroDivisionError:
-	print('x cannot be zero')
+    print('x cannot be zero')
 except ValueError:
-	print('x must be a number')
+    print('x must be a number')
 except IndexError:
-	print(f'there are only 3 elements in the list')
+    print(f'there are only 3 elements in the list')
 except TypeError:
-	print(f'cannot add an int to a string')
+    print(f'cannot add an int to a string')
 except Exception as e:
-	print('something else happened...')
-	print(type(e))    # check the Exception type
-	print(e)          # view the error details
+    print('something else happened...')
+    print(type(e))    # check the Exception type
+    print(e)          # view the error details
 
 
 print()
@@ -107,8 +108,8 @@ print('---------------------------------------')
 try:
     x = 1/0
 except Exception as e:
-	print('_except_ block runs only if there was an error in the _try_ block')
-	print(f'Here is the error: {e}')
+    print('_except_ block runs only if there was an error in the _try_ block')
+    print(f'Here is the error: {e}')
 else:
     print('Run _else_ block only if no exception occurred in the try block')
 finally:
@@ -136,21 +137,15 @@ except ValueError as e:
 
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
+"""
+PRACTICE PROBLEMS
 
-practice = """
-
-Easy
 1. Basic Try-Except: Write a program that attempts to divide two numbers provided 
    as inputs. Use a try-except block to catch and handle a ZeroDivisionError.
 2. Catching a ValueError: Write a program that attempts to convert a string input 
    into an integer. Use a try-except block to catch and handle a ValueError.
 3. File Not Found: Write a program that tries to open a file named "data.txt". 
    Use a try-except block to catch and handle a FileNotFoundError.
-
-Medium
 4. Multiple Exceptions: Write a program that attempts to divide two inputs provided
    by the user. Handle both ValueError (if the inputs are not numbers) and 
    ZeroDivisionError (if division by zero is attempted).
@@ -164,8 +159,6 @@ Medium
 8. KeyError Handling: Create a dictionary data = {'x': 10, 'y': 25.1}. 
    Write a program that attempts to access a key entered by the user and handles 
    a KeyError if the key is not found.
-
-Hard
 9.  Raising an Exception: Write a function check_length() that takes a string as 
     an argument. Raise a ValueError with a custom message if the length of
     the string is greater than 5.
@@ -188,7 +181,6 @@ Hard
     and handle the exception at the top level.
 
 """
-print(practice)
 
 
 

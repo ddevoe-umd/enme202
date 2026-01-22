@@ -9,7 +9,7 @@ Object Declaration
 Instance Methods
 Class Methods
 Method Chaining
-Magic (Dunder) Methods
+Magic (Dunder) Methods and Instances
 Class Composition
 Class Inheritance
 Multiple Inheritance
@@ -496,6 +496,7 @@ class Animal:
 
 class Dog(Animal):
     def speak(self):     # override the Animal.speak() method
+        super().speak()  # access parent method via super()
         print("Woof!")
 
 class Cat(Animal):
@@ -522,6 +523,7 @@ print('---------------------------------------')
 # __str__     Defines what is sent to standard output by print()
 # __float__   Defines what is returned by type conversion using float()
 # __add__     Defines what is returned by the addition operator (+)
+# __mul__     Defines what is returned by the multiplication operator (*)
 #
 # ...and many more!
 #
@@ -529,7 +531,10 @@ print('---------------------------------------')
 # control how each operator processes our objects:
 
 class Vector:
-    """n-dimensional vector"""
+    """
+    n-dimensional vector, accepts
+    arguments as separate values
+    """
     def __init__(self, *args):
         self.coordinates = args     
 

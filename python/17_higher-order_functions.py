@@ -305,11 +305,9 @@ print(reduce(multiply, vals))
 #    multiply(48, 8) → 384
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
+"""
+PRACTICE PROBLEMS
 
-practice = """
 Easy
 1. Passing Functions: Write a function apply_twice(func, x) that takes a function 
    func and a value x, and applies func to x twice.
@@ -346,7 +344,6 @@ Hard
     function and two numbers, and returns the result of applying the lambda to 
     the two numbers.
 """
-print(practice)
 
 
 

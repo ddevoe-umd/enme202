@@ -60,26 +60,26 @@ print('---------------------------------------')
 print("""
 add()           Add an element to the set
 clear()         Remove all the elements from the set
-copy()	        Return a deep copy of the set
-difference()	Return a set containing the difference between 
+copy()          Return a deep copy of the set
+difference()    Return a set containing the difference between 
                 two or more sets
-difference_update()	 Removes the items in this set that are also
+difference_update()  Removes the items in this set that are also
                      included in another, specified set
-discard()	    Remove the specified item
-intersection()	Return a set, that is the intersection of two or more sets
-intersection_update()	 Remove the items in this set that are not 
+discard()       Remove the specified item
+intersection()  Return a set, that is the intersection of two or more sets
+intersection_update()    Remove the items in this set that are not 
                          present in other, specified set(s)
-isdisjoint()	  Return whether two sets have a intersection or not
-issubset()	      Return whether another set contains this set or not
-issuperset()	  Return whether this set contains another set or not
-pop()	          Remove & return an element from the set
-remove()	      Remove the specified element
-symmetric_difference()	Return a set with the symmetric differences 
+isdisjoint()    Return whether two sets have a intersection or not
+issubset()      Return whether another set contains this set or not
+issuperset()    Return whether this set contains another set or not
+pop()           Remove & return an element from the set
+remove()        Remove the specified element
+symmetric_difference()  Return a set with the symmetric differences 
                         of two sets
-symmetric_difference_update()	Insert the symmetric differences from 
+symmetric_difference_update()   Insert the symmetric differences from 
                                 this set and another
-union()	          Return a set containing the union of sets
-update()	      Update the set with another set, or any other iterable
+union()         Return a set containing the union of sets
+update()        Update the set with another set, or any other iterable
 """)
 
 
@@ -226,7 +226,7 @@ print(f'{s1} and {s2} have no overlaping elements: {s1.isdisjoint(s2)}')
 
 
 """
-PROBLEMS
+PRACTICE PROBLEMS
 
 Easy
 1. Create a set consisting of all integers from 1 to 5, inclusive.

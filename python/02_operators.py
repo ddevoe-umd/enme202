@@ -9,37 +9,37 @@ Comparison operators
 Comparison operations using Booleans
 """
 
-print("""
+"""
 Arithmetic operators:
 --------------------
-+ 	addition 	
-– 	subtraction
-* 	multiplication
-/ 	division
-//	floor division
-**	exponentiation
-%	modulus
++   addition
+–   subtraction
+*   multiplication
+/   division
+//  floor division
+**  exponentiation
+%   modulus
 
 Assignment Operators:
 --------------------
-=	assignment
-+=	addition assignment
-–=	subtraction assignment
-*=	multiplication assignment
-/=	division assignment
-//=	floor division assignment
-**=	exponentiation assignment
-%=	modulus assignment
+=   assignment
++=  addition assignment
+–=  subtraction assignment
+*=  multiplication assignment
+/=  division assignment
+//= floor division assignment
+**= exponentiation assignment
+%=  modulus assignment
 
 Comparison Operators:
 --------------------
-==	equality
-!= 	inequality
->	greater than
-<	less than
->=	greater than or equal
-<=	less than or equal
-""")
+==  equality
+!=  inequality
+>   greater than
+<   less than
+>=  greater than or equal
+<=  less than or equal
+"""
 
 
 print()
@@ -63,7 +63,7 @@ print('---------------------------------------')
 
 # Floor division returns an integer, dropping values after the radix:
 
-5 / 2		 # 2.5
+5 / 2     # 2.5
 5 // 2    # 2
 
 # The molulus operator returns the remainder after division:
@@ -181,7 +181,7 @@ False == False   # True
 # Booleans are automatically type cast to int values based on the
 # context. For example:
 
-True + 1 	# yields 2 since True is type cast to 1
+True + 1    # yields 2 since True is type cast to 1
 False - 1   # yields -1 since False is type cast to 0
 
 # This makes the following comparions valid:
@@ -190,11 +190,9 @@ True > False       # True since 1 > 0
 True >= 2 - False  # False since 2-False yields 2-0 which is > 1
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
+"""
+PRACTICE PROBLEMS
 
-practice = """
 Arithmetic and Assignment Operators
 1. Basic Arithmetic: Compute the result of the following expressions 
    and store them in variables:
@@ -247,7 +245,6 @@ Boolean Operators
     zero, and even, or y is both odd and less than 20. Test the expression using
     x,y = 10,13
 """
-print(practice)
 
 
 

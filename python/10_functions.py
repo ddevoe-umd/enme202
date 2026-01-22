@@ -3,16 +3,16 @@
 """ 
 Topics
 ------
-Function basics
+Function syntax
 Returning multiple values
 Default argument values
-Passing an arbitrary number of arguments (packing)
+Passing an arbitrary number of arguments (packing & unpacking)
 Documentation strings (docstrings)
 Variable Scope
 """
 
 print()
-print('Function basics:')
+print('Function syntax:')
 print('---------------------------------------')
 
 # A function is a block of code that can be executed multiple times, and from multiple
@@ -29,7 +29,7 @@ print('---------------------------------------')
 # and returns no value
 
 def custom_function():
-	print('custom_function() called')
+    print('custom_function() called')
 
 # Defining the function does not run the function code. To run the function code,
 # we can call the function from anywhere in the main code
@@ -40,14 +40,14 @@ custom_function()
 # root of the sum of that value and 5:
 
 def sum_sqrt(x):
-	total = x + 5
-	sqrt = total**(1/2)
-	print(sqrt)
+    total = x + 5
+    sqrt = total**(1/2)
+    print(sqrt)
 
 # Of course this function can be simplified to:
 
 def sum_sqrt_v2(x):
-	print((x+5)**(1/2))
+    print((x+5)**(1/2))
 
 
 print()
@@ -59,9 +59,9 @@ print('---------------------------------------')
 # for example assignment to a variable:
 
 def sum_sqrt_v3(x):
-	total = x + 5
-	sqrt = total**(1/2)
-	return sqrt
+    total = x + 5
+    sqrt = total**(1/2)
+    return sqrt
 
 result = sum_sqrt_v3(11)
 print(result)
@@ -71,10 +71,10 @@ print(result)
 # multiple branches of a conditional to return different values:
 
 def is_single_digit_int(x):
-	if x >= 0 and x < 10 and isinstance(x, int):
-	    return True
-	else:
-	    return False 
+    if x >= 0 and x < 10 and isinstance(x, int):
+        return True
+    else:
+        return False 
 
 print(is_single_digit_int(2.1))   # False
 print(is_single_digit_int(5))     # True
@@ -89,9 +89,9 @@ print('---------------------------------------')
 # a function similar to sum_sqrt() above, but which takes 2 numerical arguments:
 
 def sum_sqrt_v4(x, y):
-	total = x + y
-	sqrt = (total)**(1/2)
-	return sqrt
+    total = x + y
+    sqrt = (total)**(1/2)
+    return sqrt
 
 print(sum_sqrt_v4(6, 3))
 
@@ -102,11 +102,11 @@ print(sum_sqrt_v4(6, 3))
 # returns the result.
 
 def quad_eval(coefs, x):
-	if len(coefs) != 3:
-		print('improper coefficient list')
-		return(None)
-	(a,b,c) = coefs           # unpacking
-	return(a*x**2 + b*x + c)
+    if len(coefs) != 3:
+        print('improper coefficient list')
+        return(None)
+    (a,b,c) = coefs           # unpacking
+    return(a*x**2 + b*x + c)
 
 print(quad_eval([2,1,2], -1))
 
@@ -135,11 +135,11 @@ print('---------------------------------------')
 # returns both roots in a list:
 
 def roots(coefs):
-	(a,b,c) = coefs
-	disc = (b**2 - 4*a*c)**(0.5)
-	r1 = -b + disc/(2*a)
-	r2 = -b - disc/(2*a)
-	return [r1, r2]        # return a single list containing 2 numbers
+    (a,b,c) = coefs
+    disc = (b**2 - 4*a*c)**(0.5)
+    r1 = -b + disc/(2*a)
+    r2 = -b - disc/(2*a)
+    return [r1, r2]        # return a single list containing 2 numbers
 
 print(roots([1,2,1]))
 print(roots([2,0,-2]))
@@ -154,9 +154,9 @@ print('---------------------------------------')
 # if the function is called without those arguments being passed:
 
 def sum_sqrt_v4(x, y=5):
-	total = x + y
-	sqrt = (total)**(1/2)
-	return sqrt
+    total = x + y
+    sqrt = (total)**(1/2)
+    return sqrt
 
 x1 = sum_sqrt_v4(11, 14)     # call with two arguments...
 x1 = sum_sqrt_v4(11)         # or just one
@@ -184,7 +184,7 @@ print('---------------------------------------')
 # whose elements are the values passed to the function:
 
 def prod(*args):
-	print(type(args))
+    print(type(args))
     print(args)
     total = 1
     for v in args:
@@ -207,7 +207,7 @@ print(prod(2, 5, 2, 6, 9, 3))
 # here is a function that accepts a sequence of 5 values as arguments:
 
 def add(a,b,c,d,e):
-	return(a+b+c+d+e)
+    return(a+b+c+d+e)
 
 # Say we want to add up the values in a list:
 
@@ -231,10 +231,10 @@ print(add(*vals))    # This is valid since vals has been unpacked
 # placing starred variables at the end of the argument list:
 
 def my_join(delimeter, *args):
-	result = args[0]
-	for s in args[1:]:        # start at 2nd string to join
-		result += delimeter + s
-	return(result)
+    result = args[0]
+    for s in args[1:]:        # start at 2nd string to join
+        result += delimeter + s
+    return(result)
 
 print(my_join(',','one','two','three'))
 print(my_join(',','a','b','c', '1', '2', '3'))
@@ -246,7 +246,7 @@ print(my_join(',','a','b','c', '1', '2', '3'))
 
 def print_dict(**kwargs):
     for item in kwargs.items():
-    	print(f'{item[0]}: {item[1]}')
+        print(f'{item[0]}: {item[1]}')
 
 print_dict(key1='A', key2='B', key3='C', key4='D')
 
@@ -309,8 +309,8 @@ print('---------------------------------------')
 # have _local scope_ instead of _global scope_.
 
 def test1():
-	x = -1
-	print(x,y)  # the value of local variable x is now -1
+    x = -1
+    print(x,y)  # the value of local variable x is now -1
 
 x,y = 5, 6
 print(x,y)
@@ -324,9 +324,9 @@ print(x,y)      # but the value in the main code remains unchanged
 # make changes to global y).
 
 def test2():
-	global x    # declare x as global
-	x = -1
-	print(x,y)  # the value of _global_ variable x is now -1
+    global x    # declare x as global
+    x = -1
+    print(x,y)  # the value of _global_ variable x is now -1
 
 x,y = 5, 6
 print(x,y)
@@ -350,7 +350,7 @@ print('---------------------------------------')
 
 # Here is a regular named function that adds 2 numbers, returning the result:
 def add(x,y):
-	return x+y
+    return x+y
 print(add(1,2))
 
 # Here is the same function as a lambda function:
@@ -380,11 +380,9 @@ print(sqrt(81))
 
 
 
-print()
-print('PRACTICE PROBLEMS')
-print('---------------------------------------')
+"""
+PRACTICE PROBLEMS
 
-practice = """
 Easy
 1. Greeting Function: Define a function greet that takes a name as an argument and 
    prints "Hello, [name]!".
@@ -394,6 +392,7 @@ Easy
    if it is even and False if it is odd. Use a conditional statement.
 4. Find Maximum: Define a function find_max that takes three numbers as arguments 
    and returns the largest using if-elif-else.
+
 Medium
 5. Factorial Calculation: Define a function factorial that takes a number and returns
    its factorial using a loop.
@@ -409,6 +408,7 @@ Medium
 9. Custom Range: Define a function custom_range that takes three arguments: 
    start, end, and step. Return a list of numbers between start and end (exclusive) 
    with the specified step.
+
 Hard
 10. Prime Number Check: Define a function is_prime that takes a number and returns 
     True if it is prime and False otherwise.
@@ -425,7 +425,6 @@ Hard
 15. Find Longest Word: Define a function longest_word that takes a list of words
     and returns the longest word in the list. If there is a tie, return the first one.
 """
-print(practice)
 
 
 
