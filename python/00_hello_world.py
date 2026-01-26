@@ -18,25 +18,27 @@ print('---------------------------------------')
 # The print() statement takes one of more _arguments_ separated
 # by commas, and displays the argument values to the screen.
 # If more than one argument is given, the values are displayed
-# with a space between each argument:
+# with a space between each argument. Arguments can also be combined
+# (without spaces) using the addition symbol:
 
 print("hello world")
 
 print("hello", "world")
 
+print("hello" + " " + "world")
+
 # By default, the print() function adds a newline character 
 # to the end of the string argument. However, sometimes
 # we want multiple print lines to generate output on the
 # same line. To do this, add a second "end" argument to 
-# replace the default newline with a _null string_
-# as follows:
+# replace the default newline with a _null string_:
 
 print("hello world...", end='')
 print("and hello again ")
 
 # The "end" value can be any valid string, such as:
 
-print("hello", end='\n...\n')
+print("hello", end='...and\n')
 print("goodbye ")
 
 
