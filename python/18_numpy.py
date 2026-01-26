@@ -26,7 +26,7 @@ print('---------------------------------------')
 
 # Why use NumPy instead of Python lists?
 #   -- Speed: NumPy arrays are stored more efficiently and operations
-#      are implemented in C, making them much faster than Python lists.
+#      are implemented in C / C++, making them much faster than Python lists.
 #   -- Convenience: NumPy provides many built-in functions for mathematical
 #      operations that would require loops with regular Python lists.
 #   -- Memory efficiency: NumPy arrays use less memory than Python lists.
@@ -39,12 +39,12 @@ list_b = [10, 20, 30, 40, 50]
 list_sum = [a + b for a, b in zip(list_a, list_b)]
 print("List sum:", list_sum)
 
-# Using NumPy arrays (element-wise operation is automatic)
+# Using NumPy arrays (element-wise operation is   )
 arr_a = np.array([1, 2, 3, 4, 5])
 arr_b = np.array([10, 20, 30, 40, 50])
 arr_sum = arr_a + arr_b
 print("Array sum:", arr_sum)
-
+ 
 
 
 print()
@@ -92,7 +92,7 @@ print("Arange:", range_arr)
 # ---------------
 
 # Create an array with a specified number of evenly spaced values
-# Syntax: np.linspace(start, stop, num)
+# Syntax: np.linspace(start, stop, num_vals)
 
 linspace_arr = np.linspace(0, 1, 5)   # 5 values from 0 to 1 (inclusive)
 print("Linspace:", linspace_arr)
@@ -113,7 +113,7 @@ print("Identity matrix:\n", identity)
 rand_arr = np.random.rand(3)          # 3 random values between 0 and 1
 print("Random (uniform):", rand_arr)
 
-randn_arr = np.random.randn(3)        # 3 random values from standard normal distribution
+randn_arr = np.random.randn(3)        # 3 random values from a normal distribution
 print("Random (normal):", randn_arr)
 
 randint_arr = np.random.randint(1, 10, 5)  # 5 random integers from 1 to 9
@@ -265,15 +265,13 @@ print()
 print('Common Array Functions:')
 print('---------------------------------------')
 
-arr = np.array([[1, 2, 3],
-                [4, 5, 6],
-                [7, 8, 9]])
-
-print("Array:\n", arr)
-
 # ---------------
 # Aggregation Functions
 # ---------------
+
+arr = np.array([[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]])
 
 print("\nAggregation functions:")
 print("Sum of all elements:", np.sum(arr))
@@ -290,6 +288,9 @@ print("Mean along axis 0:", np.mean(arr, axis=0))
 # ---------------
 # Mathematical Functions
 # ---------------
+
+# Regular Python math functions can't operate with numpy arrays,
+# so use the equivalent numpy functions instead:
 
 x = np.array([0, np.pi/4, np.pi/2, np.pi])
 
@@ -311,9 +312,9 @@ print("sqrt(y):", np.sqrt(y))      # Square root
 arr = np.array([3, 1, 4, 1, 5, 9, 2, 6])
 
 print("\nArray:", arr)
-print("Index of max value:", np.argmax(arr))
-print("Index of min value:", np.argmin(arr))
-print("Sorted indices:", np.argsort(arr))
+print("Index of max value:", np.argmax(arr))   # 1st occurence only
+print("Index of min value:", np.argmin(arr))   # 1st occurence only
+print("Sorted indices:", np.argsort(arr))      # sort min --> max
 
 # np.where() returns indices where a condition is True
 indices = np.where(arr > 4)
@@ -345,7 +346,7 @@ reshaped = arr.reshape(4, -1)   # 4 rows, columns calculated automatically
 print("Reshaped to (4, -1):\n", reshaped)
 
 # ---------------
-# flatten() and ravel()
+# flatten()
 # ---------------
 
 # Convert a multi-dimensional array to 1D:
@@ -355,15 +356,16 @@ arr_2d = np.array([[1, 2, 3],
 print("\n2D array:\n", arr_2d)
 print("Flattened:", arr_2d.flatten())
 
+
 # ---------------
-# Transpose
+# Transpose (T)
 # ---------------
 
 # Swap rows and columns:
 print("\nTranspose:\n", arr_2d.T)
 
 # ---------------
-# Concatenation
+# concatenate()
 # ---------------
 
 a = np.array([1, 2, 3])
@@ -374,8 +376,10 @@ print("b:", b)
 print("Concatenate:", np.concatenate([a, b]))
 
 # For 2D arrays, specify axis:
-arr1 = np.array([[1, 2], [3, 4]])
-arr2 = np.array([[5, 6], [7, 8]])
+arr1 = np.array([[1, 2], 
+                 [3, 4]])
+arr2 = np.array([[5, 6], 
+                 [7, 8]])
 
 print("\nVertical stack (axis=0):\n", np.concatenate([arr1, arr2], axis=0))
 print("Horizontal stack (axis=1):\n", np.concatenate([arr1, arr2], axis=1))

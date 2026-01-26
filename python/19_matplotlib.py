@@ -10,8 +10,8 @@ Different Plot Types (Scatter, Bar, Histogram, Pie)
 Saving Figures
 """
 
-import matplotlib.pyplot as plt   # Standard convention for importing matplotlib
-import numpy as np                # NumPy is commonly used with matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 print()
@@ -34,7 +34,7 @@ print('---------------------------------------')
 # ---------------
 
 # The simplest way to create a plot:
-x = [1, 2, 3, 4, 5]
+x = [0, 2, 4, 6, 8]
 y = [1, 4, 9, 16, 25]
 
 plt.plot(x, y)
@@ -43,6 +43,12 @@ plt.show()
 # If you only provide one list, it is used as y-values
 # and x-values are automatically generated as indices (0, 1, 2, ...):
 plt.plot([1, 4, 9, 16, 25])
+plt.show()
+
+# plot() simply displays each (x,y) pair in sequence:
+x = [-5, -5, 5, 5,-5]
+y = [-2, 2, 5, -5, -2]
+plt.plot(x, y)
 plt.show()
 
 # ---------------
@@ -66,14 +72,27 @@ y = np.sin(x)
 plt.plot(x, y)
 plt.xlabel('x (radians)')           # Label for x-axis
 plt.ylabel('sin(x)')                # Label for y-axis
-plt.title('Sine Wave')              # Title of the plot
+plt.title('Sine Wave - Single Period')              # Title of the plot
 plt.show()
 
+# ---------------
+# Multiple Lines on One Plot
+# ---------------
+
+x = np.linspace(0, 2 * np.pi, 100)
+
+# Simply call plot() multiple times before show():
+plt.plot(x, np.sin(x), label='sin(x)')
+plt.plot(x, np.sin(2*x), label='sin(2x)')
+plt.plot(x, np.sin(3*x), label='sin(3x)')
+plt.title('Multiple Lines')
+plt.show()
 
 
 print()
 print('Customizing Plots:')
 print('---------------------------------------')
+
 
 # ---------------
 # Line Styles and Colors
@@ -160,24 +179,9 @@ plt.grid(True, linestyle='--', alpha=0.7)   # Dashed grid with transparency
 plt.show()
 
 
-
 print()
 print('Multiple Plots and Subplots:')
 print('---------------------------------------')
-
-# ---------------
-# Multiple Lines on One Plot
-# ---------------
-
-x = np.linspace(0, 2 * np.pi, 100)
-
-# Simply call plot() multiple times before show():
-plt.plot(x, np.sin(x), label='sin(x)')
-plt.plot(x, np.sin(2*x), label='sin(2x)')
-plt.plot(x, np.sin(3*x), label='sin(3x)')
-plt.legend()
-plt.title('Multiple Lines')
-plt.show()
 
 # ---------------
 # Subplots
@@ -224,7 +228,7 @@ plt.show()
 # ---------------
 
 # Control the size of the figure:
-fig, ax = plt.subplots(figsize=(10, 4))   # Width=10 inches, Height=4 inches
+fig, ax = plt.subplots(figsize=(10, 4))   # width, height (inches)
 ax.plot(x, np.sin(x))
 ax.set_title('Wide Figure')
 plt.show()
@@ -371,7 +375,7 @@ plt.xlabel('x (radians)')
 plt.ylabel('sin(x)')
 plt.title('Sine Wave')
 
-# Save to various formats:
+# Format options:
 # plt.savefig('sine_wave.png')              # PNG format
 # plt.savefig('sine_wave.pdf')              # PDF format
 # plt.savefig('sine_wave.svg')              # SVG format
@@ -382,17 +386,35 @@ plt.title('Sine Wave')
 
 plt.show()
 
-# Note: savefig() must be called before show() or the figure will be blank
-
-print("Figures would be saved to current directory (commented out in this demo)")
-
-
 # ---------------
 # Object-Oriented Interface
 # ---------------
 
-# For more control, use the object-oriented interface:
+# Matplotlib has two interfaces:
+#   1. Pyplot interface (plt.plot, plt.xlabel, etc.) - simple, stateful
+#   2. Object-oriented interface (fig, ax) - explicit, more control
+#
+# The pyplot interface uses a "current figure" and "current axes" that
+# change implicitly. This works for simple plots but can be confusing
+# when working with multiple figures or subplots.
+#
+# The OO interface explicitly references Figure and Axes objects:
+#   - Figure: the entire window/canvas (can contain multiple plots)
+#   - Axes: a single plot area with its own coordinate system
+#
+# Key differences in method names:
+#   Pyplot              Object-Oriented
+#   ------              ---------------
+#   plt.plot()          ax.plot()
+#   plt.xlabel()        ax.set_xlabel()
+#   plt.ylabel()        ax.set_ylabel()
+#   plt.title()         ax.set_title()
+#   plt.xlim()          ax.set_xlim()
+#   plt.ylim()          ax.set_ylim()
+#   plt.legend()        ax.legend()
+#   plt.grid()          ax.grid()
 
+# Example using the OO interface:
 fig, ax = plt.subplots()
 
 ax.plot(x, np.sin(x), label='sin(x)')
@@ -406,6 +428,12 @@ ax.grid(True)
 
 # fig.savefig('oo_style.png', dpi=150)
 plt.show()
+
+# The OO interface is preferred when:
+#   - Working with multiple figures or subplots
+#   - Writing functions that create plots (pass ax as parameter)
+#   - You need to modify a plot after creating it
+#   - Building complex visualizations
 
 
 """
