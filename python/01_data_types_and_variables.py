@@ -46,18 +46,19 @@ print(type('a'))                   # single characters are also strings
 
 print("this isn't not a string")
 
-# Alternatively, use a backspace to denote a string literal:
+# Alternatively, use a backslash as an _escape character_ that forces the
+# next character to be included in the _string literal_:
 
 print('that wasn\'t good grammar')
 
-# A string can be passed as an argument to the len() function
-# to determine the number of characters in the string:
+# The len() function will return the number of characters in
+# the string:
 
 print(len('let\'s count'))
 
-# A string is not just a sequence of characters. It is a "member" of
-# the String "class" and an "iterable" object that has access to
-# a number of methods (functions) associated with the String class 
+# A string is not just a sequence of characters. It is a member of
+# the String _class_, and is an _iterable_ object that has access to
+# a number of _methods_ (functions) associated with its class 
 # (we will soon learn what all of this means).
 
 
@@ -77,11 +78,11 @@ print('---------------------------------------')
 #   this_is_snake_case
 #
 # Variable names are case-sensitive (myvar, Myvar, and myVar are all
-# different names)
+# unique names)
 
-# The assignment operator (=) assigns a value (RHS) to variable (LHS). When
-# using the assignment operator to define the value stored in a variable,
-# we say the variable is being "declared":
+# The assignment operator (=) assigns a value (RHS) to variable name (LHS).
+# When using the assignment operator to define the value for a new variable
+# name, we say the variable is being "declared":
 
 x = 5    # assign interger to a variable named x
 this_course = "ENME202"    # assign a string
@@ -105,9 +106,9 @@ print('The values of s1, s2, and b are', s1, ',', s2,', and', b)
 
 # New values can be assigned to variables at any time:
 
-print('x = ',x,type(x))    # initially x = 1.0 (float)
+print('x = ', x, type(x))    # initially x = 1.0 (float)
 x = 10
-print('x = ',x,type(x))    # now x = 10 (int)
+print('x = ', x, type(x))    # now x = 10 (int)
 
 # Because Python is a strictly-typed language, it is often necessary 
 # to explicity change the variable type using the built-in functions
@@ -116,8 +117,8 @@ print('x = ',x,type(x))    # now x = 10 (int)
 
 print(22 + int("33"))
 
-# Another common example is using type converstion to "clip" values 
-# after the radix in a float by converting the value to an int:
+# Can use type converstion to "clip" values after the radix in a
+# float by converting the value to an int:
 
 print(int(123.456))
 

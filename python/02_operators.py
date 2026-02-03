@@ -94,8 +94,7 @@ print()
 print('Assignment operators')
 print('---------------------------------------')
 
-# Assignment operators allow us to combine assignment and arithmetic 
-# operations:
+# Assignment operators can combine assignment and arithmetic operations:
 
 x = 8    # basic assignment operator
 
@@ -106,7 +105,7 @@ x //= 2  # same as x = x // 2 (x is now 2)
 x **= 3  # same as x = x ** 2 (x is now 8)
 x %= 3   # same as x = x % 3 (x is now 2)
 
-# Assignment operators work for all arithmetic data types:
+# Works for all arithmetic data types:
 
 complex_val = 2 + 6j
 complex_val *= -3j     # (2 + 6j) * (-3j) = 18 - 6j
@@ -114,11 +113,11 @@ complex_val *= -3j     # (2 + 6j) * (-3j) = 18 - 6j
 float_val = 4.41
 float_val += 1.02
 
-# Assignment operators can be combined with other variables on the RHS:
+# Can combine with other variables on the RHS:
 
 x += 2*complex_val
 
-# Addition assignment (only) also works for strings:
+# Addition assignment also works for strings:
 
 str1 = "foo"
 str1 += "bar"
@@ -158,6 +157,7 @@ print('---------------------------------------')
 3 == "why"          # False
 'A' == '\u0041'     # True, since capital A has a unicode value of 41 (hexadecimal)
 3 == len("why")     # True
+
 
 print()
 print('Comparison operations using Booleans')

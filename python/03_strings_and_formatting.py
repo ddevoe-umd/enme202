@@ -36,7 +36,7 @@ s = 'this is a string with spaces'
 print(s)
 
 # Strings can also contain non-space white characters including
-# tabs and newline characters using "escape sequences":
+# tabs and newline characters using _escape sequences_:
 s1 = 'start\t1 tab\t\t\t3 tabs'      # tab escape sequence: \t
 s2 = 'this is a\nmultiline string'   # newline escape sequence: \n
 print(s1)
@@ -358,7 +358,7 @@ s = f'{x:2.1f} is {y} of {z}'
 print(s)
 
 
-# A final point about the print() function: 
+# A final reminder about the print() function: 
 # After a print() statement is executed, Python will automatically display
 # a newline character in the terminal, so that the next print() statement
 # appears on the next line. Sometimes this is not the desired behavior,
