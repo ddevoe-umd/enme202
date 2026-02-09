@@ -94,9 +94,30 @@ print()
 print('Assignment operators')
 print('---------------------------------------')
 
-# Assignment operators can combine assignment and arithmetic operations:
+x = 1    # basic assignment operator
+y = 2
+print(x,y)
 
-x = 8    # basic assignment operator
+# What if we want to swap the values stored in x and y?  We need an
+# intermediate variable to do this (do you see why?):
+
+temp = x
+x = y
+y = temp
+print(x,y)
+
+# Multiple assignments may be performed on a single line of code:
+
+x,y = 1,2
+print(x,y)
+
+# This syntax can be used to avoid the need for an intermediate variable
+# when swapping values:
+
+x,y = y,x
+print(x,y)
+
+# Assignment operators can combine assignment and arithmetic operations:
 
 x += 5   # same as x = x + 5, so x is now 13
 x -= 3   # same as x = x - 5 (x is now 10)
@@ -123,6 +144,7 @@ str1 = "foo"
 str1 += "bar"
 
 # Note that there are no increment (++) or decrement (--) operators in Python
+
 
 print()
 print('Comparison operators')
