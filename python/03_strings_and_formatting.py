@@ -180,7 +180,9 @@ s.splitlines()
 s.join(iterable)
 """
 
-dir('string')    # Display all attributes and methods for the string class
+# Display all attributes and methods of the given object's class,
+# in this case a string
+dir('string')
 
 # capitalize()
 # Return a new string with the first letter capitalized
@@ -189,17 +191,16 @@ print(welcome.capitalize())
 
 # title()
 # Returns a new string with the first letters of all words capitalized
-languages = "Spanish French German"
 print(welcome.title())
-print(languages.title())
 
 # swapcase()
 # Return a new string with lower and upper case letter swapped
+languages = "Spanish French German"
 print(languages.swapcase())
 
 # count(substr, start=.., end=..)
 # Return the number of occurrences of substr in s,
-# optionally give the starting and ending position to test
+# optionally give the starting and ending slice positions
 story = 'extreme text exaggeration'
 print(story.count('ex'))
 print(story.count('ex', 3, -1))   # can use negative indices
@@ -231,7 +232,7 @@ print('abcABC'.isalpha())    # True
 print('abc ABC'.isalpha())   # False
 
 # isdecimal()
-# Return True if strong contains only numerical characters
+# Return True if strong contains only _numerical_ characters
 print('123'.isdecimal())     # True
 print('123.5'.isdecimal())   # False
 
