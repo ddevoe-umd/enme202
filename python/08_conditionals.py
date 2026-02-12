@@ -20,9 +20,6 @@ print('---------------------------------------')
 #
 # if Boolean_condition: 
 #    code_block_when_True
-#
-# - A colon defines the start of the if statement code block
-# - Indentation defines the extent of each code block
 
 # Simple example
 x = 2
