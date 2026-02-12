@@ -54,7 +54,7 @@ print('---------------------------------------')
 
 # keys()
 # Return all dictionary keys as a dict_keys object -- use list() to
-# conver the dict_keys object to a list if needed
+# convert the dict_keys object to a list if needed
 k = demo_dict.keys()
 print(k)
 k_list = list(k)
@@ -95,8 +95,9 @@ print('---------------------------------------')
 # To avoid this, use the get() method which returns None (NoneType data
 # type) if the key does not exist
 d = {"foobar":123, "this":"that", 2:(123, 'x'), 0:1.23}
-# print(d['nope'])     <--- this would raise an error, so instead do the following:
-print(d.get('nope'))   # None
+d.get("this")          # returns "that"
+# d["nope"]            # this would raise an error, so instead do the following:
+print(d.get('nope'))   # returns None
 
 
 print()
@@ -123,6 +124,23 @@ print(d)
 # Clear the dictionary items (leaving an empty dict)
 d.clear()
 print(d)
+
+
+print()
+print('Updating a Dictionary:')
+print('---------------------------------------')
+
+# The d1.update(d2) method combines dictionaries d1 and d2. If the same key
+# exists in both dictionaties, the value from d2 is used
+d1 = {'a': 1, 'b': 2}
+d2 = {'b': 3, 'c': 4}
+d1.update(d2)
+print(d1)
+
+# Dictionaries can also be combined using the _bitwise or_ operator (|)
+# which we will learn about soon.
+
+d1 | d2
 
 
 """

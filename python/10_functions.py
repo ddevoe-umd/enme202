@@ -54,9 +54,8 @@ print()
 print('Returning values:')
 print('---------------------------------------')
 
-# Custom functions can return a single value (of any data type), and
-# we can use the returned value in the same way as with built-in functions,
-# for example assignment to a variable:
+# Functions can return a single value (of any data type), allowing the 
+# returned value to be accessed by the calling code:
 
 def sum_sqrt_v3(x):
     total = x + 5
@@ -114,17 +113,17 @@ print(quad_eval([2,1,2], -1))
 # the order in the function definition.  However, we can avoid this limitation
 # by specifying the variable names in the function call:
 
-print(quad_eval(x=4, coefs=[1,2,3]))
+quad_eval(x=4, coefs=[1,2,3])
 
 # When calling a function, we are passing _values_ not _variables_.  As long
 # as an argument reduces to a value (appropriate for the data type) that
 # value will be passed to the function and assigned to the given local variables:
 
-print(quad_eval(list(range(3)), 6**2.5))
+quad_eval(list(range(3)), 6**2.5)
 
 
 print()
-print('Returning multiple values:')
+print('Returning Multiple Values:')
 print('---------------------------------------')
 
 # Functions can only return a single value, but often we need to extract 
@@ -141,9 +140,9 @@ def roots(coefs):
     r2 = -b - disc/(2*a)
     return [r1, r2]        # return a single list containing 2 numbers
 
-print(roots([1,2,1]))
-print(roots([2,0,-2]))
-print(roots([2,0,2]))
+print(roots([1,2,1]))      # real & repeated roots
+print(roots([2,0,-2]))     # real & unique roots
+print(roots([2,0,2]))      # complex conjugate roots
 
 
 print()
@@ -197,11 +196,9 @@ print(prod(2, 5, 2, 6, 9, 3))
 
 # The * symbol denotes _packing_ or _unpacking_ of an iterable
 # (and is NOT the same as the pointer operator in C/C++).  In the above
-# example we are _packing_ a sequence of arguments into a _tuple_
-# which is then accessed within the function under a single variable name.
+# example we are packing a sequence of arguments into a _tuple_.
 
-# Using _args_ as the name of the packed argument values is not required, but
-# is used by convention.
+# Using _args_ as the packed argument name is convention, but not required.
 
 # We can also _unpack_ an iterable to yield a sequence of values. For example,
 # here is a function that accepts a sequence of 5 values as arguments:
@@ -221,14 +218,14 @@ vals = [1, 2, 3, 4, 5]
 # Instead, we can _unpack_ the list to pass each value in the list as
 # a separate argument:
 
-print(vals)          # Shows a list
-print(*vals)         # Shows individual values from the list
+print(vals)          # list
+print(*vals)         # individual values
 
 print(add(*vals))    # This is valid since vals has been unpacked
 
 
 # We can combine regular arguments with packed arguments by
-# placing starred variables at the end of the argument list:
+# placing the packed argument at the end of the argument list:
 
 def my_join(delimeter, *args):
     result = args[0]
@@ -250,8 +247,8 @@ def print_dict(**kwargs):
 
 print_dict(key1='A', key2='B', key3='C', key4='D')
 
-# Using _args_ or _kwargs_ as the name of the packed variables
-# is not required, but is convention.
+# As with _args_, using _kwargs_ as the name of the packed dictionary
+# is convention, but not required.
 
 
 
@@ -333,9 +330,9 @@ print(x,y)
 test2() 
 print(x,y)      # the value of x has been changed
 
-# Unlike some other programming languages, Python does NOT have block-level scope. 
+# Unlike some programming languages, Python does NOT have "block-level scope". 
 # This means that variables declared within if statements, for/while loops, etc., 
-# are still accessible outside the block.
+# are accessible outside the block.
 
 
 
@@ -371,7 +368,7 @@ print(sqrt(81))
 
 # This is an example of _closure_, a concept we will cover later in the
 # context of _higher-order functions_. Briefly, we will see that any 
-# functions (not just lambda functions) can be defined within another
+# function (not just lambda functions) can be defined within another
 # function and returned by that function.
 #
 # Lambda functions and closure are often confused for one another, since

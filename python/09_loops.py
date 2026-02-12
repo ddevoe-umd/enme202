@@ -4,11 +4,12 @@
 Topics
 ------
 for Loops
-The range() Function
+range()
 Nested for Loops
 break, continue, else Statements
 pass Statement
 Structured Data Types as Loop Indices
+Unpacking Iterables in Loop Definition
 Looping with Index Values Using enumerate()
 while Loops
 """
@@ -19,8 +20,8 @@ print('---------------------------------------')
 
 # Basic for loop syntax:
 
-for loop_variable in iterable: 
-    # Do something.
+for loop_variable in iterable:
+    # Loop block code here.
     # Never modify the iterable within the loop!
 
 # An iterable is a data structure that can be “iterated over”. Many Python data
@@ -82,10 +83,8 @@ for idx in range(0,6):
 for x in range(2, 15, 3):
     print(x)
 
-# Sometimes we want a loop to execute a certain number of times, 
-# but we don't need to access the loop variable value itself.
-# In this case, use a single underscore (_) to denote a
-# "throwaway" variable:
+# If we don't need to access the loop variable itself, can use a single
+# underscore (_) as a "throwaway" variable:
 
 for _ in range(10):
     print('.', end='')
@@ -103,7 +102,11 @@ print('---------------------------------------')
 # Example -- use nested for loops to display the list structure for the
 # variable _matrix_ as a 2D array:
 
-matrix = [ [1, 2, 3], [4, 5, 6], [7, 8, 9] ]
+matrix = [ [1, 2, 3],
+           [4, 5, 6],
+           [7, 8, 9] ]
+print(matrix, '\n')
+
 for row in range(3):
     for col in range(3):
         print(matrix[row][col], end=' ')
@@ -157,7 +160,7 @@ for val in range(100):
 
 
 print()
-print('Other Iterables as Loop Indices:')
+print('Unpacking Iterables in the Loop Definition:')
 print('---------------------------------------')
 
 # Remember again that any iterable can be used to assign values to the loop variable. 
@@ -167,10 +170,7 @@ knights = {
   'gallahad': 'the pure', 
   'robin': 'the brave' }
 
-for item in knights.items():          # items() returns an iterable of tuples
-  print(f'{item[0]}, {item[1]}') 
-
-for (a, b) in knights.items():        # same idea but unpack the tuple
+for (a, b) in knights.items():   # unpack each dict entry into a tuple
   print(a, b)
 
 
@@ -183,6 +183,7 @@ print('---------------------------------------')
 # loop:
 
 vals = [4, -2, 98, 2.5, 6.02]
+
 for v in vals:
   if v > 5:
     print('uh oh')     # What do we do??  There is no loop variable to print!
@@ -205,18 +206,14 @@ print('---------------------------------------')
 # a new iterable of tuples, with each tuple containing corresponding values 
 # from each of the input iterables:
 
-letters = ['A', 'B', 'C', 'D', 'E']                    
-numbers = [1, 2, 3, 4, 5]
-combined = []
+list1 = ['A', 'B', 'C', 'D', 'E']                    
+list2 = [1, 2, 3, 4, 5]
 
-for letter, number in zip(letters, numbers):
-    combined.append({'letter':letter, 'number':number})
-
-print(combined)
-print(combined['C'])
+for letter, number in zip(list1, list2):
+    print(f'letter:{letter}, number: {number}')
 
 
-# Another zip() example with more than 2 iterables:
+# Another zip() example with 3 iterables:
 
 vec1 = [2,4,7]
 vec2 = [0,1,0]
@@ -230,21 +227,22 @@ print()
 print('while Loops:')
 print('---------------------------------------')
 
-# _While_ loops are necessary when the number of loop iterations is
-# not know ahead of time, but rather is defined by a condition that changes
-# within the loop:
+# _while_ loops are necessary when the number of loop iterations is
+# unknow before entering the loop:
 
 a = -10
 while a <= 10:
     print(a)
     a += 1
 
-# Infinite loops will continue indefinitely (until hitting a break statement):
+# Infinite loops will continue indefinitely (until hitting a break statement).
 
 while True:
     if int(input('enter number > 10 to end: ')) > 10:
         break
 
+# You can also end an infinite loop manually in the IDE by hitting the stop button,
+# or by pressing control-C in the shell:
 
 
 """

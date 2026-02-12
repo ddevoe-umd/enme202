@@ -125,7 +125,7 @@ not > and > or
 # Build truth tables for each of the Boolean operators:
 
 print('\n  x  | not x ')
-print('-----|-----|--------')
+print('-----|-----')
 x = 0
 print(f'  {x}  |  {int(not x)}')
 x = 1 
@@ -202,8 +202,8 @@ print('match / case Statements')
 print('---------------------------------------')
 
 # The match/case statement tries to match an input value to a sequence of 
-# possible case values. The code block under the _first_ matching case statement
-# will be executed (after which the match block ends). 
+# possible case values. The code block under the *first* matching case statement
+# will be executed (after which the entire match block ends). 
 
 # A case value of _ will always match the input value, allowing a
 # corresponding block of code to execute if all previous case values
@@ -216,6 +216,7 @@ match x:
     case 20:
         print("x == 20")
     case _:
+        # This block will run if all others don't
         print("x != 10 and x != 20")
 
 # The match/case statement accepts composite data structures

@@ -82,7 +82,7 @@ print(fruits[2::2])
 print(fruits[::2])
 
 # Becauase lists are mutable (and strings are not) we can direclty
-# modify indexed values
+# modify indexed values using the assignment operator
 fruits[0] = 'tangerine'
 print(fruits)
 
