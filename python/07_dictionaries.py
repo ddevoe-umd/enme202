@@ -12,6 +12,7 @@ Extracting Keys and Values
 Copying Dictionaries
 Referencing Non-Existent Keys Using get()
 Removing Items from a Dictionary
+Combining Dictionaries
 """
 
 print()
@@ -127,18 +128,19 @@ print(d)
 
 
 print()
-print('Updating a Dictionary:')
+print('Combining Dictionaries:')
 print('---------------------------------------')
 
 # The d1.update(d2) method combines dictionaries d1 and d2. If the same key
-# exists in both dictionaties, the value from d2 is used
+# exists in both dictionaties, the value from d2 is used.
 d1 = {'a': 1, 'b': 2}
 d2 = {'b': 3, 'c': 4}
 d1.update(d2)
 print(d1)
 
 # Dictionaries can also be combined using the _bitwise or_ operator (|)
-# which we will learn about soon.
+# which we will learn about soon.  Unlike update(), this operator
+# does not modify either dictionary.
 
 d1 | d2
 
