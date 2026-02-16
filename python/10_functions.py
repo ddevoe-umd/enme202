@@ -9,6 +9,7 @@ Default argument values
 Passing an arbitrary number of arguments (packing & unpacking)
 Documentation strings (docstrings)
 Variable Scope
+Lambda Functions
 """
 
 print()

@@ -28,9 +28,9 @@ for loop_variable in iterable:
 # structures including strings, lists, tuples, and dictionaries are iterables. 
 
 # Let's start constructing for loops with lists as the iterable data structure.
-# When used with the _in_ keyword, Python will iterate through each element
-# of the list, sequentially assigning eachlist value to the loop variable for each
-# pass through the list.
+# When used with the _in_ keyword (which we previously used as a membership operator),
+# Python will iterate through each element of the list, sequentially assigning each
+# list value to the loop variable upon each pass through the list.
 
 my_string = 'among these barren crags'
 for letter in my_string:
@@ -38,7 +38,7 @@ for letter in my_string:
 
 my_list = ['cat', 'window', 'defenestrate']
 for item in my_list:
-    print(item, len(x))
+    print(item, len(item))
 
 # Any iterable can be used to assign values to the loop variable. Here is an
 # example using a dictionary:
@@ -163,15 +163,25 @@ print()
 print('Unpacking Iterables in the Loop Definition:')
 print('---------------------------------------')
 
-# Remember again that any iterable can be used to assign values to the loop variable. 
-# Here is an example using tuples:
+# An iterable can be *unpacked*, i.e. have individual values assigned to specific
+# variables:
+
+w = [1, 2, 3]
+print(w)
+
+a, b, c = w
+print(a, b, c)
+
+# Iterables used in for loops can be unpacked within the loop to assign values to
+# multiple loop variables.  Here is an example using a dict_items object, which is
+# an _iterator of tuples_:
 
 knights = {
   'gallahad': 'the pure', 
   'robin': 'the brave' }
-
-for (a, b) in knights.items():   # unpack each dict entry into a tuple
-  print(a, b)
+  
+for (name, characteristic) in knights.items():   # unpack dict_items into tuples
+  print(name, characteristic)
 
 
 print()
@@ -190,7 +200,7 @@ for v in vals:
 
 # To access the index values, use the enumerate() function
 #
-# enumerate(iter) returns an iterator of tuples, with each tuple containing
+# enumerate(iter) returns an _iterator of tuples_, with each tuple containing
 # an (index, value) pair:
 
 for (idx, v) in enumerate(vals):
@@ -227,8 +237,8 @@ print()
 print('while Loops:')
 print('---------------------------------------')
 
-# _while_ loops are necessary when the number of loop iterations is
-# unknow before entering the loop:
+# _while_ loops iterate as long as the loop's Boolean condition remains True.  While loops
+# are necessary when the number of loop iterations is unknow before entering the loop:
 
 a = -10
 while a <= 10:
