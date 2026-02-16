@@ -9,7 +9,8 @@ if / elif / else Statements
 Nested if Statements
 Boolean (Logical) Operators
 Using Boolean Operators in if Statements
-
+Using Boolean Operators with the _in_ Membership Operator
+Match / Case Statements
 """
 
 print()
@@ -173,7 +174,7 @@ print('---------------------------------------')
 # Boolean operators can be used to construct complex logical expressions
 # for use in _if_ statements (and beyond)
 val = int(input('Enter an integer: '))
-if val > 0 and val < 10 and val%2  == True:
+if val > 0 and val < 10 and not val%2:
     print('value is an even positive integer between 0 and 10')
 
 # Another example
@@ -192,6 +193,23 @@ if (age > 18 and has_drivers_license) or (income > 50000 and not has_criminal_re
 else:
     print("Not eligible")
 
+
+print()
+print('Using Boolean Operators with the _in_ Membership Operator')
+print('---------------------------------------')
+
+# Because the _in_ membership operator returns a Boolean, it can be combined
+# with standard Boolean operators:
+
+w = ['one', 'two', 'three']
+
+'one' in w and 'two' in w            # True
+
+'one' in w and not 'ten' in w        # True
+
+not 'five' in w or not 'one' in w    # True
+
+# Note that the _in_ operator has precedence over Boolean operators
 
 
 print()

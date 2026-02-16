@@ -5,6 +5,7 @@ Topics
 ------
 List Declaration
 Indexing and Slicing Lists
+The _in_ membership operator
 Copying Lists
 Other List Methods
 """
@@ -99,8 +100,8 @@ print()
 print('in')
 print('---------------------------------------')
 
-# The _in_ keyword can be used to check if a value is present 
-# in a sequence (list, string, and others we will learn about).
+# The _in_ membership operator can be used to check if a value is a 
+# member of a sequence (list, string, and others we will learn about).
 # The syntax "value in list" returns True if the value is in
 # the list, otherwise False.
 is_in_fruits = "carrot" in fruits       # False
