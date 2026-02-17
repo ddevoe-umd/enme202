@@ -204,9 +204,7 @@ print('---------------------------------------')
 w = ['one', 'two', 'three']
 
 'one' in w and 'two' in w            # True
-
 'one' in w and not 'ten' in w        # True
-
 not 'five' in w or not 'one' in w    # True
 
 # Note that the _in_ operator has precedence over Boolean operators

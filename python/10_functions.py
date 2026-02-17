@@ -195,8 +195,7 @@ print(prod(2, 5))
 print(prod(2, 5, 2))
 print(prod(2, 5, 2, 6, 9, 3))
 
-# The * symbol denotes _packing_ or _unpacking_ of an iterable
-# (and is NOT the same as the pointer operator in C/C++).  In the above
+# The * symbol denotes _packing_ or _unpacking_ of an iterable. In the above
 # example we are packing a sequence of arguments into a _tuple_.
 
 # Using _args_ as the packed argument name is convention, but not required.
@@ -308,12 +307,11 @@ print('---------------------------------------')
 
 def test1():
     x = -1
-    print(x,y)  # the value of local variable x is now -1
+    print(f'Inside function: {x},{y}')   # the value of local variable x is now -1
 
 x,y = 5, 6
-print(x,y)
 test1()         # test assigns a different value to a local variable x,
-print(x,y)      # but the value in the main code remains unchanged
+print(f'Outside function: {x},{y}')      # but the value in the main code remains unchanged
 
 # If the intent is to change the value of x in the main code, declare x inside the
 # function using the _global_ keyword to ensure global scope. Note that we 
@@ -324,12 +322,11 @@ print(x,y)      # but the value in the main code remains unchanged
 def test2():
     global x    # declare x as global
     x = -1
-    print(x,y)  # the value of _global_ variable x is now -1
+    print(f'Inside function: {x},{y}')  # the value of global variable x is now -1
 
 x,y = 5, 6
-print(x,y)
 test2() 
-print(x,y)      # the value of x has been changed
+print(f'Outside function: {x},{y}')     # the value of x has been changed
 
 # Unlike some programming languages, Python does NOT have "block-level scope". 
 # This means that variables declared within if statements, for/while loops, etc., 
@@ -371,11 +368,6 @@ print(sqrt(81))
 # context of _higher-order functions_. Briefly, we will see that any 
 # function (not just lambda functions) can be defined within another
 # function and returned by that function.
-#
-# Lambda functions and closure are often confused for one another, since
-# lambda functions are commonly used in function closure, but the two 
-# concepts are distinct.
-
 
 
 """

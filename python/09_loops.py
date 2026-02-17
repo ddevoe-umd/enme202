@@ -163,14 +163,12 @@ print()
 print('Unpacking Iterables in the Loop Definition:')
 print('---------------------------------------')
 
-# An iterable can be *unpacked*, i.e. have individual values assigned to specific
+# An iterable can be *unpacked*, i.e. have individual values assigned to specified
 # variables:
 
-w = [1, 2, 3]
-print(w)
+w = [1, 2, 3]     # define a list
 
-a, b, c = w
-print(a, b, c)
+a, b, c = w       # unpack the list
 
 # Iterables used in for loops can be unpacked within the loop to assign values to
 # multiple loop variables.  Here is an example using a dict_items object, which is
@@ -203,8 +201,8 @@ for v in vals:
 # enumerate(iter) returns an _iterator of tuples_, with each tuple containing
 # an (index, value) pair:
 
-for (idx, v) in enumerate(vals):
-  if v > 5:
+for (idx, val) in enumerate(vals):
+  if val > 5:
     print(idx)
 
 
@@ -253,6 +251,8 @@ while True:
 
 # You can also end an infinite loop manually in the IDE by hitting the stop button,
 # or by pressing control-C in the shell:
+
+# Note: _else_ statements can be applied to while loops in a similar manner as for loops.
 
 
 """
