@@ -41,19 +41,19 @@ print(sq_vals)
 
 # List comprehension can be applied to any iterable object:
 
-new_list_1 = [v/2 for v in range(10)]  # range object as iterable
+new_list_1 = [v/2 for v in range(10)] 
 
-new_list_2 = [tup for tup in enumerate(range(5,10))]    # enumerate object as iterable 
-                                                        # and tuples as values
-new_list_3 = [idx%3 + x for idx, x in enumerate(range(15))]  # enumerate object as iterable
-                                                             # (with unpacked tuple)
-new_list_4 = [k.upper() for k in {'a':1, 'b':2}]        # dictionary as iterable
+new_list_2 = [tup for tup in enumerate(range(10))]
+
+new_list_3 = [idx%3 + x for idx, x in enumerate(range(10))] 
+
+new_list_4 = [k.upper() for k in {'a':1, 'b':2}]
 
 # The concept of list comprehension can also be applied to dictionaries,
 # as seen below. Note how zip is required in this case to generate paired
 # keys and values for the dictionary:
 
-new_dict = [key, value for key, value in zip(['a','b','c'], range(3))]
+new_dict = {key: value for key, value in zip(['a','b','c'], range(3))}
 
 
 print()

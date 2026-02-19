@@ -74,7 +74,7 @@ def is_single_digit_int(x):
     if x >= 0 and x < 10 and isinstance(x, int):
         return True
     else:
-        return False 
+        return False
 
 print(is_single_digit_int(2.1))   # False
 print(is_single_digit_int(5))     # True
@@ -105,7 +105,7 @@ def quad_eval(coefs, x):
     if len(coefs) != 3:
         print('improper coefficient list')
         return(None)
-    (a,b,c) = coefs           # unpacking
+    a,b,c = coefs           # unpacking
     return(a*x**2 + b*x + c)
 
 print(quad_eval([2,1,2], -1))
@@ -353,7 +353,7 @@ add = lambda x,y: x+y
 print(add(1,2))
 
 # Lambda functions can be returned by another function, allowing us to
-# define new functions "on the fly".  
+# define entirely new functions "on the fly".  
 
 def power(x):
     return lambda n : n ** x
@@ -365,7 +365,7 @@ sqrt = power(1/2)  # create a new function called sqrt()
 print(sqrt(81))
 
 # This is an example of _closure_, a concept we will cover later in the
-# context of _higher-order functions_. Briefly, we will see that any 
+# context of _higher-order functions_. Briefly, we will see that *any* 
 # function (not just lambda functions) can be defined within another
 # function and returned by that function.
 
