@@ -98,9 +98,8 @@ print()
 print('Else, Finally:')
 print('---------------------------------------')
 
-# The _else_ block executes if _no_ exceptions occur.  This block is only useful
-# to improve clarity of code, since the contents of the block could instead
-# be placed at the end of the try block with identical results.
+# The _else_ block executes if _no_ exceptions occur.  This block only useful
+# if something needs to happen *only* when the try block is successful.
 #
 # The _finally_ block executes _regardless_ of whether an exception was raised,
 # and even if the try block terminates (for example by returning from a function call)
