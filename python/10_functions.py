@@ -262,7 +262,8 @@ print('---------------------------------------')
 # by the function, a _docstring_ has been added to the function definition.
 
 def average(numbers):
-    """ Calculates the average of a list of numbers.
+    """
+    Calculates the average of a list of numbers.
     Args:
         numbers: A list of numbers.
     Returns:
