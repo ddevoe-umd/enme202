@@ -243,6 +243,7 @@ print(my_join(',','a','b','c', '1', '2', '3'))
 
 def print_dict(**kwargs):
     for item in kwargs.items():
+        print(type(kwargs))
         print(f'{item[0]}: {item[1]}')
 
 print_dict(key1='A', key2='B', key3='C', key4='D')
@@ -267,10 +268,6 @@ def average(numbers):
     Returns:
         The average of the numbers.
     """
-
-    if not numbers:
-        return 0
-
     total = sum(numbers)
     return total / len(numbers)
 
