@@ -30,12 +30,10 @@ vals = [1, 2, 5, 7]
 sq_vals = []
 for v in vals:
     sq_vals.append(v**2)
-print(sq_vals)
 
 # Here is the same result using list comprehension:
 
 sq_vals = [v**2 for v in vals]
-print(sq_vals)
 
 # From the Zen of Python: “Flat is better than nested”!
 
@@ -47,13 +45,16 @@ new_list_2 = [tup for tup in enumerate(range(10))]
 
 new_list_3 = [idx%3 + x for idx, x in enumerate(range(10))] 
 
-new_list_4 = [k.upper() for k in {'a':1, 'b':2}]
+new_list_4 = [k.upper() for k in {'a':1, 'b':2}.keys()]
 
 # The concept of list comprehension can also be applied to dictionaries,
 # as seen below. Note how zip is required in this case to generate paired
 # keys and values for the dictionary:
 
-new_dict = {key: value for key, value in zip(['a','b','c'], range(3))}
+new_dict = {key : value for key, value in zip(['a','b','c'], range(3))}
+
+# Note the syntax, with the key:value pair and curly braces needed
+# to create a dictionary rather than a list.
 
 
 print()
@@ -85,16 +86,14 @@ for x in v1:
 # Another example: flatten a 2-D array:
 
 array = [[1,2,3], [4,5,6], [7,8,9]]
-print(array)
+
 flat_array = [val for row in array for val in row]
-print(flat_array)
 
 
 # Another way to work with multiple lists is using zip() (recall that zip()
 # "packages" paired values from each list as tuples):
 
 added_lists = [x+y for x,y in zip(v1, v2)]
-print(added_lists)
 
 
 print()
@@ -109,34 +108,37 @@ print('---------------------------------------')
 #
 # Example: create a list of numbers in [1,99] that are evenly divisible by 3: 
 
-div_by_three = [x for x in range(1,100) if x%3 == 0]
-print(div_by_three)
+div_by_three_v1 = [x for x in range(1,100) if x%3 == 0]
 
-# Case 2: Don't filter the iterable, but use _if/else_ condition to decide
-# what to do with each value. In this case the _if/else_ statements are
-# placed *before* the iterable.
+# Case 2: use _if/else_ condition to assign the resulting list value. In
+# this case _if/else_ statements are placed *before* the iterable.
 
-div_by_three = [x if x%3 == 0 else '.' for x in range(1,100)]
-print(div_by_three)
+div_by_three_v2 = [x if x%3 == 0 else '.' for x in range(1,100)]
 
 # Do you see the difference? In the first case, the iterable list was filtered
 # to ignore values that did not meet the _if_ condition. In the second case,
 # all values from the iterable were included, but the _if/else_  condition
 # allowed us to decide what to do with each value.
 
+
+print()
+print('Nested Conditionals:')
+print('---------------------------------------')
+
 # Conditionals can also be nested in list comprehension. Here is an example that
-# tests each list element for divisibility by different values, with different 
-# entries in the final list depending on the result of each conditional:
+# tests each list element for divisibility by multiple values:
 
 values = list(range(1,50))  
-result = [int(n/2) if n % 2 == 0 else int(n/3) if n % 3 == 0 else 'non-integer' for n in values]  
-print(result)  
-
-# Finally, conditionals can be used to both filter the iterable and decide how to process
-# individual values in the same list comprehension statement:
+result = [int(n/2) if not n % 2
+          else int(n/3) if not n % 3
+          else f'{n} is not divisible by 2 or 3'
+          for n in values]
+       
+        
+# Finally, conditionals can be used to both filter the iterable *and* decide how to
+# process individual values in a single statement:
 
 div_by_three = [x if x%3 == 0 else '.' for x in range(1,100) if math.sin(x)>0.5]
-print(div_by_three)
 
 
 """
@@ -155,16 +157,16 @@ PRACTICE PROBLEMS
    last names: [["James","Joyce"], ["Gene","Wolfe"], ["George,Orwell"]] given the list 
    ["James Joyce", "Gene Wolfe", "George Orwell"]
 6. Extract Initials: Given a list of names, use list comprehension to extract 
-   the first letter of each name: ['JJ', 'GW', 'GO'] given the list 
+   the first letter of each name. For example: ['JJ', 'GW', 'GO'] given the list 
    ["James Joyce", "Gene Wolfe", "George Orwell"]
 7. Flatten a Nested List: Given a nested list [[1, 2], [3, 4], [5, 6]], 
    use a list comprehension to create a flat list [1, 2, 3, 4, 5, 6].
-8. Generate Pairs: Use a list comprehension to create a list of all pairs 
+8. Generate Pairs: Use list comprehension to create a list of all possible pairs 
    (x, y) where x is from [1, 2, 3] and y is from [4, 5].
 9. Replace Negative Numbers: Given a list numbers = [-5, 3, -1, 2], use a list 
    comprehension to create a new list where all negative numbers are replaced by 0.
 10. Filter Words by Length: Given a list of words ["cat", "dog", "elephant", "frog"],
-    use a list comprehension to create a new list containing only the words with 
+    use list comprehension to create a new list containing only the words with 
     more than three letters.
 11. Find Common Elements: Given two lists list1 = [1, 2, 3, 4] and 
     list2 = [3, 4, 5, 6], use a list comprehension to create a list of their 

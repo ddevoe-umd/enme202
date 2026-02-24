@@ -54,7 +54,7 @@ print('Defining a Class:')
 print('---------------------------------------')
 
 # The _class_ keyword is used to create a class definition.  By convention use PascalCase
-# for class names.  The basic class definition uses the following syntax:
+# for class names.  Basic class declaration syntax:
 
 class ClassName:
     # class attributes and class methods (if any) are defined in main block

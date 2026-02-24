@@ -50,7 +50,7 @@ f.close()
 #   f = open(filename, 'r+')  <-- read + write (file must exist, content preserved)
 #   f = open(filename, 'w+')  <-- read + write (overwrite, create new if none)
 
-# Use the write() method to add a string to a file at the current position:
+# Use the write() method to create a new file:
 f = open("myfile.txt", 'w')
 f.write('new text') 
 f.close()
@@ -61,7 +61,7 @@ contents = f.read()
 f.close()
 print(contents)
 
-# The current position in the file is set to 0 (start) when a file is first 
+# The current position in the file is set to byte 0 (start) when a file is first 
 # opened. We can change the position using the seek() method, where
 # seek(n) sets the file position to n bytes from the start of the file:
 f = open("myfile.txt")
@@ -73,6 +73,7 @@ print(remainder)
 # The number of bytes used by each character depends on the text encoding format
 # (e.g. utf-8, utf-16, ascii, etc.).  Specifying text encoding format can make 
 # your code more robust:
+#
 # f = open('myfile.txt', mode = 'r', encoding = 'utf-8')
 
 
@@ -81,7 +82,7 @@ print('Opening Files Using _with_:')
 print('---------------------------------------')
 
 # Python’s _with_ statement simplifies file I/O. The file will automatically close
-# at end of the _with_ block, even if an exception is raised. 
+# at end of the _with_ block, **even if an exception is raised**. 
 
 with open("test.txt", 'w') as f:
     f.write("hello there")
@@ -94,7 +95,7 @@ print()
 print('Files as Iterators:')
 print('---------------------------------------')
 
-# File objects are iterators, with each iteration yielding the next line in the file
+# File objects are _iterators_, with each iteration yielding the next line in the file
 # as a string.  Note that all characters from each line, including newline characters, 
 # are included in the string.
 
@@ -103,9 +104,9 @@ with open('myfile.txt') as f:
         print(line.strip())   # use strip() to remove newline characters
 
 
-# Advanced: an _iterator_ is a bit different than an _iterable_. The former supports
-# the __next__() method, which returns the next element. For example, we can manually 
-# step through the first 3 lines of the file as follows:
+# An _iterator_ is a bit different than an _iterable_. The former supports the
+# __next__() "magic method", which returns the next element. For example, we can
+# manually step through the first 3 lines of the file as follows:
 
 with open('myfile.txt') as f:
     print(next(f))     # next(f) is the same as f.__next__()
@@ -148,69 +149,76 @@ import json
 # Keys must be strings (typically in double quotes).
 #
 # Values can be any of:
-#    objects (similar to Python dictionaries, enclosed in curly braces {})
-#    lists (enclosed in square brackets [])
-#    strings
+#    {objects}   (same as Python dictionaries)
+#    [lists]     (same as Python lists)
+#    "strings"
 #    numbers
-#    booleans (true or false)
+#    booleans
 #    null
 
 # A Python dictionary can be converted to a JSON string using the
-# json.dumps() method:
+# json.dumps() method.
+#
+# The "s" in "dumps" stands for "string":
 
-my_dict = {'A': 1, 'B': 'foo', 3: 0.192}
-my_dict_as_json = json.dumps(my_dict)
-print(my_dict_as_json)
+d = {'A': 1, 'B': 'foo', 3: 0.192}
+d_as_json = json.dumps(d)
+print(d_as_json)
 
-# Notice that the integer key in my_dict was converted to a string in the
+# Notice that the integer key in d was converted to a string in the
 # JSON representation of the dictionary, since JSON object keys must be strings.
 
 # The resulting JSON value is just a string:
-print(my_dict_as_json.split(':'))
+print(d_as_json.split(':'))
 
 # Here is an example of a more complex dictionary converted to JSON:
-my_dict = {'k_list': [1,2,3], 'k_dict': {'A':1, 'B':2}, 'k_dict_list_tuple': {'a':[4,5,6], 'b':(7,8,9)}, 'k_bool':False}
-my_dict_as_json = json.dumps(my_dict)
-print(my_dict_as_json)
+d = {'k_list': [1,2,3], 'k_dict': {'A':1, 'B':2}, 'k_dict_list_tuple': {'a':[4,5,6], 'b':(7,8,9)}, 'k_bool':False}
+d_as_json = json.dumps(d)
+print(d_as_json)
 
 # The result is hard to parse!  Let's make it easier to interpret by
 # telling json.dumps() to show each value on a separate line, with
 # indentation to show the level of each value:
  
-my_dict_as_json = json.dumps(my_dict, indent=4)
-print(my_dict_as_json)
+d_as_json = json.dumps(d, indent=4)
+print(d_as_json)
 
 # Great, now we know how to convert a dictionary to a JSON string.  How do
 # we store this data in a JSON file?  We could open a file for writing, and 
 # the write the string to the file, but the json.dump() method simplifies
-# this process.  The syntax for json.dump() is:
+# this process:
 #
 #    json.dump(dict, file)
 
 with open('datafile.json', 'w+') as f:
-  json.dump(my_dict, f)
-with open('datafile.json') as f:    # Display the JSON-formatted file
-  print(f.read())
+    json.dump(d, f)
+  
+# We can then read the file to see the content:
+
+with open('datafile.json') as f:
+    print(f.read())
 
 # If we want to JSON file to be more readible (to humans), we can add 
 # indentation to json.dump() just as for json.dumps():
+
 with open('datafile.json', 'w') as f:
-  json.dump(my_dict, f, indent=4)
-with open('datafile.json') as f:    # Display the JSON-formatted file
-  print(f.read())
+    json.dump(d, f, indent=4)
+with open('datafile.json') as f:      # Display the JSON-formatted file
+    print(f.read())
 
 # The json.load() method can be used to read an existing JSON-formatted file
 # directly into a Python dictionary:
 
 with open('datafile.json') as f:
-  new_dict = json.load(f)
-print(new_dict)
-print(new_dict['k_list'])
-print(new_dict['k_dict_list_tuple']['b'])
+    d = json.load(f)
+print(d)
+print(d['k_list'])
+print(d['k_dict_list_tuple']['b'])
 
 # The above examples involved the use of JSON formatting to work with 
 # dictionaries, but the approach can also be used to work with lists,
 # which are also supported by the standard JSON data structure. 
+
 
 # Note that we can also convert a JSON string (rather than a file) using
 # the json.loads() method.
@@ -226,43 +234,48 @@ print('---------------------------------------')
 # data and in data science.
 #
 # The Python _csv_ module makes working with CSV-formatted files (and 
-# strings) straighforward:
+# strings) straightforward:
 
 import csv
 
+# Consider a CSV file with the following format:
+
+with open('files/data.csv', 'w') as f:
+    f.write('1,2,3\n4,5,6\n7,8,9')
+
+# Here are the file contents:
+
+with open('files/data.csv') as f:
+    print(f.read())
+
 # The csv.reader(f) method returns a list of strings for each line in a
 # CSV file, with each list entry defined by the line substrings
-# separated by commas.  For example, consider a CSV file with the
-# following format:
+# separated by commas.  Use the reader method to read data into a 2D list
+# using the csv.reader() method:
 
-with open('data.csv', 'w') as f:
-    print(f.write('1,2,3\n4,5,6\n7,8,9'))
+with open('files/data.csv') as f:
+    array = []
+    csv_reader = csv.reader(f)    # Create iterable CSV reader object
+    for row in csv_reader:
+        array.append([row[0], row[1], row[2]])
+        
+print(array)
 
 # Alternately, if we have our data in a 2D list, we can write it to
 # a file using the csv.writer() method:
+
 data_2d = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9]
 ]
-with open("data.csv", 'w', newline='') as csvfile:
+with open("files/data.csv", 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(data_2d)
 
 # The newline='' option in the open() function is prevents Python from 
 # inserting extra blank lines between rows when writing to a CSV file
 # (especially on Windows).
-
-# Now go the other direction -- read data from the file into a 2D list
-# using the csv.reader() method:
-
-with open('data.csv') as f:
-    array = []
-    csv_reader = csv.reader(f)
-    for row in csv_reader:
-        array.append([row[0], row[1], row[2]])
-
-print(array)
 
 
 
