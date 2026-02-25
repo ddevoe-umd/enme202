@@ -136,20 +136,20 @@ id(x) == id(y)        # shallow copy (same memory address)
 # stored. As a result, changing a value in either list modifies
 # the same memory location. This is called a "shallow copy".
 #
-# To prevent a shallow copy, use the copy() method
+# To ensure that the new variable references values stored at independent
+# memory locations, use the copy() method
 x = [5, 8, 13, 4, 9]
 y = x.copy()
 y[0] = -1
 print(x)
 print(y)
-id(x) == id(y)        # deep copy (different memory address)
+id(x) == id(y)        # independent copy (different memory address)
 
-# Warning: if the list contains another list as an element, copy() 
-# will yield a shallow copy of the internal list!  To avoid this,
-# there is another function called deepcopy() that is part of the
-# _copy_ module, which must be manually imported into the code.
-# We will not cover the use of deepcopy() in ENME202, but be aware
-# of this issue for the future.
+# However, this is technically still a shallow copy since, if the list 
+# contains another list as an element, copy() will yield a shallow copy of 
+# the internal list!  To avoid this, there isanother function called deepcopy()
+# (part of the _copy_ module) can be used. We will not cover the use of 
+# deepcopy() in ENME202, but be aware of this issue for the future.
 
 
 print()
@@ -179,7 +179,7 @@ print(fruits)
 
 # pop(idx=0)
 # Remove a single value at index idx, and return the value (if no
-# argument is given the index defaults to 0)
+# argument is given the index defaults to -1, i.e. the last element)
 x = fruits.pop()
 print(x)
 print(fruits)
@@ -233,11 +233,14 @@ fruits.reverse()
 print(fruits)  
 
 # sort(reverse=False, key_function)
-# Sort the list in ascending order based on the numerical value (numbers)
-# or length (strings) of the elements. The order can be changed to
-# descending by passing True as a first argument. The sort rule can
-# be defined by the user by passing a sorting function as a second
-# argument (we will cover functions shortly). Nothing is returned.
+# Sort the list in ascending order:
+#    numbers - sory by value
+#    strings - sort lexicographically (by Unicode valu)
+# The order can be changed to descending by passing True as a first 
+# argument. The sort rule can be defined by the user by passing a 
+# sorting function as a second argument (we will cover functions shortly). 
+# Nothing is returned.
+
 print(fruits)
 fruits.sort()
 print(fruits)

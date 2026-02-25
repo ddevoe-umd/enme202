@@ -32,9 +32,12 @@ print(4 + 5.27 + (5+8j))    # yields (14.27+8j)
 # Python is also a ++dynamically-typed++ language: the value type is determined 
 # by context (type declarations are generally not required). 
 
-# Unlike C-family languages, numerical data types have infinite precision!
-# We don't need to worry about limits to the maximum values that can be
+# Unlike C-family languages, int values have infinite precision!
+# We don't need to worry about limits to the maximum int values that can be
 # represented by these data types.
+#
+# However, float and complex are standard IEEE 754 64-bit values (providing 
+# ~15–17 significant digits of precision), the same as C double. 
 
 # Python also supports several non-numerical data types:
 
@@ -110,7 +113,7 @@ print('x = ', x, type(x))    # initially x = 1.0 (float)
 x = 10
 print('x = ', x, type(x))    # now x = 10 (int)
 
-# Because Python is a strictly-typed language, it is often necessary 
+# Because Python is a strongly-typed language, it is often necessary 
 # to explicity change the variable type using the built-in functions
 # int(), float(), or str(). For example, can cannot add a string and
 # an int together -- the string must first be converted to an int:

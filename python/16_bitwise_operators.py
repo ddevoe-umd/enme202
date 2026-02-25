@@ -36,8 +36,8 @@ x & y    AND
 x | y    OR
 ~x       COMPLEMENT (NOT)
 x ^ y    XOR (exclusive OR)
-x << n   shift bits left n places (same as multiplying by 2**y)
-x >> n   shift bits right n places (same as dividing by 2**y)
+x << n   shift bits left n places (same as multiplying by 2**n)
+x >> n   shift bits right n places (same as dividing by 2**n)
 
 """
 
@@ -58,7 +58,7 @@ column, etc.). By this convention, we interpret a decimal number like 479 as fol
 
 This same convention applies to *any* number base, inluding base 2 (binary). 
 For base 2, we only have 2 digits (0 and 1). For example, a binary value of
-11010 is interpreted as a base 10 number like this:
+110110 is interpreted as a base 10 number like this:
 
 110110 = 1*2^5 + 1*2^4 + 0*2^3 + 1*2^2 + 1*2^1 + 0*2^0
        = 1*32  + 1*16  + 0*8   + 1*4   + 1*2   + 0*1
@@ -187,7 +187,10 @@ print(f"x | ~x =          { x | ~x :b}")
 #
 # Thus ~x will always invert the sign of x (when interpreting
 # x as an integer).
-#
+
+print( 0b110)   #  6
+print(~0b110)   # -7
+               
 # This result may not be what you were expecting.
 # ~x yields "one's complement" of x, meaning each bit
 # is flipped **including all leading bits** that determines
@@ -204,27 +207,9 @@ print(f"x | ~x =          { x | ~x :b}")
 # defined by taking one's complement (flipping bits) and 
 # adding 1.
 #
-# How does Python know that 11111010 is -6 and not -3 (in other
-# words, how does it know that this bit:
-#                                |
-#                            11111010
-# is part of the number and not just a leading 1 indicating a negative
-# value)?  In languages such as C++, which have fixed-length 
-# binary values, the answer would be that the system has to keep
-# track of the number of relevant bits, but this is not the case
-# in Python, which uses infinite-precision signed integers, and
-# performs bitwise operations on actual integers, with the result
-# automatically being a valid Python integer rather than a raw bit
-# pattern.
-
-# Here is an example:
-
-print( 0b110)   #  6 base 10
-print(~0b110)   # -7 base 10 via two's complement:
-                #    flip bits:       001 (one's complement)
-                #    subtract 1:      000
-                #    flip bits again: 111 = 7 (negative)
-
+# For example, flipping all bits of the infinite two's complement 
+# representation of 6 (...00000110) gives ...11111001, which is −7.
+#
 # The main difference between 1′s complement and 2′s complement is 
 # that 1′s complement has two representations of 0 (zero):
 #   00000000, which is positive zero (+0), and
@@ -347,7 +332,7 @@ status ^= POWER            # Toggle power state
 check_status()
 
 # Toggle multiple flags at the same time:
-status ^= POWER_ON | BATTERY_LOW 
+status ^= POWER | BATTERY_LOW 
 check_status()
 
 # Clear all flags while saving status of a selected flag:

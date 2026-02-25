@@ -10,7 +10,7 @@ TOPICS
 Dictionary Basics
 Extracting Keys and Values
 Copying Dictionaries
-Referencing Non-Existent Keys Using get()
+Referencing Non-Existent Keys
 Removing Items from a Dictionary
 Combining Dictionaries
 """
@@ -84,8 +84,11 @@ print('---------------------------------------')
 # Just as with lists, the assignment operator (=) only creates a shallow copy
 # of a dictionary.
 
-shallow_copy_dict = demo_dict   # shallow copy
-deep_copy_dict = demo_dict.copy()
+shallow_copy_dict = demo_dict       # both variables reference same address
+full_copy_dict = demo_dict.copy()   # variables reference different addresses
+
+# Remember that deepcopy() can be used to create a true deep copy if the
+# dictionary contains values such as lists or other dictionaries.
 
 
 print()

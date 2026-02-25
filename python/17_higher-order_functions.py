@@ -41,8 +41,8 @@ def cube(x):
     return x**3
 
 # pass squared() or cubed() as an argument to add_one_into_function()
-result_1 = add_one_into_function(squared, 3)
-result_2 = add_one_into_function(cubed, 2)
+result_1 = add_one_into_function(square, 3)
+result_2 = add_one_into_function(cube, 2)
 print(result_1, result_2)
 
 

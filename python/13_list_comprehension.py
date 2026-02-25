@@ -8,6 +8,8 @@ List Comprehension with Multiple Iterables
 List Comprehension with Conditionals
 """
 
+import math
+
 
 print()
 print('List Comprehension Basics:')
@@ -73,8 +75,9 @@ for x in v1:
         result.append(x*y)
 
 # An aside: the result is a 1D list (rather than a 2D matrix, which is what the cross
-# product should yield).  Can you think of a way to modify this code to yield
-# the desired 2D data structure?
+# product should yield).  The code is actually computing the scalar products over 
+# the Cartesian product (similar to the outer product). Can you think of a way to 
+# modify this code to yield the desired 2D data structure for a true cross-product?
 
 # Here is the same 1D result using list comprehension:
 
@@ -85,7 +88,9 @@ for x in v1:
 
 # Another example: flatten a 2-D array:
 
-array = [[1,2,3], [4,5,6], [7,8,9]]
+array = [[1,2,3],
+         [4,5,6],
+         [7,8,9]]
 
 flat_array = [val for row in array for val in row]
 
@@ -108,19 +113,25 @@ print('---------------------------------------')
 #
 # Example: create a list of numbers in [1,99] that are evenly divisible by 3: 
 
-div_by_three_v1 = [x for x in range(1,100) if x%3 == 0]
+div_by_three_v1 = [x for x in range(1,100) if not x%3]
 
 # Case 2: use _if/else_ condition to assign the resulting list value. In
 # this case _if/else_ statements are placed *before* the iterable.
 
-div_by_three_v2 = [x if x%3 == 0 else '.' for x in range(1,100)]
+div_by_three_v2 = [x if not x%3 else '.' for x in range(1,100)]
 
 # Do you see the difference? In the first case, the iterable list was filtered
 # to ignore values that did not meet the _if_ condition. In the second case,
 # all values from the iterable were included, but the _if/else_  condition
 # allowed us to decide what to do with each value.
 
+        
+# Finally, conditionals can be used to both filter the iterable *and* decide how to
+# process individual values in a single statement:
 
+div_by_three = [x if x%3 == 0 else '.' for x in range(1,100) if math.sin(x)>0.5]
+               
+               
 print()
 print('Nested Conditionals:')
 print('---------------------------------------')
@@ -128,17 +139,22 @@ print('---------------------------------------')
 # Conditionals can also be nested in list comprehension. Here is an example that
 # tests each list element for divisibility by multiple values:
 
-values = list(range(1,50))  
+values = range(1,50)
 result = [int(n/2) if not n % 2
           else int(n/3) if not n % 3
           else f'{n} is not divisible by 2 or 3'
           for n in values]
-       
-        
-# Finally, conditionals can be used to both filter the iterable *and* decide how to
-# process individual values in a single statement:
 
-div_by_three = [x if x%3 == 0 else '.' for x in range(1,100) if math.sin(x)>0.5]
+# Equivalent with standard conditionals:
+result = []
+for n in values:
+    if not n%2:
+        result.append(int(n/2))
+    elif not n%3:
+        result.append(int(n/3))
+    else:
+        result.append(f'{n} is not divisible by 2 or 3')
+        
 
 
 """

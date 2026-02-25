@@ -49,7 +49,7 @@ val = int(input('Enter an integer: '))
 if val > 0:
     print('The value is positive')
 else:
-    print('The value is negative')
+    print('The value is zero or negative')
 
 
 print()

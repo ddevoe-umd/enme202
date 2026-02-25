@@ -60,7 +60,7 @@ print('---------------------------------------')
 print("""
 add()           Add an element to the set
 clear()         Remove all the elements from the set
-copy()          Return a deep copy of the set
+copy()          Return a copy of the set
 difference()    Return a set containing the difference between 
                 two or more sets
 difference_update()  Removes the items in this set that are also

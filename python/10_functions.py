@@ -137,8 +137,8 @@ print('---------------------------------------')
 def roots(coefs):
     (a,b,c) = coefs
     disc = (b**2 - 4*a*c)**(0.5)
-    r1 = -b + disc/(2*a)
-    r2 = -b - disc/(2*a)
+    r1 = (-b + disc)/(2*a)
+    r2 = (-b - disc)/(2*a)
     return [r1, r2]        # return a single list containing 2 numbers
 
 print(roots([1,2,1]))      # real & repeated roots

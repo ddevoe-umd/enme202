@@ -118,12 +118,12 @@ x,y = y,x
 print(x,y)
 
 # Assignment operators can combine assignment and arithmetic operations:
-
-x += 5   # same as x = x + 5, so x is now 13
-x -= 3   # same as x = x - 5 (x is now 10)
-x /= 2   # same as x = x / 2 (x is now 5)
+x = 1
+x += 9   # same as x = x + 9, so x is now 10
+x -= 2   # same as x = x - 2 (x is now 8)
+x /= 2   # same as x = x / 2 (x is now 4)
 x //= 2  # same as x = x // 2 (x is now 2)
-x **= 3  # same as x = x ** 2 (x is now 8)
+x **= 3  # same as x = x ** 3 (x is now 8)
 x %= 3   # same as x = x % 3 (x is now 2)
 
 # Works for all arithmetic data types:

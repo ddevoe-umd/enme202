@@ -80,7 +80,7 @@ class ClassName:
 # The _self_ parameter in __init__ and __del__ references the instance of the class 
 # being operated on.
 #
-# The constructor and destructor methods are optional.
+# The constructor and destructor methods are both optional.
 
 # Here is a simple class with _instance attributes_ x, y, z defining a point in 
 # 3D Cartesian space.
