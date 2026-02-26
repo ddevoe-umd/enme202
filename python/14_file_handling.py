@@ -183,6 +183,7 @@ print(d_as_json)
 d_as_json = json.dumps(d, indent=4)
 print(d_as_json)
 
+
 # Great, now we know how to convert a dictionary to a JSON string.  How do
 # we store this data in a JSON file?  We could open a file for writing, and 
 # the write the string to the file, but the json.dump() method simplifies
@@ -258,8 +259,12 @@ with open('files/data.csv') as f:
     csv_reader = csv.reader(f)    # Create iterable CSV reader object
     for row in csv_reader:
         array.append([row[0], row[1], row[2]])
-        
+
 print(array)
+
+# Of course we could have done the same thing using a list comprehension
+# instead of a for loop!
+
 
 # Alternately, if we have our data in a 2D list, we can write it to
 # a file using the csv.writer() method:
