@@ -51,12 +51,12 @@ f.close()
 #   f = open(filename, 'w+')  <-- read + write (overwrite, create new if none)
 
 # Use the write() method to create a new file:
-f = open("myfile.txt", 'w')
+f = open("files/myfile.txt", 'w')
 f.write('new text') 
 f.close()
 
 # Check to see that the text was written:
-f = open("myfile.txt")
+f = open("files/myfile.txt")
 contents = f.read()
 f.close()
 print(contents)
@@ -64,7 +64,7 @@ print(contents)
 # The current position in the file is set to byte 0 (start) when a file is first 
 # opened. We can change the position using the seek() method, where
 # seek(n) sets the file position to n bytes from the start of the file:
-f = open("myfile.txt")
+f = open("files/myfile.txt")
 f.seek(5)              # move the current file position to the 6th byte
 remainder = f.read()   # read the remainder of the file     
 f.close()
@@ -84,10 +84,10 @@ print('---------------------------------------')
 # Python’s _with_ statement simplifies file I/O. The file will automatically close
 # at end of the _with_ block, **even if an exception is raised**. 
 
-with open("test.txt", 'w') as f:
+with open("files/test.txt", 'w') as f:
     f.write("hello there")
 
-with open("test.txt") as f:
+with open("files/test.txt") as f:
     print(f.read())
 
 
@@ -99,7 +99,7 @@ print('---------------------------------------')
 # as a string.  Note that all characters from each line, including newline characters, 
 # are included in the string.
 
-with open('myfile.txt') as f:
+with open('files/myfile.txt') as f:
     for line in f:
         print(line.strip())   # use strip() to remove newline characters
 
@@ -108,7 +108,7 @@ with open('myfile.txt') as f:
 # __next__() "magic method", which returns the next element. For example, we can
 # manually step through the first 3 lines of the file as follows:
 
-with open('myfile.txt') as f:
+with open('files/myfile.txt') as f:
     print(next(f))     # next(f) is the same as f.__next__()
     print(next(f))
     print(next(f))
@@ -190,18 +190,18 @@ print(d_as_json)
 #
 #    json.dump(dict, file)
 
-with open('datafile.json', 'w+') as f:
+with open('files/datafile.json', 'w+') as f:
     json.dump(d, f)
   
 # We can then read the file to see the content:
 
-with open('datafile.json') as f:
+with open('files/datafile.json') as f:
     print(f.read())
 
 # If we want to JSON file to be more readible (to humans), we can add 
 # indentation to json.dump() just as for json.dumps():
 
-with open('datafile.json', 'w') as f:
+with open('files/datafile.json', 'w') as f:
     json.dump(d, f, indent=4)
 with open('datafile.json') as f:      # Display the JSON-formatted file
     print(f.read())
@@ -209,7 +209,7 @@ with open('datafile.json') as f:      # Display the JSON-formatted file
 # The json.load() method can be used to read an existing JSON-formatted file
 # directly into a Python dictionary:
 
-with open('datafile.json') as f:
+with open('files/datafile.json') as f:
     d = json.load(f)
 print(d)
 print(d['k_list'])
