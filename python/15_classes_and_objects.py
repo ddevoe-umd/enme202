@@ -6,8 +6,8 @@ Topics
 Object-Oriented Programming
 Defining a Class
 Object Declaration
+Instance Attributes
 Instance Methods
-Class Methods
 Method Chaining
 Magic (Dunder) Methods and Instances
 Class Composition
@@ -15,6 +15,7 @@ Class Inheritance
 Multiple Inheritance
 Method Overriding
 Overriding Magic Methods
+Class Methods
 Class Attributes
 Private Attributes and Methods
 """
@@ -26,21 +27,20 @@ print()
 print('Object-Oriented Programming:')
 print('---------------------------------------')
 
-# A _class_ describes a set of attributes (variables) and methods (functions) that
+# A _class_ describes a set of _attributes_ (variables) and _methods_ (functions) that
 # are common to any variable declared as an _instance_ of the class.  Such variables
 # are called _objects_ and are _members_ of the class from which they were
 # instatiated.  
 #
 # Attributes and methods defined in a class are available to every instance of that
 # class, but attribute values can differ between objects instantiated from the same class.
-# In this sense, the class acts as a cookie cutter to shape multiple cookies (objects)
+# In this sense, the class acts as a cookie cutter to shape identical cookies (objects)
 # which can then be "decorated" in different ways (given different attribute values).
 #
-# There are many advantages to object-oriented programming (OOP)!
+# There are many advantages to object-oriented programming!
 # 1. Classes/objects abstract the code design process: 
-#    - bundle together related attributes and methods.
-#    - provide a more logical structure to the code.
-#    - large programs become easier to plan and implement.
+#    - enable a more logical structure to the code.
+#    - simplify large program implementation.
 # 2. Classes can hide their internals from other programmers.
 # 3. Classes can be extended through inheritance to create new classes with expanded
 #    functionality as needs grow.
@@ -53,12 +53,14 @@ print()
 print('Defining a Class:')
 print('---------------------------------------')
 
-# The _class_ keyword is used to create a class definition.  By convention use PascalCase
-# for class names.  Basic class declaration syntax:
+# Basic class declaration syntax below.
+# By convention use PascalCase for class names:
 
 class ClassName:
-    # class attributes and class methods (if any) are defined in main block
-
+    """
+    Class docstring goes here (optional).
+    Class attributes and class methods (if any) are defined in main block
+    """
     def __init__(self):
          # class constructor (optional)
          # instance attributes are defined in constructor
@@ -70,11 +72,10 @@ class ClassName:
          # stuff to do when deallocating an object from memory goes here
          pass
 
-# The __init__ function (with double-underscores) is called the class _constructor_
-# or _instantiation method_.  The constructor is run each time a new member of the
-# class is declared.
+# The __init__ function is the class _constructor_ or _instantiation method_.
+# The constructor is run each time a new member of the class is declared.
 #
-# The __del__ function is called the class _destructor_. The destructor is run each 
+# The __del__ function is the class _destructor_. The destructor is run each 
 # time class instance is deleted from memory.
 #
 # The _self_ parameter in __init__ and __del__ references the instance of the class 
@@ -82,20 +83,27 @@ class ClassName:
 #
 # The constructor and destructor methods are both optional.
 
-# Here is a simple class with _instance attributes_ x, y, z defining a point in 
-# 3D Cartesian space.
+
+print()
+print('Object Declaration and Instance Attributes:')
+print('---------------------------------------')
+
+# Here is a simple class with 3 _instance attributes_ x, y, z:.
 
 class Point:
+    """
+    Represents a point in 3D Cartesian space.
+
+    Attributes:
+        x (int or float): The x-coordinate along the horizontal axis. Defaults to 0.
+        y (int or float): The y-coordinate along the vertical axis. Defaults to 0.
+        z (int or float): The z-coordinate along the depth axis. Defaults to 0.
+    """
     def __init__(self):
         self.x = 0
         self.y = 0
         self.z = 0
-
-
-print()
-print('Object Declaration:')
-print('---------------------------------------')
-
+        
 # The Point class is now a new data type available in our code. A variable
 # of type Point is called an _object_ or _instance_ of the Point class.
 # Let's declare a few Point objects, and change their attribute values:
@@ -161,24 +169,33 @@ print('Instance Methods:')
 print('---------------------------------------')
 
 # The utility of a class can be greatly expanded by providing _instance methods_
-# that can be accessed by all class instances.  The first argument of an
-# instance method must be _self_, allowing the method to access attribute
-# values for the particular instance calling the method.
+# (or just "methods") that can be accessed by all class instances.  The first
+# argument of an instance method must be _self_, allowing the method to access
+# attribute values for the particular instance calling the method.
 #
-# Here is an expanded Point class with 3 instance methods:
-#  distance()  -- return the distance between the Point and a second Point
-#  length()    -- return the distance from the origin to the Point
-#  stringify() -- return Point values in a string as "(x,y,z)"
+# Here is an expanded Point class with 3 methods:
 
 class Point:
-    """3D Cartesian point class"""       # doc string
+    """
+    Represents a point in 3D Cartesian space.
+
+    Attributes:
+        x (int or float): The x-coordinate. Defaults to 0.
+        y (int or float): The y-coordinate. Defaults to 0.
+        z (int or float): The z-coordinate. Defaults to 0.
+
+    Methods:
+        distance(p): Returns the Euclidean distance between this Point and another Point p.
+        length():    Returns the Euclidean distance from the origin (0,0,0) to this Point.
+        stringify(): Returns a string representation of this Point in the format "(x,y,z)".
+    """
     def __init__(self, x=0, y=0, z=0):
         self.x = x
         self.y = y
         self.z = z
     def distance(self, p):      # distance to a second Point
         return(((self.x-p.x)**2 + (self.y-p.y)**2 + (self.z-p.z)**2)**(1/2))
-    def length(self):               # distance from origin to the Point
+    def length(self):           # distance from origin to the Point
         return(self.distance(Point(0,0,0)))
     def stringify(self):
         return(f'({self.x},{self.y},{self.z})')
@@ -203,31 +220,6 @@ for p in points:
 
 
 print()
-print('Class Methods:')
-print('---------------------------------------')
-
-# Class methods apply to the class itself (rather than instances), and are denoted
-# by a _decorator_ to the function as shown below. Class methods are used to access 
-# or modify class-level data, such as class attributes, or to create "factory methods"
-# that return class instances with specific configurations, as in this example:
-
-class Point:
-    def __init__(self, x=0, y=0, z=0):
-        self.x = x
-        self.y = y
-        self.z = z
-    @classmethod           # decorator
-    def point123(cls):
-        return cls(1,2,3)
-
-# The _cls_ argument is the Point class itself, and the method above instantiates the
-# class using values of x,y,z = 1,2,3 to create a new object:
-
-new_point = Point.point123()
-
-
-
-print()
 print('Method Chaining:')
 print('---------------------------------------')
 
@@ -244,20 +236,20 @@ class Point:
         self.z = z
     def double_x(self, val):
         self.x *= 2
-        return self        # need to return self for chaining
+        return self           # return self for chaining
     def double_y(self, val):
         self.y *= 2
-        return self        # need to return self for chaining
+        return self           # return self for chaining
     def double_z(self, val):
         self.z *= 2
-        return self        # need to return self for chaining
+        return self           # return self for chaining
 
 p = Point(1,2,3)
 p.double_x().double_y().double_z()    # chained methods
 
 
 print()
-print('Magic (Dunder) Methods:')
+print('Magic Methods (Dunder Methods):')
 print('---------------------------------------')
 
 # All classes, including both built-in and custom classes, have a number of built-in 
@@ -304,7 +296,21 @@ print(dir(dict))
 # For example, we can make class instances +iterable+ using the __iter__ method
 # which, together with the iter() function, define how iterating through an object should occur.
 
-# Here is a simple example of an iterable class:
+# First, let's look at the iter() function:
+print(iter.__doc__)
+"""
+iter(iterable) -> iterator
+iter(callable, sentinel) -> iterator
+
+Get an iterator from an object.  In the first form, the argument must
+supply its own iterator, or be a sequence.
+In the second form, the callable is called until it returns the sentinel.
+"""
+
+# Consider the first form where iter() takes an iterable as an argument,
+# and returns an iterator (NOT just an iterable).
+#
+# Using this understanding, here is a simple example of an iterable class:
 
 class CountDown:
     def __init__(self, max):
@@ -312,6 +318,9 @@ class CountDown:
 
     def __iter__(self):  # Make the class iterable
         return iter(range(self.max, -1, -1))  # Return an iterator over the range
+
+# Note that __iter__ returns an iterable structure allowing us to interate over a
+# class instance:
 
 for val in CountDown(5):
     print(val)
@@ -348,7 +357,7 @@ for entry in my_list:
 #
 # Redo CountDown as an iterator:
 
-class CountDown:
+class CountDownIterator:
     def __init__(self, max):
         self.current = max
 
@@ -364,12 +373,12 @@ class CountDown:
         return self.current+1
 
 # Use as iterable (recall that all iterators are also iterables):
-counter = CountDown(5)
+counter = CountDownIterator(5)
 for number in counter:
     print(number)
 
 # Use as iterator:
-counter = CountDown(5)
+counter = CountDownIterator(5)
 print('first value: ', end='')
 print(next(counter))
 print('second value: ', end='')
@@ -665,6 +674,32 @@ cow_life_cycle()
 # Note that the destructor is called when the Cow goes out of scope
 # after the function ends. We could also call the destructor manually
 # via "del the_cow" or "the_cow.__del__()".
+
+
+
+print()
+print('Class Methods:')
+print('---------------------------------------')
+
+# Class methods apply to the class itself (rather than instances), and are denoted
+# by a _decorator_ to the function as shown below. Class methods are used to access 
+# or modify class-level data, such as class attributes, or to create "factory methods"
+# that return class instances with specific configurations, as in this example:
+
+class Point:
+    def __init__(self, x=0, y=0, z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+    @classmethod           # decorator
+    def point123(cls):
+        return cls(1,2,3)
+
+# The _cls_ argument references the Point class itself. The point123 method instantiates the
+# class using values of x,y,z = 1,2,3 to create a new object:
+
+new_point = Point.point123()
+
 
 
 print()
