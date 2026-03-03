@@ -58,8 +58,8 @@ print('---------------------------------------')
 
 class ClassName:
     """
-    Class docstring goes here (optional).
-    Class attributes and class methods (if any) are defined in main block
+    Class docstring goes here (optional)
+    Can access via ClassName.__doc__
     """
     def __init__(self):
          # class constructor (optional)
@@ -103,15 +103,16 @@ class Point:
         self.x = 0
         self.y = 0
         self.z = 0
-        
+
 # The Point class is now a new data type available in our code. A variable
 # of type Point is called an _object_ or _instance_ of the Point class.
-# Let's declare a few Point objects, and change their attribute values:
+# Let's declare a few Point objects, and use the dot operator to
+# change their attribute values:
 
 p1 = Point()
 print(f'{p1.x}, {p1.y}, {p1.z}')
 
-# Attribues of a given object can be changed at any time:
+# Attribues of an object can be assigned new values at any time:
 p2 = Point()
 p2.x = -12.5
 p2.y = 0
@@ -163,13 +164,16 @@ print(f'{p2.x}, {p2.y}, {p2.z}')
 p3 = Point(y=3)
 print(f'{p3.x}, {p3.y}, {p3.z}')
 
+# Note: if desired we can pack or unpack instantiation arguments for classes in
+# the same way we saw with functions.
+
 
 print()
 print('Instance Methods:')
 print('---------------------------------------')
 
 # The utility of a class can be greatly expanded by providing _instance methods_
-# (or just "methods") that can be accessed by all class instances.  The first
+# (or just "methods") that can be accessed by all class members.  The first
 # argument of an instance method must be _self_, allowing the method to access
 # attribute values for the particular instance calling the method.
 #
@@ -185,9 +189,9 @@ class Point:
         z (int or float): The z-coordinate. Defaults to 0.
 
     Methods:
-        distance(p): Returns the Euclidean distance between this Point and another Point p.
-        length():    Returns the Euclidean distance from the origin (0,0,0) to this Point.
-        stringify(): Returns a string representation of this Point in the format "(x,y,z)".
+        distance(p): Returns the Euclidean distance between the Point and another Point p.
+        length():    Returns the Euclidean distance from the origin (0,0,0) to the Point.
+        stringify(): Returns a string representation of the Point in the format "(x,y,z)".
     """
     def __init__(self, x=0, y=0, z=0):
         self.x = x
@@ -256,21 +260,21 @@ print('---------------------------------------')
 # class attributes and methods called _magic attributes/methods_ (also known 
 # as _dunder_ attributes/methods since they are surrounded by Double UNDERscores).
 
-# The dir() function returns a list of all magic attributes/methods available for
-# a given class:
+# The dir() function returns a list of all attributes/methods available for
+# a given class (including magic methods):
 
 print(dir(Point))
 
-#    __dict__   Dictionary with class namespace
 #    __doc__    Class documentation string
-#    __name__   Class name
+#    __dict__   Dictionary with class namespace
+#    __class__  Class of an object (i.e. its type).
 #    __module__ Module where class is defined ("__main__" or name of imported module)
 #    __bases__  Tuple of all base classes the current class inherits from
 #    and more...
 
-print(Point.__dict__)
 print(Point.__doc__)
-print(Point.__name__)
+print(Point.__dict__)
+print(Point.__class__)
 print(Point.__module__)
 print(Point.__bases__)
 
@@ -283,7 +287,7 @@ print(list.__doc__)
 
 def my_function():
     pass
-print(my_function.__name__)
+print(my_function.__class__)
 
 print(dir(dict))
 
@@ -319,8 +323,8 @@ class CountDown:
     def __iter__(self):  # Make the class iterable
         return iter(range(self.max, -1, -1))  # Return an iterator over the range
 
-# Note that __iter__ returns an iterable structure allowing us to interate over a
-# class instance:
+# __iter__ returns an iterator, which by definition is an iterable that
+# allows us to interate over any instance of the CountDown class:
 
 for val in CountDown(5):
     print(val)
@@ -332,7 +336,7 @@ class ListOfTuples:
          self.vals = vals
 
     def __iter__(self):  
-        # Use a generator to create an iterator to return via iter():
+        # Use a generator to create the iterable structure:
         second_value_list = (item[1] for item in self.vals)
         return iter(second_value_list)
 
@@ -341,10 +345,9 @@ my_list = ListOfTuples(data)
 for entry in my_list:
     print(entry)
 
-# Note that in the above example, "(item[1] for item in self.vals)" looks like
-# list comprehension, but this is actually a _generator_, which is similar
-# to list comprehension but is more memory-efficient for cases where we don't need
-# to store the entire list in memory at once.
+# Note that in the above example, "(item[1] for item in self.vals)" creates
+# a _generator_, which is significantly more memory-efficient than list comprehension
+# for cases where we don't need to store the entire list in memory at once.
 
 
 # ---------------
@@ -352,8 +355,8 @@ for entry in my_list:
 # ---------------
 
 # Instead of making an _iterable_, which uses iter() to return an iterator, the class 
-# itself can instatiate _iterators_ that support the use of next() to manually
-# iterate through the data elements.
+# itself can instatiate _iterators_ by defining a __next__ method within the class
+# to allow for manual iteration through the data elements.
 #
 # Redo CountDown as an iterator:
 
