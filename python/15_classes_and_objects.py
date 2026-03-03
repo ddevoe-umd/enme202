@@ -238,13 +238,13 @@ class Point:
         self.x = x
         self.y = y
         self.z = z
-    def double_x(self, val):
+    def double_x(self):
         self.x *= 2
         return self           # return self for chaining
-    def double_y(self, val):
+    def double_y(self):
         self.y *= 2
         return self           # return self for chaining
-    def double_z(self, val):
+    def double_z(self):
         self.z *= 2
         return self           # return self for chaining
 
