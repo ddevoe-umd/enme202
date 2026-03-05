@@ -105,7 +105,7 @@ class Point:
         self.z = 0
 
 # The Point class is now a new data type available in our code. A variable
-# of type Point is called an _object_ or _instance_ of the Point class.
+# of type Point is called a Point _object_ or an _instance_ of the Point class.
 # Let's declare a few Point objects, and use the dot operator to
 # change their attribute values:
 
@@ -230,7 +230,7 @@ print('---------------------------------------')
 # Method chaining allows multiple methods to be called on an object sequentially
 # in a single line of code. This makes the code more concise and readable.
 #
-# To enable method chaining, each method must return the object itself 
+# To enable method chaining, each relevant method must return the object itself 
 # (usually _self_).
 
 class Point:
@@ -238,6 +238,13 @@ class Point:
         self.x = x
         self.y = y
         self.z = z
+    def distance(self, p):      # distance to a second Point
+        return(((self.x-p.x)**2 + (self.y-p.y)**2 + (self.z-p.z)**2)**(1/2))
+    def length(self):           # distance from origin to the Point
+        return(self.distance(Point(0,0,0)))
+    def stringify(self):
+        return(f'({self.x},{self.y},{self.z})')
+    # Make the following methods be capable of chaining:
     def double_x(self):
         self.x *= 2
         return self           # return self for chaining
@@ -267,7 +274,7 @@ print(dir(Point))
 
 #    __doc__    Class documentation string
 #    __dict__   Dictionary with class namespace
-#    __class__  Class of an object (i.e. its type).
+#    __class__  Class of an object (i.e. its type)
 #    __module__ Module where class is defined ("__main__" or name of imported module)
 #    __bases__  Tuple of all base classes the current class inherits from
 #    and more...
@@ -354,9 +361,8 @@ for entry in my_list:
 # Classes as iterators
 # ---------------
 
-# Instead of making an _iterable_, which uses iter() to return an iterator, the class 
-# itself can instatiate _iterators_ by defining a __next__ method within the class
-# to allow for manual iteration through the data elements.
+# Instead of making an _iterable_, we can instead instatiate _iterators_ by defining
+# a __next__ method within the class to allow for manual iteration through the data elements.
 #
 # Redo CountDown as an iterator:
 
@@ -368,14 +374,14 @@ class CountDownIterator:
         return self      # iterators should return themselves
 
     def __next__(self):  
-    # __next__ makes the class an _iterator_, defining the next value to be returned at
+    # __next__ let's class members be iterators, defining the next value to be returned at
     # each iteration, and raising a StopIteration exception when there are no more values
         if self.current <0:
             raise StopIteration
         self.current -= 1
         return self.current+1
 
-# Use as iterable (recall that all iterators are also iterables):
+# Use as a simple iterable:
 counter = CountDownIterator(5)
 for number in counter:
     print(number)
@@ -413,6 +419,36 @@ class Triangle:
 
 tri = Triangle((-2,-5), (-3,3), (0,10))
 print(tri.perimeter())
+
+
+# The side length calculations in perimeter() are just repeating the work of the
+# distance() method from the Point class!  Re-write Triangle to take advantage
+# of this method by referencing it through the Point class itself:
+
+class Triangle:
+    def __init__(self, p1=(0,0), p2=(0,0), p3=(0,0)):
+        self.p1 = Point(p1[0],p1[1])
+        self.p2 = Point(p2[0],p2[1])
+        self.p3 = Point(p3[0],p3[1])
+    def perimeter(self):
+        return (Point.distance(self.p1, self.p2) +
+                Point.distance(self.p2, self.p3) +
+                Point.distance(self.p3, self.p1))
+
+tri = Triangle((-2,-5), (-3,3), (0,10))
+print(tri.perimeter())
+
+# Note that we could have instead accessed the distance() method through any of the
+# Point objects instead of the class, e.g. self.p1.distance(self.p2).
+#
+# Both forms are equivalent:
+#   Point.distance(self.p1, self.p2)  — calls via the class, explicitly passing both points
+#   self.p1.distance(self.p2)         — calls via the instance; self.p1 is implicitly bound
+#                                       as the "self" parameter of distance()
+#
+# The instance form (self.p1.distance(self.p2)) is more idiomatic Python and is what
+# you would typically see in practice.
+
 
 
 print()
