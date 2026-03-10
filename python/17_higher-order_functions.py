@@ -57,7 +57,7 @@ print('---------------------------------------')
 def outer(x):
     def inner(y):
         return y+x
-    return inner(2)   # return a +numerical value+ to the calling code
+    return inner(2)   # return a numerical value to the calling code
 
 print(outer(1))
 
@@ -162,8 +162,8 @@ goodbye()
 
 def decorator_with_argument(func):
     def wrapper(x):
-        print('passed value assiged to "x"')
-        func(x)
+        print('passed value assigned to "x"')
+        return func(x)
     return wrapper
 
 @decorator_with_argument
@@ -178,8 +178,8 @@ display(-5)
 
 def decorator_with_arguments(func):
     def wrapper(x,y):
-        print('passed value assiged to "x"')
-        func(x,y)
+        print('passed value assigned to "x"')
+        return func(x,y)
     return wrapper
 
 @decorator_with_arguments
@@ -194,8 +194,8 @@ display(5, 7)
 
 def decorator_with_arguments_2(func):
     def wrapper(*args):
-        print('passed value assiged to "x"')
-        func(*args)
+        print('passed value assigned to "x"')
+        return func(*args)
     return wrapper
 
 @decorator_with_arguments_2
@@ -217,8 +217,8 @@ display2(5, 7, 8, 9)
 
 def decorator_with_named_arguments(func):
     def wrapper(*args, **kwargs):
-        print('passed value assiged to "x"')
-        func(*args, **kwargs)
+        print('passed value assigned to "x"')
+        return func(*args, **kwargs)
     return wrapper
 
 @decorator_with_named_arguments
@@ -270,7 +270,7 @@ print(list(xx))     # Convert the iterable to a list
 
 x = [1,2,3,4,5]
 x_even = filter(lambda x: not x%2, x)
-print(type(x_even))     # The resulting iterable is of type map
+print(type(x_even))     # The resulting iterable is of type filter
 print(list(x_even))     # Convert the iterable to a list
 
 # As with map(), this could have been done using list comprehension

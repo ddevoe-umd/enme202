@@ -460,10 +460,10 @@ print('---------------------------------------')
 # to extend base class functionality by inheriting the base class interface
 # and implementation.
 #
-# Classes that inherit from another are termed _derived classes_,
-# _child classes_, or _subclasses_.
+# Classes derived from another are termed _subclasses_,
+# _child classes_, or _derived classes_.
 #
-# Classes from which other classes are derived are called _base classes_,
+# Classes from which other classes derive are called _base classes_,
 # _parent classes_, or _super classes_.
 #
 # A derived class _inherits_ or _extends_ a base class.
@@ -498,7 +498,7 @@ class Vector2d(Vector):
         return(x*y)
     def xy_angle(self):
         [x,y] = self.coordinates
-        return math.atan(y/x)
+        return math.atan2(y/x)
 
 v = Vector(5,2,6,8,3)
 v3d = Vector3d(1,2,3)
@@ -540,7 +540,7 @@ print('---------------------------------------')
 
 class Animal:
     def speak(self):
-        print("Animal speaks")
+        print("The animal says ", end='')
 
 class Dog(Animal):
     def speak(self):     # override the Animal.speak() method
@@ -556,7 +556,6 @@ animal = Animal()
 dog = Dog()
 cat = Cat()
 
-animal.speak()
 dog.speak()
 cat.speak()
 
@@ -580,8 +579,8 @@ print('---------------------------------------')
 
 class Vector:
     """
-    n-dimensional vector, accepts
-    arguments as separate values
+    n-dimensional vector
+    arguments: individual n-dimensional axis values
     """
     def __init__(self, *args):
         self.coordinates = args     
@@ -636,15 +635,16 @@ class Vector:
             raise TypeError("Values must be Vector + Vector or Vector + float")
         return Vector(*result)    
     def __str__(self):
-        return f'Vector: {self.coordinates}'
+        return f'{len(self.coordinates)}-D vector: {self.coordinates}'
 
-v = Vector(1,12,4,7)
-print(v + 20)
+v1 = Vector(1,12,4,7)
+v2 = Vector(-9,0,4,4)
+print(v1 + v2)
 
 # Now trigger an exception:
 
 try:
-    v + 'x'
+    v1 + 'x'
 except Exception as e:
     print(e)
 
@@ -671,14 +671,18 @@ class Vector:
         return Vector(*result)
 
     def __str__(self):
-        return f'Vector: {self.coordinates}'
+        return f'{len(self.coordinates)}-D vector: {self.coordinates}'
 
 v = Vector(1,12,4,7)
-print(v + 20)
+print(v)
+print(v + (-10))
 print(20 + v)
 
 # Similar "reverse order" methods exist for all other arithmetic and
 # bitwise operators. 
+
+# Note that we had to add -10 rather than subtract 10 above because __sub__ is
+# a different magic method than __add__ (and thus requires a separate override).
 
 
 print()
@@ -731,7 +735,7 @@ class Point:
         self.y = y
         self.z = z
     @classmethod           # decorator
-    def point123(cls):
+    def point123(cls):     # factory method example
         return cls(1,2,3)
 
 # The _cls_ argument references the Point class itself. The point123 method instantiates the
