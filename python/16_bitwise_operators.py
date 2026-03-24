@@ -5,7 +5,7 @@ Topics
 ------
 Bitwise Operator Summary
 Converting Between Base 2 and Base 10
-Declaring and Displaying Binary Words
+Declaring and Displaying Binary Words (int and bin functions)
 Operator Precedence
 Bit Shifting
 Bit Masks
@@ -16,29 +16,27 @@ print('Bitwise Operator Summary:')
 print('---------------------------------------')
 
 """
+Bitwise operators:
+
+   x & y    AND
+   x | y    OR
+   ~x       COMPLEMENT (NOT)
+   x ^ y    XOR (exclusive OR)
+   x << n   shift bits left n places (same as multiplying by 2**n)
+   x >> n   shift bits right n places (same as dividing by 2**n)
+
 Bitwise operators compare or evaluate individual bits within _binary words_
 (sequences of binary values).  Unlike Boolean operators, which yield single
 True/False values, bitwise operators act on multiple values within a pair
 of binary words to yield a new binary word, where each bit in the new sequence
 is determined by comparing the corresponding bits in the initial word pair.
 
-
 Why do we care about bitwise operators?  Bit fields, bit masks, bit flags, 
 finite state machines, graphics operations, compression, encryption, 
 communications, etc.
 
-Recall that there is no standard or maximum binary word length in Python, so
-binary words can be any length
-
-Summary of bitwise operators:
-
-x & y    AND
-x | y    OR
-~x       COMPLEMENT (NOT)
-x ^ y    XOR (exclusive OR)
-x << n   shift bits left n places (same as multiplying by 2**n)
-x >> n   shift bits right n places (same as dividing by 2**n)
-
+There is no standard or maximum binary word length in Python, so
+binary words can be any length.
 """
 
 print()
@@ -60,6 +58,10 @@ This same convention applies to *any* number base, inluding base 2 (binary).
 For base 2, we only have 2 digits (0 and 1). For example, a binary value of
 110110 is interpreted as a base 10 number like this:
 
+base 2   base 10
+|        |
+V        V
+
 110110 = 1*2^5 + 1*2^4 + 0*2^3 + 1*2^2 + 1*2^1 + 0*2^0
        = 1*32  + 1*16  + 0*8   + 1*4   + 1*2   + 0*1
        = 54
@@ -70,7 +72,7 @@ hexadecimal (base 16), etc.
 """
 
 print()
-print('Declaring and Displaying Binary Words:')
+print('int() and bin() functions:')
 print('---------------------------------------')
 
 # Values of +all+ types are stored in the computer as binary words.
@@ -121,8 +123,8 @@ print('Operator Precedence:')
 print('---------------------------------------')
 
 """
-Bitwise operators have precedence over both comparisons and logical 
-(Boolean) operators. Operation precedence (descending order):
+Bitwise operators have precedence over both logical comparisons and 
+Boolean operators. Operation precedence (descending order):
 
    **      (Exponent)
    +x, -x  (Unary addition, Unary subtraction)

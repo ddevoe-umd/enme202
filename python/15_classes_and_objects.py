@@ -608,10 +608,15 @@ class Vector:
 # First test the raising of exceptions when adding:
 v1 = Vector(1,2,3)
 v2 = Vector(4,5)
+
 try:
     v3 = v1 + v2    # unmatched lengths (ValueError)
+except ValueError as e:
+    print(e)
+
+try:
     v3 = v1 + 1     # wrong type of 2nd argument (TypeError)
-except Exception as e:
+except TypeError as e:
     print(e)
 
 # Now demonstrate adding & displaying vectors:
