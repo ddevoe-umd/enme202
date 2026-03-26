@@ -5,6 +5,7 @@ Topics
 ------
 Bitwise Operator Summary
 Converting Between Base 2 and Base 10
+Hexadecimal (Base 16)
 Declaring and Displaying Binary Words (int and bin functions)
 Operator Precedence
 Bit Shifting
@@ -344,6 +345,82 @@ check_status()
 # Clear all flags while saving status of multiple selected flags:
 status &= (ERROR | POWER)  # Turn all flags off but keep ERROR & POWER unchanged
 check_status()
+
+
+
+print()
+print('Hexadecimal (Base 16):')
+print('---------------------------------------')
+
+"""
+Hexadecimal (hex) is a base 16 number system that uses digits 0-9 and letters
+A-F (where A=10, B=11, C=12, D=13, E=14, F=15). Hex is widely used in
+programming because each hex digit maps exactly to 4 binary bits (a "nibble"),
+making it a compact shorthand for binary values:
+
+   Hex    Decimal    Binary
+   ---    -------    ------
+   0x0       0        0000
+   0x1       1        0001
+   0x2       2        0010
+   0x3       3        0011
+   0x4       4        0100
+   0x5       5        0101
+   0x6       6        0110
+   0x7       7        0111
+   0x8       8        1000
+   0x9       9        1001
+   0xA      10        1010
+   0xB      11        1011
+   0xC      12        1100
+   0xD      13        1101
+   0xE      14        1110
+   0xF      15        1111
+
+Because one hex digit = 4 bits, two hex digits = 8 bits = 1 byte. This is why
+hex is the go-to notation for byte-level work. Here are common hex values you
+will encounter in code and what they look like in binary:
+
+   0xFF   = 1111 1111  (255)  -- all 8 bits set; used as an 8-bit mask
+   0x80   = 1000 0000  (128)  -- only the MSB (most significant bit) set;
+                                  used to test the sign bit in a byte
+   0x7F   = 0111 1111  (127)  -- all bits set except MSB; max value of a
+                                  signed 8-bit integer
+   0x0F   = 0000 1111  (15)   -- lower nibble mask (keeps lower 4 bits)
+   0xF0   = 1111 0000  (240)  -- upper nibble mask (keeps upper 4 bits)
+   0xFFFF = 1111 1111 1111 1111  (65535) -- 16-bit (2-byte) mask
+   0xDEAD = 1101 1110 1010 1101  (57005) -- classic debug/sentinel value
+"""
+
+# In Python, hex literals are declared with the 0x prefix (just like
+# 0b for binary):
+a = 0xFF
+b = 0x80
+
+print(f"0xFF in decimal: {a}")         # 255
+print(f"0xFF in binary:  {a:08b}")     # 11111111
+print(f"0x80 in decimal: {b}")         # 128
+print(f"0x80 in binary:  {b:08b}")     # 10000000
+
+# The hex() function converts an integer to a hex string (similar to bin()):
+print(f"hex(255) = {hex(255)}")        # '0xff'
+print(f"hex(128) = {hex(128)}")        # '0x80'
+
+# String formatting can also display hex values:
+print(f"{255:02x}")   # 'ff'  (lowercase)
+print(f"{255:02X}")   # 'FF'  (uppercase)
+print(f"{255:#04x}")  # '0xff' (with 0x prefix)
+
+# Converting between representations -- these all refer to the same value:
+print(0xFF == 0b11111111 == 255)  # True
+
+# Practical example: extracting the upper and lower nibbles of a byte
+byte_val = 0xA3  # 1010 0011
+upper_nibble = (byte_val & 0xF0) >> 4  # isolate upper 4 bits, shift right
+lower_nibble =  byte_val & 0x0F        # isolate lower 4 bits
+print(f"Byte: 0x{byte_val:02X} = {byte_val:08b}")
+print(f"  Upper nibble: 0x{upper_nibble:X} = {upper_nibble:04b}")
+print(f"  Lower nibble: 0x{lower_nibble:X} = {lower_nibble:04b}")
 
 
 
