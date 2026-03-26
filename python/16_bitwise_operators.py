@@ -5,11 +5,12 @@ Topics
 ------
 Bitwise Operator Summary
 Converting Between Base 2 and Base 10
-Hexadecimal (Base 16)
 Declaring and Displaying Binary Words (int and bin functions)
+Bitwise operations
 Operator Precedence
 Bit Shifting
 Bit Masks
+Hexadecimal (Base 16)
 """
 
 print()
@@ -90,13 +91,12 @@ print('---------------------------------------')
 # Example: convert 0101 (base 2) to decimal:
 x = int('0101',2)  # 0101 (b2) = 5 (b10)
 
-# We can also directly declare binary values by preceeding a binary
-# value with _0b_ as follows:
+# We can also directly define binary values by with a leading _0b_:
 y = 0b0110         # 0110 (b2) = 6 (b10)
 
 # Displaying either variable using print() will show a base 10 value!
-# We cam display a binary word by either using the bin() function, or
-# using string formatting:
+# To display a binary word, either use the bin() function or apply string
+# formatting:
 print(x)                 # --> 5
 print(bin(x))            # --> "0b101"
 print("{:b}".format(x))  # --> "101"
@@ -104,7 +104,7 @@ print(f"{x:b}")          # --> "101"
 
 # Hang on...we defined x as a 4-bit word, but only 3 bits appear in 
 # the output.  This is because Python does not keep track of 
-# leading zeros. If we know the word length, use string formatting
+# leading zeros. If the desired word length is known, use string formatting
 # to control output appearance:
 
 print(f"{0b1010:04b}")  # format output 4 char long using "0" for padding.
@@ -112,10 +112,27 @@ print(f"{0b1010:04b}")  # format output 4 char long using "0" for padding.
 x = 0b0101
 y = 0b0110
 print(f"x =     { x   :04b}") 
-print(f"y =     { y   :04b}") 
-print(f"x & y = { x&y :04b}") 
-print(f"x | y = { x|y :04b}") 
-print(f"x ^ y = { x^y :04b}") 
+print(f"y =     { y   :04b}")
+
+
+
+print()
+print('Bitwise operations:')
+print('---------------------------------------')
+
+# Bitwise and, or, xor operating on the binary words x and y will compare
+# bit values in each corresponding position within the words.  
+
+print(f"{(0b0101 & 0b0110):04b}") 
+print(f"{(0b0101 | 0b0110):04b}") 
+print(f"{(0b0101 ^ 0b0110):04b}") 
+
+# If the words have different lengths, zeros will be padded in front of the
+# shorter word:
+
+print(f"{(0b01 & 0b0110):04b}") 
+print(f"{(0b1101 | 0b1):04b}") 
+print(f"{(0b10 ^ 0b0110):04b}") 
 
 
 
@@ -125,17 +142,19 @@ print('---------------------------------------')
 
 """
 Bitwise operators have precedence over both logical comparisons and 
-Boolean operators. Operation precedence (descending order):
+Boolean operators. Operator precedence (descending order):
 
    **      (Exponent)
    +x, -x  (Unary addition, Unary subtraction)
    ~x      (Bitwise NOT)
    *, /, //, %  (Multiplication, Division, Floor division, Modulus)
    +, -    (Addition, Subtraction)
+   
    <<, >>  (Bitwise shift operators)
    &       (Bitwise AND)
    ^       (Bitwise XOR)
    |       (Bitwise OR)
+   
    ==, !=, >, >=, <, <=, is, is not, in, not in  (Comparisons, Membership)
    not     (Logical NOT)
    and     (Logical AND)
