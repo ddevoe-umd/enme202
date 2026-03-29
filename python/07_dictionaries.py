@@ -1,9 +1,5 @@
 # Dictionaries
 
-# A dicionary data structure consists of a collection of _unordered_ 
-# and _mutable_ (key : value) pairs. Each key within a dictionary must be
-# unique.  Dictionary values are _heterogeneous_.
-
 """
 TOPICS
 ------
@@ -18,6 +14,25 @@ Combining Dictionaries
 print()
 print('Dictionary Basics')
 print('---------------------------------------')
+
+# A dicionary consists of a collection of _mutable_ (key : value) pairs
+#
+# Keys must hashable (that is, they must have a hash value that never 
+# changes during their lifetime and can be compared to other objects)
+# (can check via hash() function):
+#    - built-in immutable data types incuding: int, float, str, bool, complex)
+#    - tuples containing only hashable elements
+#    - custom objects that are hashable
+#    NOT ALLOWED: list, dict, set
+#       
+# Each key must be unique
+#
+# Dictionary values are _heterogeneous_ (any valid Python data type)
+#
+# In older versions of Python v2 and v3, dictionaries were unordered, but
+# this is no longer the case: starting with Python 3.7, dictionaries are
+# _ordered_ data structures.
+
 
 # Declare an empty dictionary, and add key,value pair entries
 demo_dict = {}                       # declare an empty dictionary
