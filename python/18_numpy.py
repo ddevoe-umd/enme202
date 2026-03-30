@@ -10,6 +10,8 @@ Indexing and Slicing
 Array Operations and Broadcasting
 Common Array Functions
 Reshaping Arrays
+Polynomial Functions
+Linear Algebra (np.linalg)
 """
 
 import numpy as np   # Standard convention for importing NumPy
@@ -85,7 +87,7 @@ print("Ones:\n", ones_arr)
 # Syntax: np.arange(start, stop, step)
 
 range_arr = np.arange(0, 10, 2)   # Start at 0, stop before 10, step by 2
-print("Arange:", range_arr)
+print("range:", range_arr)
 
 # ---------------
 # np.linspace()
@@ -110,13 +112,13 @@ print("Identity matrix:\n", identity)
 # ---------------
 
 # Create arrays with random values:
-rand_arr = np.random.rand(3)          # 3 random values between 0 and 1
+rand_arr = np.random.rand(3)          # 3 random floats in [0,1] uniform distribution
 print("Random (uniform):", rand_arr)
 
-randn_arr = np.random.randn(3)        # 3 random values from a normal distribution
+randn_arr = np.random.randn(3)        # 3 random floats in [0,1] normal distribution
 print("Random (normal):", randn_arr)
 
-randint_arr = np.random.randint(1, 10, 5)  # 5 random integers from 1 to 9
+randint_arr = np.random.randint(1, 10, 5)  # 5 random ints in [1,9] uniform distribution
 print("Random integers:", randint_arr)
 
 
@@ -152,6 +154,8 @@ print('---------------------------------------')
 # 1D Array Indexing
 # ---------------
 
+# Same syntax as list indexing and slicing
+
 arr_1d = np.array([10, 20, 30, 40, 50])
 
 print("Original 1D array:", arr_1d)
@@ -163,6 +167,8 @@ print("Slice [1:4]:", arr_1d[1:4])        # Elements at indices 1, 2, 3
 # 2D Array Indexing
 # ---------------
 
+# ++Different++ syntax than list indexing and slicing!
+
 arr_2d = np.array([[1, 2, 3],
                    [4, 5, 6],
                    [7, 8, 9]])
@@ -173,7 +179,7 @@ print("\nOriginal 2D array:\n", arr_2d)
 print("Element at row 0, col 2:", arr_2d[0, 2])
 print("Element at row 1, col 1:", arr_2d[1, 1])
 
-# Access an entire row or column
+# Slice an entire row or column
 print("Row 0:", arr_2d[0, :])             # All columns of row 0
 print("Column 1:", arr_2d[:, 1])          # All rows of column 1
 
@@ -184,11 +190,14 @@ print("Subarray (rows 0-1, cols 1-2):\n", arr_2d[0:2, 1:3])
 # Boolean Indexing
 # ---------------
 
+# Boolean indexing is a powerful technique to pull out values from an 
+# array based on conditional values.
+
 # Select elements based on a condition:
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 print("\nOriginal array:", arr)
 
-# Create a boolean mask
+# Create a boolean mask (array of T/F values based on condition)
 mask = arr > 5
 print("Boolean mask (arr > 5):", mask)
 
@@ -244,6 +253,11 @@ row_vector = np.array([100, 200, 300])
 print("Row vector:", row_vector)
 print("Array + row_vector:\n", arr + row_vector)
 
+column_vector = np.array([[100], [200], [300]])
+print("Column vector:", column_vector)
+print("Array + column_vector:\n", arr + column_vector)
+
+
 # ---------------
 # Matrix Operations
 # ---------------
@@ -266,7 +280,7 @@ print('Common Array Functions:')
 print('---------------------------------------')
 
 # ---------------
-# Aggregation Functions
+# Aggregation Functions: sum, mean, std, min, max
 # ---------------
 
 arr = np.array([[1, 2, 3],
@@ -320,6 +334,9 @@ print("Sorted indices:", np.argsort(arr))      # sort min --> max
 indices = np.where(arr > 4)
 print("Indices where arr > 4:", indices[0])
 
+# For N-dimensional arrays np.where() returns N tuples of matched indices 
+# where confition is True.
+
 
 
 print()
@@ -368,6 +385,7 @@ print("\nTranspose:\n", arr_2d.T)
 # concatenate()
 # ---------------
 
+# Concatenate cmbines arrays
 a = np.array([1, 2, 3])
 b = np.array([4, 5, 6])
 
@@ -383,6 +401,265 @@ arr2 = np.array([[5, 6],
 
 print("\nVertical stack (axis=0):\n", np.concatenate([arr1, arr2], axis=0))
 print("Horizontal stack (axis=1):\n", np.concatenate([arr1, arr2], axis=1))
+
+
+print()
+print('Polynomial Functions:')
+print('---------------------------------------')
+
+# NumPy represents polynomials as arrays of coefficients, ordered from
+# the highest degree to the lowest (constant term last).
+# For example, 2x^3 - 5x^2 + 3x - 7 is represented as [2, -5, 3, -7].
+
+# ---------------
+# np.polyval()
+# ---------------
+
+# Evaluate a polynomial at specific x values:
+# p(x) = 2x^3 - 5x^2 + 3x - 7
+
+coeffs = [2, -5, 3, -7]
+
+print("Polynomial: 2x^3 - 5x^2 + 3x - 7")
+print("p(0) =", np.polyval(coeffs, 0))       # Evaluate at x = 0
+print("p(1) =", np.polyval(coeffs, 1))       # Evaluate at x = 1
+print("p(2) =", np.polyval(coeffs, 2))       # Evaluate at x = 2
+
+# Evaluate at multiple x values at once using an array:
+x_vals = np.array([0, 1, 2, 3, 4])
+print("p(x) for x = 0..4:", np.polyval(coeffs, x_vals))
+
+# ---------------
+# np.roots()
+# ---------------
+
+# Find the roots (values of x where p(x) = 0):
+# p(x) = x^2 - 5x + 6  -->  factors as (x-2)(x-3)
+
+coeffs_quad = [1, -5, 6]
+r = np.roots(coeffs_quad)
+print("\nPolynomial: x^2 - 5x + 6")
+print("Roots:", r)               # Should be 3.0 and 2.0
+
+# Roots can be complex numbers:
+# p(x) = x^2 + 1  -->  roots are ±i
+coeffs_complex = [1, 0, 1]
+r_complex = np.roots(coeffs_complex)
+print("\nPolynomial: x^2 + 1")
+print("Roots:", r_complex)       # Should be 0+1j and 0-1j
+
+# ---------------
+# np.poly()
+# ---------------
+
+# Construct polynomial coefficients from known roots (inverse of np.roots):
+# If the roots are 2 and 3, the polynomial is (x-2)(x-3) = x^2 - 5x + 6
+
+roots = [2, 3]
+p = np.poly(roots)
+print("\nPolynomial from roots [2, 3]:", p)    # [1, -5, 6]
+
+roots = [1, -1, 4]
+p = np.poly(roots)
+print("Polynomial from roots [1, -1, 4]:", p)
+
+# ---------------
+# np.polyder()
+# ---------------
+
+# Compute the derivative of a polynomial:
+# p(x) = 3x^3 + 2x^2 - x + 5
+# p'(x) = 9x^2 + 4x - 1
+
+coeffs_cubic = [3, 2, -1, 5]
+deriv = np.polyder(coeffs_cubic)
+print("\nPolynomial: 3x^3 + 2x^2 - x + 5")
+print("Derivative coefficients:", deriv)       # [9, 4, -1]
+
+# Higher-order derivatives (pass the order as the second argument):
+deriv2 = np.polyder(coeffs_cubic, 2)
+print("Second derivative:", deriv2)            # [18, 4]
+
+# ---------------
+# np.polyint()
+# ---------------
+
+# Compute the integral of a polynomial (antiderivative):
+# p(x) = 9x^2 + 4x - 1
+# ∫p(x)dx = 3x^3 + 2x^2 - x + C
+
+coeffs_deriv = [9, 4, -1]
+integral = np.polyint(coeffs_deriv)
+print("\nPolynomial: 9x^2 + 4x - 1")
+print("Integral coefficients:", integral)      # [3, 2, -1, 0]  (C = 0 by default)
+
+# ---------------
+# np.polyadd(), np.polysub(), np.polymul()
+# ---------------
+
+# Arithmetic with polynomials:
+p1 = [1, 2, 3]     # x^2 + 2x + 3
+p2 = [4, 5]         # 4x + 5
+
+print("\np1 = x^2 + 2x + 3")
+print("p2 = 4x + 5")
+print("p1 + p2:", np.polyadd(p1, p2))     # x^2 + 6x + 8
+print("p1 - p2:", np.polysub(p1, p2))     # x^2 - 2x - 2
+print("p1 * p2:", np.polymul(p1, p2))     # 4x^3 + 13x^2 + 22x + 15
+
+# ---------------
+# np.polyfit()
+# ---------------
+
+# Fit a polynomial of a given degree to data points (least-squares fit):
+
+x_data = np.array([0, 1, 2, 3, 4, 5])
+y_data = np.array([1, 2.1, 8.9, 27.2, 64.1, 125.3])
+
+# Fit a 3rd-degree polynomial to the data:
+fit_coeffs = np.polyfit(x_data, y_data, 3)
+print("\nData x:", x_data)
+print("Data y:", y_data)
+print("Best-fit cubic coefficients:", np.round(fit_coeffs, 2))
+
+# Evaluate the fitted polynomial at the original x values:
+y_fit = np.polyval(fit_coeffs, x_data)
+print("Fitted values:", np.round(y_fit, 2))
+
+
+print()
+print('Linear Algebra (np.linalg):')
+print('---------------------------------------')
+
+# NumPy's linalg submodule provides standard linear algebra operations
+# commonly used in engineering and science.
+
+# ---------------
+# np.eye() — Identity Matrix
+# ---------------
+
+# np.eye() creates an identity matrix (1s on the diagonal, 0s elsewhere).
+# This is defined at the top level of NumPy, not inside linalg.
+
+I = np.eye(3)
+print("3x3 Identity matrix:\n", I)
+
+# A useful property: any matrix times the identity equals itself
+A = np.array([[2, 1, 0],
+              [3, 5, 2],
+              [1, 0, 4]])
+
+print("\nA:\n", A)
+print("A @ I (should equal A):\n", A @ I)
+
+# ---------------
+# np.linalg.det() — Determinant
+# ---------------
+
+# The determinant is a scalar value that describes certain properties of a
+# matrix. A matrix with a determinant of 0 is called singular (non-invertible).
+
+print("\ndet(A):", np.linalg.det(A))
+
+# Determinant of the identity matrix is always 1:
+print("det(I):", np.linalg.det(I))
+
+# A singular matrix has determinant 0:
+singular = np.array([[1, 2],
+                     [2, 4]])
+print("det(singular):", np.linalg.det(singular))
+
+# ---------------
+# np.linalg.inv() — Matrix Inverse
+# ---------------
+
+# The inverse of a matrix A is the matrix A_inv such that A @ A_inv = I.
+# Only square, non-singular matrices have an inverse.
+
+A_inv = np.linalg.inv(A)
+print("\nA:\n", A)
+print("A inverse:\n", np.round(A_inv, 4))
+
+# Verify: A @ A_inv should give the identity matrix
+product = A @ A_inv
+print("A @ A_inv (should be identity):\n", np.round(product, 10))
+
+# ---------------
+# np.linalg.solve() — Solve Linear Systems
+# ---------------
+
+# Solve the system of equations Ax = b for x.
+# This is more efficient and numerically stable than computing x = A_inv @ b.
+
+# Example system:
+#   2x + 1y + 0z = 5
+#   3x + 5y + 2z = 15
+#   1x + 0y + 4z = 8
+
+b = np.array([5, 15, 8])
+x = np.linalg.solve(A, b)
+print("\nSolving Ax = b")
+print("b:", b)
+print("Solution x:", np.round(x, 4))
+
+# Verify: A @ x should equal b
+print("A @ x (should equal b):", np.round(A @ x, 10))
+
+# ---------------
+# np.linalg.eig() — Eigenvalues and Eigenvectors
+# ---------------
+
+# Eigenvalues (lambda) and eigenvectors (v) satisfy: A @ v = lambda * v.
+# eig() returns a tuple of (eigenvalues_array, eigenvectors_matrix).
+
+M = np.array([[4, 2],
+              [1, 3]])
+
+eigenvalues, eigenvectors = np.linalg.eig(M)
+print("\nMatrix M:\n", M)
+print("Eigenvalues:", eigenvalues)
+print("Eigenvectors (as columns):\n", eigenvectors)
+
+# Verify first eigenvalue/eigenvector pair: A @ v = lambda * v
+v0 = eigenvectors[:, 0]
+print("\nVerification: M @ v0 =", M @ v0)
+print("lambda0 * v0 =", eigenvalues[0] * v0)
+
+# ---------------
+# np.linalg.norm() — Vector and Matrix Norms
+# ---------------
+
+# The norm measures the "size" or "length" of a vector or matrix.
+
+v = np.array([3, 4])
+print("\nVector:", v)
+print("L2 norm (Euclidean length):", np.linalg.norm(v))        # sqrt(3^2 + 4^2) = 5
+print("L1 norm (Manhattan distance):", np.linalg.norm(v, 1))   # |3| + |4| = 7
+
+v3d = np.array([1, 2, 2])
+print("\n3D Vector:", v3d)
+print("L2 norm:", np.linalg.norm(v3d))     # sqrt(1 + 4 + 4) = 3
+
+# ---------------
+# np.transpose() / .T — Transpose
+# ---------------
+
+# Transpose swaps rows and columns. For a matrix A, (A^T)_ij = A_ji.
+# We saw .T earlier; np.linalg operations often use it.
+
+B = np.array([[1, 2, 3],
+              [4, 5, 6]])
+
+print("\nB (2x3):\n", B)
+print("B transposed (3x2):\n", B.T)
+
+# A useful property: (A @ B)^T = B^T @ A^T
+C = np.array([[1, 0],
+              [2, 1],
+              [0, 3]])
+
+print("(B @ C)^T:\n", (B @ C).T)
+print("C^T @ B^T:\n", C.T @ B.T)
 
 
 """
@@ -420,4 +697,18 @@ Hard
     array, then horizontally into a 2x6 array.
 15. Simulation: Use NumPy to simulate rolling two dice 10,000 times. Calculate the
     probability of getting a sum of 7.
+16. Polynomial Roots: Define the polynomial p(x) = x^3 - 6x^2 + 11x - 6. Find its
+    roots, and verify by evaluating p(x) at each root (results should be ~0).
+17. Curve Fitting: Generate noisy data from y = 2x^2 - 3x + 1 by evaluating at
+    x = np.linspace(0, 5, 20) and adding random noise with np.random.randn. Use
+    np.polyfit to recover the original coefficients.
+18. Derivatives: Define p(x) = x^4 - 4x^3 + 6x^2 - 4x + 1. Compute its first and
+    second derivatives. Find the roots of the first derivative to locate the critical
+    points.
+19. Inverse Verification: Create a random 4x4 matrix using np.random.randint. Compute
+    its inverse and verify that A @ A_inv is approximately the identity matrix.
+20. Linear System: Solve the system:  3x + 2y - z = 1,  2x - 2y + 4z = -2,
+    -x + 0.5y - z = 0.  Verify by substituting the solution back into A @ x.
+21. Eigenvalues: Create a 3x3 symmetric matrix (hint: A = B + B^T for any B).
+    Compute its eigenvalues and verify they are all real numbers.
 """
