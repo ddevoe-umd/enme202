@@ -154,7 +154,7 @@ print('---------------------------------------')
 # 1D Array Indexing
 # ---------------
 
-# Same syntax as list indexing and slicing
+# Same syntax as lists
 
 arr_1d = np.array([10, 20, 30, 40, 50])
 
@@ -183,6 +183,9 @@ print("Element at row 1, col 1:", arr_2d[1, 1])
 print("Row 0:", arr_2d[0, :])             # All columns of row 0
 print("Column 1:", arr_2d[:, 1])          # All rows of column 1
 
+# Rows can also be indexed using a single value:
+print("Row 1:", arr_2d[1])                # Row 1
+
 # Slice a subarray
 print("Subarray (rows 0-1, cols 1-2):\n", arr_2d[0:2, 1:3])
 
@@ -193,9 +196,7 @@ print("Subarray (rows 0-1, cols 1-2):\n", arr_2d[0:2, 1:3])
 # Boolean indexing is a powerful technique to pull out values from an 
 # array based on conditional values.
 
-# Select elements based on a condition:
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-print("\nOriginal array:", arr)
 
 # Create a boolean mask (array of T/F values based on condition)
 mask = arr > 5
@@ -211,7 +212,7 @@ print("Even elements:", arr[arr % 2 == 0])
 
 
 print()
-print('Array Operations and Broadcasting:')
+print('Array Operations:')
 print('---------------------------------------')
 
 # ---------------
