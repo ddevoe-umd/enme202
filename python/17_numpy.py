@@ -16,7 +16,7 @@ Linear Algebra (np.linalg)
 
 import numpy as np   # Standard convention for importing NumPy
 
-
+ 
 print()
 print('What is NumPy and Why Use It:')
 print('---------------------------------------')
@@ -210,7 +210,8 @@ print("Elements > 5:", arr[mask])
 print("Elements > 5:", arr[arr > 5])
 print("Even elements:", arr[arr % 2 == 0])
 
-# More complex boolean masks can be created using bitwise operators:
+# More complex boolean masks can be created using bitwise operators, which
+# (like comparison ops) are applied element-by-element:
 mask = (arr>1) & (arr<6) | (arr%3==False)
 print(arr[mask])
 
@@ -329,6 +330,7 @@ print("sqrt(y):", np.sqrt(y))      # Square root
 
 arr = np.array([3, 1, 4, 1, 5, 9, 2, 6])
 
+# np.argmax(), argmin(), argsort():
 print("\nArray:", arr)
 print("Index of max value:", np.argmax(arr))   # 1st occurence only
 print("Index of min value:", np.argmin(arr))   # 1st occurence only
