@@ -341,9 +341,9 @@ indices = np.where(arr > 4)
 print("Indices where arr > 4:", indices[0])
 
 # For N-dimensional arrays np.where() returns N tuples of matched indices 
-# where confition is True.
-
-
+# where confition is True
+arr = np.array([[3, 1, 4, 1], [5, 9, 2, 6]])
+np.where(arr>4)
 
 print()
 print('Reshaping Arrays:')
@@ -385,7 +385,7 @@ print("Flattened:", arr_2d.flatten())
 # ---------------
 
 # Swap rows and columns:
-print("\nTranspose:\n", arr_2d.T)q
+print("\nTranspose:\n", arr_2d.T)
 
 # Transpose only works on 2d arrays (not 1d). Need to start with a 2d array
 # defned using double-brackets:
@@ -395,22 +395,22 @@ row_vector.T
 # Alternately, use reshape to convert 1d array to 2d vector:
 row_vector = np.array([1,2,3])
 print("Row vector:\n", row_vector)
-column_vector = row_vector.reshape(-1, 1)    # transform to 2d column vector
-print("Column vector\n", column_vector)
-
+row_vector = row_vector.reshape(1,-1)    # transform to 2d row vector
+print("Column vector\n", row_vector.T)
 
 
 # ---------------
 # concatenate()
 # ---------------
 
-# Concatenate combines arrays
+# Concatenate combines arrays or array-like iterables (lists or tuples containing values)
 a = np.array([1, 2, 3])
-b = np.array([4, 5, 6])
+b = [4, 5, 6]
+c = (7, 8, 9)
 
 print("\na:", a)
 print("b:", b)
-print("Concatenate:", np.concatenate([a, b]))
+print("Concatenate:", np.concatenate([a, b, c]))
 
 # For 2D arrays, specify axis:
 arr1 = np.array([[1, 2], 
