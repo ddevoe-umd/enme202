@@ -189,6 +189,7 @@ print("Row 1:", arr_2d[1])                # Row 1
 # Slice a subarray
 print("Subarray (rows 0-1, cols 1-2):\n", arr_2d[0:2, 1:3])
 
+
 # ---------------
 # Boolean Indexing
 # ---------------
@@ -196,19 +197,34 @@ print("Subarray (rows 0-1, cols 1-2):\n", arr_2d[0:2, 1:3])
 # Boolean indexing is a powerful technique to pull out values from an 
 # array based on conditional values.
 
+# Comparison operators apply to each element of a numpy array, yielding
+# a new array with boolean values:
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-
-# Create a boolean mask (array of T/F values based on condition)
 mask = arr > 5
 print("Boolean mask (arr > 5):", mask)
 
-# Use the mask to select elements
+# Use the mask to select elements from an array
 print("Elements > 5:", arr[mask])
 
 # This can also be done in one step:
 print("Elements > 5:", arr[arr > 5])
 print("Even elements:", arr[arr % 2 == 0])
 
+# More complex boolean masks can be created using bitwise operators:
+mask = (arr>1) & (arr<6) | (arr%3==False)
+print(arr[mask])
+
+# Can apply numpy functions when creating masks:
+x = np.linspace(0, 2*np.pi, 50)
+y = np.sin(x)
+mask = np.abs(y) > 0.9     # use a numpy function with comparison
+print(y)
+print(y[mask])
+
+# Boolean masks can also be used to assign new values to selected 
+# array elements:
+arr[arr%2==True] = 0   # assign 0 to all even elements
+print("Even values set to zero:", arr)
 
 
 print()
@@ -262,19 +278,6 @@ print("Array + column_vector:\n", arr + column_vector)
 # ---------------
 # Matrix Operations
 # ---------------
-
-# For true matrix multiplication, use @ operator or np.dot():
-A = np.array([[1, 2],
-              [3, 4]])
-B = np.array([[5, 6],
-              [7, 8]])
-
-print("\nMatrix A:\n", A)
-print("Matrix B:\n", B)
-print("A @ B (matrix multiplication):\n", A @ B)
-print("A * B (element-wise multiplication):\n", A * B)
-
-
 
 print()
 print('Common Array Functions:')
@@ -380,13 +383,26 @@ print("Flattened:", arr_2d.flatten())
 # ---------------
 
 # Swap rows and columns:
-print("\nTranspose:\n", arr_2d.T)
+print("\nTranspose:\n", arr_2d.T)q
+
+# Transpose only works on 2d arrays (not 1d). Need to start with a 2d array
+# defned using double-brackets:
+row_vector = np.array([[1,2,3]])   # note double brackets
+row_vector.T
+
+# Alternately, use reshape to convert 1d array to 2d vector:
+row_vector = np.array([1,2,3])
+print("Row vector:\n", row_vector)
+column_vector = row_vector.reshape(-1, 1)    # transform to 2d column vector
+print("Column vector\n", column_vector)
+
+
 
 # ---------------
 # concatenate()
 # ---------------
 
-# Concatenate cmbines arrays
+# Concatenate combines arrays
 a = np.array([1, 2, 3])
 b = np.array([4, 5, 6])
 
@@ -402,6 +418,7 @@ arr2 = np.array([[5, 6],
 
 print("\nVertical stack (axis=0):\n", np.concatenate([arr1, arr2], axis=0))
 print("Horizontal stack (axis=1):\n", np.concatenate([arr1, arr2], axis=1))
+
 
 
 print()
@@ -456,13 +473,24 @@ print("Roots:", r_complex)       # Should be 0+1j and 0-1j
 # Construct polynomial coefficients from known roots (inverse of np.roots):
 # If the roots are 2 and 3, the polynomial is (x-2)(x-3) = x^2 - 5x + 6
 
-roots = [2, 3]
-p = np.poly(roots)
+r = [2, 3]       # roots
+p = np.poly(r)   # polynomial from roots
 print("\nPolynomial from roots [2, 3]:", p)    # [1, -5, 6]
 
-roots = [1, -1, 4]
-p = np.poly(roots)
+r = [1, -1, 4]
+p = np.poly(r)
 print("Polynomial from roots [1, -1, 4]:", p)
+
+# poly() will always create a +monic+ polynomial (coefficient on highest
+# power of x will be unity):
+
+p = [1, 5, 1]
+np.poly(np.roots(p)) == p    # True since initial polynomial is monic
+
+p = [2, 5, 1]
+np.poly(np.roots(p)) == p    # False since initial polynomial not monic
+2*np.poly(np.roots(p)) == p  # True (with 2x scaling applied)
+
 
 # ---------------
 # np.polyder()
@@ -474,7 +502,6 @@ print("Polynomial from roots [1, -1, 4]:", p)
 
 coeffs_cubic = [3, 2, -1, 5]
 deriv = np.polyder(coeffs_cubic)
-print("\nPolynomial: 3x^3 + 2x^2 - x + 5")
 print("Derivative coefficients:", deriv)       # [9, 4, -1]
 
 # Higher-order derivatives (pass the order as the second argument):
@@ -485,13 +512,12 @@ print("Second derivative:", deriv2)            # [18, 4]
 # np.polyint()
 # ---------------
 
-# Compute the integral of a polynomial (antiderivative):
+# Compute the integral of a polynomial:
 # p(x) = 9x^2 + 4x - 1
 # ∫p(x)dx = 3x^3 + 2x^2 - x + C
 
-coeffs_deriv = [9, 4, -1]
-integral = np.polyint(coeffs_deriv)
-print("\nPolynomial: 9x^2 + 4x - 1")
+p = [9, 4, -1]
+integral = np.polyint(p)
 print("Integral coefficients:", integral)      # [3, 2, -1, 0]  (C = 0 by default)
 
 # ---------------
@@ -508,11 +534,14 @@ print("p1 + p2:", np.polyadd(p1, p2))     # x^2 + 6x + 8
 print("p1 - p2:", np.polysub(p1, p2))     # x^2 - 2x - 2
 print("p1 * p2:", np.polymul(p1, p2))     # 4x^3 + 13x^2 + 22x + 15
 
+# We could instead have used numpy arrays to represent the polynomials instead of
+# lists, and applied normal arithmetic operators.
+
 # ---------------
 # np.polyfit()
 # ---------------
 
-# Fit a polynomial of a given degree to data points (least-squares fit):
+# Fit a polynomial to data points (least-squares fit):
 
 x_data = np.array([0, 1, 2, 3, 4, 5])
 y_data = np.array([1, 2.1, 8.9, 27.2, 64.1, 125.3])
@@ -534,6 +563,22 @@ print('---------------------------------------')
 
 # NumPy's linalg submodule provides standard linear algebra operations
 # commonly used in engineering and science.
+
+# ---------------
+# Matrix Multiplication
+# ---------------
+
+# For true matrix multiplication (vs. element-wise mult), use @ operator
+# or np.dot():
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[5, 6],
+              [7, 8]])
+
+print("\nMatrix A:\n", A)
+print("Matrix B:\n", B)
+print("A @ B (matrix multiplication):\n", A @ B)
+print("A * B (element-wise multiplication):\n", A * B)
 
 # ---------------
 # np.eye() — Identity Matrix
