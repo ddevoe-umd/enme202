@@ -512,7 +512,7 @@ print("Integral coefficients:", integral)      # [3, 2, -1, 0]  (C = 0 by defaul
 
 # Arithmetic with polynomials:
 p1 = [1, 2, 3]     # x^2 + 2x + 3
-p2 = [4, 5]         # 4x + 5
+p2 = [4, 5]        #       4x + 5
 
 print("\np1 = x^2 + 2x + 3")
 print("p2 = 4x + 5")
@@ -533,7 +533,7 @@ y = np.array([1, 2.1, 6.9, 28.2, 64.1, 89.3])
 p_fit = np.polyfit(x, y, 3)
 print("\nData x:", x)
 print("Data y:", y)
-print("Best-fit cubic coefficients:", np.round(p_fit, 2))
+print("Best-fit coefficients:", np.round(p_fit, 2))
 
 # Evaluate the fitted polynomial at the original x values:
 y_fit = np.polyval(p_fit, x)
@@ -553,6 +553,21 @@ print('Linear Algebra:')
 print('---------------------------------------')
 
 # ---------------
+# Matrix multiplicataion (@)
+# ---------------
+
+# True matrix multiplication (as opposed to element-wise multiplication) is
+# performed using the @ operator. Inner dimensions of the matrices must match.
+
+A = np.array([[2, 1, 0],
+              [3, 5, 2],
+              [1, 0, 4]])
+B = np.array([[3, 5, 2],
+              [2, 1, 0],
+              [1, 0, 2]])
+print(A @ B)
+
+# ---------------
 # np.eye() — Identity Matrix
 # ---------------
 
@@ -563,13 +578,8 @@ I = np.eye(3)
 print("3x3 Identity matrix:\n", I)
 
 # A useful property: any matrix times the identity equals itself
-A = np.array([[2, 1, 0],
-              [3, 5, 2],
-              [1, 0, 4]])
-
 print("\nA:\n", A)
 print("A @ I (should equal A):\n", A @ I)
-
 
 # ---------------
 # np.linalg.det() — Determinant
