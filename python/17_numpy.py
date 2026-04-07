@@ -16,7 +16,7 @@ Linear Algebra (np.linalg)
 
 import numpy as np   # Standard convention for importing NumPy
 
- 
+
 print()
 print('What is NumPy and Why Use It:')
 print('---------------------------------------')
@@ -98,14 +98,6 @@ print("range:", range_arr)
 
 linspace_arr = np.linspace(0, 1, 5)   # 5 values from 0 to 1 (inclusive)
 print("Linspace:", linspace_arr)
-
-# ---------------
-# np.eye()
-# ---------------
-
-# Create an identity matrix (1s on diagonal, 0s elsewhere):
-identity = np.eye(3)
-print("Identity matrix:\n", identity)
 
 # ---------------
 # np.random
@@ -190,6 +182,19 @@ print("Row 1:", arr_2d[1])                # Row 1
 print("Subarray (rows 0-1, cols 1-2):\n", arr_2d[0:2, 1:3])
 
 
+
+
+
+===========
+===========
+===========
+- review assignment plans for rest of semester
+- revisit boolean indexing for bitwise and assignments...
+
+
+
+
+
 # ---------------
 # Boolean Indexing
 # ---------------
@@ -197,9 +202,10 @@ print("Subarray (rows 0-1, cols 1-2):\n", arr_2d[0:2, 1:3])
 # Boolean indexing is a powerful technique to pull out values from an 
 # array based on conditional values.
 
-# Comparison operators apply to each element of a numpy array, yielding
-# a new array with boolean values:
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# Comparison operators are applied to each element of a numpy array, yielding
+# a new array with boolean values:
 mask = arr > 5
 print("Boolean mask (arr > 5):", mask)
 
@@ -210,8 +216,7 @@ print("Elements > 5:", arr[mask])
 print("Elements > 5:", arr[arr > 5])
 print("Even elements:", arr[arr % 2 == 0])
 
-# More complex boolean masks can be created using bitwise operators, which
-# (like comparison ops) are applied element-by-element:
+# More complex boolean masks can be created using bitwise operators:
 mask = (arr>1) & (arr<6) | (arr%3==False)
 print(arr[mask])
 
@@ -276,10 +281,6 @@ print("Column vector:", column_vector)
 print("Array + column_vector:\n", arr + column_vector)
 
 
-# ---------------
-# Matrix Operations
-# ---------------
-
 print()
 print('Common Array Functions:')
 print('---------------------------------------')
@@ -330,7 +331,6 @@ print("sqrt(y):", np.sqrt(y))      # Square root
 
 arr = np.array([3, 1, 4, 1, 5, 9, 2, 6])
 
-# np.argmax(), argmin(), argsort():
 print("\nArray:", arr)
 print("Index of max value:", np.argmax(arr))   # 1st occurence only
 print("Index of min value:", np.argmin(arr))   # 1st occurence only
@@ -341,9 +341,9 @@ indices = np.where(arr > 4)
 print("Indices where arr > 4:", indices[0])
 
 # For N-dimensional arrays np.where() returns N tuples of matched indices 
-# where confition is True
-arr = np.array([[3, 1, 4, 1], [5, 9, 2, 6]])
-np.where(arr>4)
+# where confition is True.
+
+
 
 print()
 print('Reshaping Arrays:')
@@ -385,32 +385,33 @@ print("Flattened:", arr_2d.flatten())
 # ---------------
 
 # Swap rows and columns:
-print("\nTranspose:\n", arr_2d.T)
+print("\nTranspose:\n", arr_2d.T)q
 
-# Transpose only works on 2d arrays (not 1d). Need to start with a 2d array
-# defned using double-brackets:
-row_vector = np.array([[1,2,3]])   # note double brackets
-row_vector.T
-
-# Alternately, use reshape to convert 1d array to 2d vector:
+# Transpose only works on 2d arrays (not 1d).  To transpose 1d array,
+# use reshape instead:
 row_vector = np.array([1,2,3])
 print("Row vector:\n", row_vector)
-row_vector = row_vector.reshape(1,-1)    # transform to 2d row vector
-print("Column vector\n", row_vector.T)
+column_vector = row_vector.reshape(-1, 1)    # transform to 2d column vector
+print("Column vector\n", column_vector)
+
+# Alternately, we could have used np.newaxis to add a new axis, thereby
+# transforming the 1d array into a 2d array with a single row:
+row_vector = np.array([1,2,3])
+row_vector = row_vector[np.newaxis, :]   # add axis
+row_vector.T
 
 
 # ---------------
 # concatenate()
 # ---------------
 
-# Concatenate combines arrays or array-like iterables (lists or tuples containing values)
+# Concatenate cmbines arrays
 a = np.array([1, 2, 3])
-b = [4, 5, 6]
-c = (7, 8, 9)
+b = np.array([4, 5, 6])
 
 print("\na:", a)
 print("b:", b)
-print("Concatenate:", np.concatenate([a, b, c]))
+print("Concatenate:", np.concatenate([a, b]))
 
 # For 2D arrays, specify axis:
 arr1 = np.array([[1, 2], 
@@ -422,14 +423,16 @@ print("\nVertical stack (axis=0):\n", np.concatenate([arr1, arr2], axis=0))
 print("Horizontal stack (axis=1):\n", np.concatenate([arr1, arr2], axis=1))
 
 
-
 print()
 print('Polynomial Functions:')
 print('---------------------------------------')
 
 # NumPy represents polynomials as arrays of coefficients, ordered from
 # the highest degree to the lowest (constant term last).
-# For example, 2x^3 - 5x^2 + 3x - 7 is represented as [2, -5, 3, -7].
+# For example, below are a polynomial its numpy representation:
+#
+#    2x^3 - 5x^2 + 3x - 7
+#   [2,    -5,     3,  -7]
 
 # ---------------
 # np.polyval()
@@ -446,8 +449,11 @@ print("p(1) =", np.polyval(coeffs, 1))       # Evaluate at x = 1
 print("p(2) =", np.polyval(coeffs, 2))       # Evaluate at x = 2
 
 # Evaluate at multiple x values at once using an array:
-x_vals = np.array([0, 1, 2, 3, 4])
-print("p(x) for x = 0..4:", np.polyval(coeffs, x_vals))
+x = [0, 1, 2, 3, 4]
+print("p(x) for x = 0..4:", np.polyval(coeffs, x))
+
+# polyval also accepts numpy arrays as arguments:
+print("p(x) for x = 0..4:", np.polyval(np.array(coeffs), np.array(x)))
 
 # ---------------
 # np.roots()
@@ -475,24 +481,13 @@ print("Roots:", r_complex)       # Should be 0+1j and 0-1j
 # Construct polynomial coefficients from known roots (inverse of np.roots):
 # If the roots are 2 and 3, the polynomial is (x-2)(x-3) = x^2 - 5x + 6
 
-r = [2, 3]       # roots
-p = np.poly(r)   # polynomial from roots
+roots = [2, 3]
+p = np.poly(roots)
 print("\nPolynomial from roots [2, 3]:", p)    # [1, -5, 6]
 
-r = [1, -1, 4]
-p = np.poly(r)
+roots = [1, -1, 4]
+p = np.poly(roots)
 print("Polynomial from roots [1, -1, 4]:", p)
-
-# poly() will always create a +monic+ polynomial (coefficient on highest
-# power of x will be unity):
-
-p = [1, 5, 1]
-np.poly(np.roots(p)) == p    # True since initial polynomial is monic
-
-p = [2, 5, 1]
-np.poly(np.roots(p)) == p    # False since initial polynomial not monic
-2*np.poly(np.roots(p)) == p  # True (with 2x scaling applied)
-
 
 # ---------------
 # np.polyder()
@@ -504,6 +499,7 @@ np.poly(np.roots(p)) == p    # False since initial polynomial not monic
 
 coeffs_cubic = [3, 2, -1, 5]
 deriv = np.polyder(coeffs_cubic)
+print("\nPolynomial: 3x^3 + 2x^2 - x + 5")
 print("Derivative coefficients:", deriv)       # [9, 4, -1]
 
 # Higher-order derivatives (pass the order as the second argument):
@@ -514,12 +510,13 @@ print("Second derivative:", deriv2)            # [18, 4]
 # np.polyint()
 # ---------------
 
-# Compute the integral of a polynomial:
+# Compute the integral of a polynomial (antiderivative):
 # p(x) = 9x^2 + 4x - 1
 # ∫p(x)dx = 3x^3 + 2x^2 - x + C
 
-p = [9, 4, -1]
-integral = np.polyint(p)
+coeffs_deriv = [9, 4, -1]
+integral = np.polyint(coeffs_deriv)
+print("\nPolynomial: 9x^2 + 4x - 1")
 print("Integral coefficients:", integral)      # [3, 2, -1, 0]  (C = 0 by default)
 
 # ---------------
@@ -536,51 +533,37 @@ print("p1 + p2:", np.polyadd(p1, p2))     # x^2 + 6x + 8
 print("p1 - p2:", np.polysub(p1, p2))     # x^2 - 2x - 2
 print("p1 * p2:", np.polymul(p1, p2))     # 4x^3 + 13x^2 + 22x + 15
 
-# We could instead have used numpy arrays to represent the polynomials instead of
-# lists, and applied normal arithmetic operators.
-
 # ---------------
 # np.polyfit()
 # ---------------
 
-# Fit a polynomial to data points (least-squares fit):
+# Fit a polynomial of a given degree to data points (least-squares fit):
 
-x_data = np.array([0, 1, 2, 3, 4, 5])
-y_data = np.array([1, 2.1, 8.9, 27.2, 64.1, 125.3])
+x = np.array([0, 1, 2, 3, 4, 5])
+y = np.array([1, 2.1, 6.9, 28.2, 64.1, 89.3])
 
 # Fit a 3rd-degree polynomial to the data:
-fit_coeffs = np.polyfit(x_data, y_data, 3)
-print("\nData x:", x_data)
-print("Data y:", y_data)
-print("Best-fit cubic coefficients:", np.round(fit_coeffs, 2))
+p_fit = np.polyfit(x, y, 3)
+print("\nData x:", x)
+print("Data y:", y)
+print("Best-fit cubic coefficients:", np.round(p_fit, 2))
 
 # Evaluate the fitted polynomial at the original x values:
-y_fit = np.polyval(fit_coeffs, x_data)
+y_fit = np.polyval(p_fit, x)
 print("Fitted values:", np.round(y_fit, 2))
+
+# Looking ahead (next lecture topic), we can now plot the data and curve fit
+# using matplotlib.pyplot:
+import matplotlib.pyplot as plt
+plt.figure()
+plt.plot(x, y, 'x')
+plt.plot(x, y_fit)
+plt.show()
 
 
 print()
-print('Linear Algebra (np.linalg):')
+print('Linear Algebra:')
 print('---------------------------------------')
-
-# NumPy's linalg submodule provides standard linear algebra operations
-# commonly used in engineering and science.
-
-# ---------------
-# Matrix Multiplication
-# ---------------
-
-# For true matrix multiplication (vs. element-wise mult), use @ operator
-# or np.dot():
-A = np.array([[1, 2],
-              [3, 4]])
-B = np.array([[5, 6],
-              [7, 8]])
-
-print("\nMatrix A:\n", A)
-print("Matrix B:\n", B)
-print("A @ B (matrix multiplication):\n", A @ B)
-print("A * B (element-wise multiplication):\n", A * B)
 
 # ---------------
 # np.eye() — Identity Matrix
@@ -600,9 +583,13 @@ A = np.array([[2, 1, 0],
 print("\nA:\n", A)
 print("A @ I (should equal A):\n", A @ I)
 
+
 # ---------------
 # np.linalg.det() — Determinant
 # ---------------
+
+# NumPy's linalg submodule provides standard linear algebra operations
+# commonly used in engineering and science.
 
 # The determinant is a scalar value that describes certain properties of a
 # matrix. A matrix with a determinant of 0 is called singular (non-invertible).
@@ -653,6 +640,11 @@ print("Solution x:", np.round(x, 4))
 # Verify: A @ x should equal b
 print("A @ x (should equal b):", np.round(A @ x, 10))
 
+# Solve "by hand" using matrix inversion instead:
+# A@x = b --> x = A_inv * b
+print("Solution x:", np.round(np.linalg.inv(A) @ b, 4))
+
+
 # ---------------
 # np.linalg.eig() — Eigenvalues and Eigenvectors
 # ---------------
@@ -693,7 +685,7 @@ print("L2 norm:", np.linalg.norm(v3d))     # sqrt(1 + 4 + 4) = 3
 # ---------------
 
 # Transpose swaps rows and columns. For a matrix A, (A^T)_ij = A_ji.
-# We saw .T earlier; np.linalg operations often use it.
+# We saw .T earlier, reminder here since np.linalg operations often use it.
 
 B = np.array([[1, 2, 3],
               [4, 5, 6]])
@@ -708,6 +700,122 @@ C = np.array([[1, 0],
 
 print("(B @ C)^T:\n", (B @ C).T)
 print("C^T @ B^T:\n", C.T @ B.T)
+
+
+# ---------------
+# np.dot() - dot product
+# ---------------
+
+# The dot product (scalar product) takes two vectors and
+# returns a single number (scalar). For vectors a and b:
+#   a · b = a1*b1 + a2*b2 + ... + an*bn
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print("a:", a)
+print("b:", b)
+print("np.dot(a, b):", np.dot(a, b))   # 1*4 + 2*5 + 3*6 = 32
+
+# The @ operator also works for dot products of 1D arrays:
+print("a @ b:", a @ b)                 # 32
+
+# If a · b = 0, the vectors are perpendicular (orthogonal):
+a = np.array([1, 0, 0])
+b = np.array([0, 1, 0])
+print("\nPerpendicular check:", np.dot(a, b))   # 0
+
+# The dot product of a vector with itself gives its magnitude squared:
+v = np.array([3, 4])
+print("v · v:", np.dot(v, v))                   # 25
+print("|v|^2:", np.linalg.norm(v)**2)           # 25.0
+
+# The scalar projection of a onto b:
+#   proj = (a · b) / |b|
+#
+# The vector projection of a onto b:
+#   proj_vec = ((a · b) / (b · b)) * b
+
+a = np.array([3, 4])
+b = np.array([1, 0])
+
+scalar_proj = np.dot(a, b) / np.linalg.norm(b)
+vector_proj = (np.dot(a, b) / np.dot(b, b)) * b
+
+print("\na:", a)
+print("b:", b)
+print("Scalar projection of a onto b:", scalar_proj)   # 3.0
+print("Vector projection of a onto b:", vector_proj)   # [3, 0]
+
+
+# ---------------
+# np.cross() - cross product
+# ---------------
+
+# The cross product takes two 3D vectors and returns a new vector that is
+# perpendicular to both input vectors. Unlike the dot product, the result
+# is a vector, not a scalar.
+#
+# For vectors a = [a1, a2, a3] and b = [b1, b2, b3]:
+#   a × b = [a2*b3 - a3*b2, a3*b1 - a1*b3, a1*b2 - a2*b1]
+
+a = np.array([1, 0, 0])
+b = np.array([0, 1, 0])
+
+cross = np.cross(a, b)
+print("a:", a)
+print("b:", b)
+print("a × b:", cross)                # [0, 0, 1]
+
+# The result is perpendicular to both input vectors:
+print("(a × b) · a:", np.dot(cross, a))   # 0
+print("(a × b) · b:", np.dot(cross, b))   # 0
+
+# Unlike the dot product, the cross product is NOT commutative.
+# Switching the order flips the sign: a × b = -(b × a)
+
+print("\na × b:", np.cross(a, b))      # [0, 0, 1]
+print("b × a:", np.cross(b, a))        # [0, 0, -1]
+
+# The magnitude of the cross product equals:
+#   |a × b| = |a| * |b| * sin(theta)
+#
+# This also equals the area of the parallelogram formed by a and b.
+
+a = np.array([3, 0, 0])
+b = np.array([0, 4, 0])
+
+cross = np.cross(a, b)
+area = np.linalg.norm(cross)
+print("\na:", a)
+print("b:", b)
+print("a × b:", cross)                        # [0, 0, 12]
+print("Parallelogram area:", area)             # 12.0
+print("Triangle area:", area / 2)              # 6.0
+
+# np.cross() also works with 2D vectors, returning the scalar z-component
+# of the cross product (as if the vectors had z=0):
+
+a = np.array([1, 2])
+b = np.array([3, 4])
+print("\n2D cross product:")
+print("a:", a)
+print("b:", b)
+print("a × b:", np.cross(a, b))   # 1*4 - 2*3 = -2
+
+# Torque Example
+# Torque is the cross product of the position vector and the force vector:
+#   tau = r × F
+
+r = np.array([0.5, 0, 0])         # Position vector (0.5 m along x-axis)
+F = np.array([0, 10, 0])          # Force vector (10 N along y-axis)
+
+torque = np.cross(r, F)
+print("\nTorque example:")
+print("r:", r, "(m)")
+print("F:", F, "(N)")
+print("Torque (r × F):", torque, "(N·m)")
+print("Torque magnitude:", np.linalg.norm(torque), "N·m")
 
 
 """
