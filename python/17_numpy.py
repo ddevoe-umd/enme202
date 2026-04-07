@@ -182,19 +182,6 @@ print("Row 1:", arr_2d[1])                # Row 1
 print("Subarray (rows 0-1, cols 1-2):\n", arr_2d[0:2, 1:3])
 
 
-
-
-
-===========
-===========
-===========
-- review assignment plans for rest of semester
-- revisit boolean indexing for bitwise and assignments...
-
-
-
-
-
 # ---------------
 # Boolean Indexing
 # ---------------
