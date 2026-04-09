@@ -111,13 +111,17 @@ x = np.linspace(0, 2 * np.pi, 100)
 
 plt.plot(x, np.sin(x), 'b-')        # Blue solid line
 plt.plot(x, np.cos(x), 'r--')       # Red dashed line
-plt.title('Format String Examples')
 plt.show()
 
-# Using keyword arguments for more control:
+# Use keyword arguments for more control:
 plt.plot(x, np.sin(x), color='blue', linestyle='-', linewidth=2)
 plt.plot(x, np.cos(x), color='red', linestyle='--', linewidth=1.5)
-plt.title('Keyword Argument Examples')
+plt.title('Keyword Argument Exa/mples')
+plt.show()
+
+# Multiple plots can be defined in a single plot() call:
+xc = x[0:-1:4]
+plt.plot(x, np.sin(x), 'b-', x, np.cos(x), 'ro-', xc, np.sin(xc)*np.cos(xc), 'ms-.')  
 plt.show()
 
 # ---------------
@@ -222,6 +226,10 @@ axes[1, 1].set_title('x^2')
 
 plt.tight_layout()
 plt.show()
+
+# You can explore the wide variety of axes methods available for
+# manipulating plots from the official matplotlib site:
+# https://matplotlib.org/stable/api/axes_api.html
 
 # ---------------
 # Figure Size
