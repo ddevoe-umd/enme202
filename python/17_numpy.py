@@ -643,26 +643,6 @@ print("Solution x:", np.round(np.linalg.inv(A) @ b, 4))
 
 
 # ---------------
-# np.linalg.eig() — Eigenvalues and Eigenvectors
-# ---------------
-
-# Eigenvalues (lambda) and eigenvectors (v) satisfy: A @ v = lambda * v.
-# eig() returns a tuple of (eigenvalues_array, eigenvectors_matrix).
-
-M = np.array([[4, 2],
-              [1, 3]])
-
-eigenvalues, eigenvectors = np.linalg.eig(M)
-print("\nMatrix M:\n", M)
-print("Eigenvalues:", eigenvalues)
-print("Eigenvectors (as columns):\n", eigenvectors)
-
-# Verify first eigenvalue/eigenvector pair: A @ v = lambda * v
-v0 = eigenvectors[:, 0]
-print("\nVerification: M @ v0 =", M @ v0)
-print("lambda0 * v0 =", eigenvalues[0] * v0)
-
-# ---------------
 # np.linalg.norm() — Vector and Matrix Norms
 # ---------------
 
@@ -813,6 +793,71 @@ print("r:", r, "(m)")
 print("F:", F, "(N)")
 print("Torque (r × F):", torque, "(N·m)")
 print("Torque magnitude:", np.linalg.norm(torque), "N·m")
+
+
+# ---------------
+# np.linalg.eig() — Eigenvalues and Eigenvectors
+# ---------------
+
+# Eigenvalues (lambda) and eigenvectors (v) satisfy: A @ v = lambda * v.
+# eig() returns a tuple of (eigenvalues_array, eigenvectors_matrix).
+
+M = np.array([[4, 2],
+              [1, 3]])
+
+eigenvalues, eigenvectors = np.linalg.eig(M)
+print("\nMatrix M:\n", M)
+print("Eigenvalues:", eigenvalues)
+print("Eigenvectors (as columns):\n", eigenvectors)
+
+# Verify first eigenvalue/eigenvector pair: A @ v = lambda * v
+v0 = eigenvectors[:, 0]
+print("\nVerification: M @ v0 =", M @ v0)
+print("lambda0 * v0 =", eigenvalues[0] * v0)
+
+# ---------------
+# Eigenvector Visualization
+# ---------------
+
+# When a matrix A multiplies a vector, it generally changes both the vector
+# direction and length. Eigenvectors are special: A only stretches them
+# by a scalar factor (the eigenvalue), leaving their direction unchanged.
+# Here we transform every vector on the unit circle and show that the
+# eigenvectors are the only directions that don't rotate.
+#
+# The plotting below takes advantage of the OOP plotting interface
+# in matplotlib, which we will learn about in the next set of lecture notes!
+
+import matplotlib.pyplot as plt
+
+A = np.array([[2, 1],
+              [1, 3]])
+
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+theta = np.linspace(0, 2 * np.pi, 100)
+circle = np.array([np.cos(theta), np.sin(theta)])
+transformed = A @ circle
+
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.plot(circle[0], circle[1], 'b-', label='Unit circle')
+ax.plot(transformed[0], transformed[1], 'r-', label='A @ v')
+
+for i in range(len(eigenvalues)):
+    ev = eigenvectors[:, i]
+    lam = eigenvalues[i]
+    ax.arrow(0, 0, ev[0], ev[1], color='blue', width=0.04)
+    ax.arrow(0, 0, lam*ev[0], lam*ev[1], color='red', width=0.02)
+    ax.annotate(f'λ={lam:.2f}', xy=lam*ev, xytext=(10, 10),
+                textcoords='offset points')
+
+ax.set_aspect('equal')
+ax.set_xlim(-5, 5)
+ax.set_ylim(-5, 5)
+ax.grid(True, alpha=0.3)
+ax.legend()
+ax.set_title('Eigenvectors only get scaled, not rotated')
+plt.show()
 
 
 """
