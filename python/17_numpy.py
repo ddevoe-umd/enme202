@@ -327,9 +327,45 @@ print("Sorted indices:", np.argsort(arr))      # sort min --> max
 indices = np.where(arr > 4)
 print("Indices where arr > 4:", indices[0])
 
-# For N-dimensional arrays np.where() returns N tuples of matched indices 
+# For N-dimensional arrays np.where() returns N tuples of matched indices
 # where confition is True.
 
+# np.where() also has a 3-argument form that acts as a vectorized
+# "if-else": np.where(condition, A, B) returns an array that takes values
+# from A where condition is True, and from B where condition is False.
+# A and B can be arrays of the same shape as condition, or scalars that
+# get broadcast to that shape.
+
+arr = np.array([3, 1, 4, 1, 5, 9, 2, 6])
+
+# Replace every value greater than 4 with 0, keep the rest unchanged:
+clipped = np.where(arr > 4, 0, arr)
+print("\nOriginal:", arr)
+print("Values > 4 replaced with 0:", clipped)
+
+# The "true" and "false" branches can themselves be computed arrays:
+doubled_or_negated = np.where(arr > 4, arr * 2, -arr)
+print("Doubled if > 4, else negated:", doubled_or_negated)
+
+# You can NEST np.where() calls to handle more than two cases. Put
+# another np.where() in place of the "false" branch (or the "true"
+# branch) to add a third case, and so on.
+#
+# Example: classify each value as -1 (small), 0 (medium), or +1 (large)
+#   - small:  value < 2
+#   - large:  value > 5
+#   - medium: everything else
+
+arr = np.array([3, 1, 4, 1, 5, 9, 2, 6])
+category = np.where(arr < 2, -1,
+                    np.where(arr > 5, 1, 0))
+print("\nValues:    ", arr)
+print("Categories:", category)
+# The outer np.where picks -1 where arr < 2; everywhere else it falls
+# through to the inner np.where, which picks 1 where arr > 5 and 0
+# otherwise. Read nested np.where() calls from the outside in — each
+# condition is only checked for elements that didn't match any of the
+# earlier conditions.
 
 
 print()
@@ -372,7 +408,7 @@ print("Flattened:", arr_2d.flatten())
 # ---------------
 
 # Swap rows and columns:
-print("\nTranspose:\n", arr_2d.T)q
+print("\nTranspose:\n", arr_2d.T)
 
 # Transpose only works on 2d arrays (not 1d).  To transpose 1d array,
 # use reshape instead:
