@@ -736,16 +736,14 @@ print("a @ b:", a @ b)                 # 32
 # If a · b = 0, the vectors are orthogonal:
 a = np.array([1, 0, 0])
 b = np.array([0, 1, 0])
-print("\nPerpendicular check:", np.dot(a, b))   # 0
+print("\nOrthogonality check:", np.dot(a, b))   # 0
 
 # The dot product of a vector with itself gives its magnitude squared:
 v = np.array([3, 4])
-print("v · v:", np.dot(v, v))                   # 25
-print("|v|^2:", np.linalg.norm(v)**2)           # 25.0
+np.dot(v, v) == np.linalg.norm(v)**2   # True
 
 # The scalar projection of a onto b:
 #   proj = (a · b) / |b|
-
 a = np.array([3, 4])
 b = np.array([1, 0])
 scalar_proj = np.dot(a, b) / np.linalg.norm(b)
