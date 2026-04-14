@@ -77,6 +77,7 @@ plt.plot(x, np.sin(3*x), label='sin(3x)')
 plt.title('Multiple Lines')
 plt.show()
 
+
 print()
 print('Customizing Plots:')
 print('---------------------------------------')
@@ -100,10 +101,10 @@ plt.plot(x, np.sin(x), 'b-')        # Blue solid line
 plt.plot(x, np.cos(x), 'r--')       # Red dashed line
 plt.show()
 
-# Use keyword arguments for more control:
-plt.plot(x, np.sin(x), color='blue', linestyle='-', linewidth=2)
-plt.plot(x, np.cos(x), color='red', linestyle='--', linewidth=1.5)
-plt.title('Keyword Argument Exa/mples')
+# Use keyword arguments for more control. Here we add the _linewidth_
+# and _alpha_ (transparency) options:
+plt.plot(x, np.sin(x), color='blue', linestyle='-', linewidth=1.5)
+plt.plot(x, np.cos(x), color='red', linestyle='--', linewidth=4, alpha=0.2)
 plt.show()
 
 # Multiple plots with custom formatting can be defined in a single plot() call:
@@ -119,13 +120,11 @@ x = np.linspace(0, 2 * np.pi, 20)   # Fewer points to see markers clearly
 
 plt.plot(x, np.sin(x), 'go-')       # Green circles with solid line
 plt.plot(x, np.cos(x), 'rs--')      # Red squares with dashed line
-plt.title('Markers Example')
 plt.show()
 
 # More marker customization:
 plt.plot(x, np.sin(x), marker='o', markersize=8,
          markerfacecolor='yellow', markeredgecolor='blue')
-plt.title('Custom Markers')
 plt.show()
 
 # ---------------
@@ -138,11 +137,10 @@ plt.plot(x, np.sin(x), 'b-', label='sin(x)')
 plt.plot(x, np.cos(x), 'r--', label='cos(x)')
 plt.xlabel('x (radians)')
 plt.ylabel('y')
-plt.title('Trigonometric Functions')
-plt.legend()                        # Display the legend
+plt.legend()      # Display the legend (label entries)
 plt.show()
 
-# Legend location can be specified:
+# Legend location can be specified with _loc_ parameter:
 # 'best', 'upper right', 'upper left', 'lower left', 'lower right',
 # 'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
 
@@ -383,9 +381,9 @@ plt.title('Fill Between')
 plt.show()
 
 
-# ---------------
-# Object-Oriented Interface
-# ---------------
+print()
+print('Object-Oriented Interface:')
+print('---------------------------------------')
 
 # Matplotlib has two interfaces:
 #   1. Pyplot interface (plt.plot, plt.xlabel, etc.) - simple, stateful
@@ -402,7 +400,7 @@ plt.show()
 # Key differences in method names:
 #   Regular             Object-Oriented
 #   ------              ---------------
-#   plt.plot()          ax.plot()
+#   plt.plot()          ax.plot()        also ax.scatter(), ax.bar(), etc.
 #   plt.xlabel()        ax.set_xlabel()
 #   plt.ylabel()        ax.set_ylabel()
 #   plt.title()         ax.set_title()
@@ -415,7 +413,7 @@ plt.show()
 # Example using the OO interface:
 fig, ax = plt.subplots()
 
-ax.plot(x, np.sin(x), label='sin(x)')
+ax.plot(x, np.sin(x), label='sin(x)')   
 ax.plot(x, np.cos(x), label='cos(x)')
 
 ax.set_xlabel('x (radians)')
@@ -430,6 +428,10 @@ plt.show()
 #   - Writing functions that create plots (pass ax as parameter)
 #   - You need to modify a plot after creating it
 #   - Building complex visualizations
+
+# There are many other features that can be accessed through the OO interface,
+# (annotations, arrows, layout control, tick mark fomatting, etc.), see
+# https://matplotlib.org for the full API.
 
 
 print()
