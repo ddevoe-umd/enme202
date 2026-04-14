@@ -733,7 +733,7 @@ print("np.dot(a, b):", np.dot(a, b))   # 1*4 + 2*5 + 3*6 = 32
 # The @ operator also works for dot products of 1D arrays:
 print("a @ b:", a @ b)                 # 32
 
-# If a · b = 0, the vectors are perpendicular (orthogonal):
+# If a · b = 0, the vectors are orthogonal:
 a = np.array([1, 0, 0])
 b = np.array([0, 1, 0])
 print("\nPerpendicular check:", np.dot(a, b))   # 0
@@ -745,20 +745,11 @@ print("|v|^2:", np.linalg.norm(v)**2)           # 25.0
 
 # The scalar projection of a onto b:
 #   proj = (a · b) / |b|
-#
-# The vector projection of a onto b:
-#   proj_vec = ((a · b) / (b · b)) * b
 
 a = np.array([3, 4])
 b = np.array([1, 0])
-
 scalar_proj = np.dot(a, b) / np.linalg.norm(b)
-vector_proj = (np.dot(a, b) / np.dot(b, b)) * b
-
-print("\na:", a)
-print("b:", b)
-print("Scalar projection of a onto b:", scalar_proj)   # 3.0
-print("Vector projection of a onto b:", vector_proj)   # [3, 0]
+print(f"Scalar projection of {a} onto {b}:", scalar_proj)   # 3.0
 
 
 # ---------------
@@ -769,6 +760,12 @@ print("Vector projection of a onto b:", vector_proj)   # [3, 0]
 # perpendicular to both input vectors. Unlike the dot product, the result
 # is a vector, not a scalar.
 #
+# The magnitude of the cross product equals:
+#   |a × b| = |a| * |b| * sin(theta)
+#
+# This also equals the area of the parallelogram formed by a and b.
+#
+# One can manually calculate the cross product as follows.
 # For vectors a = [a1, a2, a3] and b = [b1, b2, b3]:
 #   a × b = [a2*b3 - a3*b2, a3*b1 - a1*b3, a1*b2 - a2*b1]
 
@@ -778,43 +775,24 @@ b = np.array([0, 1, 0])
 cross = np.cross(a, b)
 print("a:", a)
 print("b:", b)
-print("a × b:", cross)                # [0, 0, 1]
+print("a × b:", cross)                 # [0, 0, 1]
 
-# The result is perpendicular to both input vectors:
+# The result is orthogonal to both input vectors:
 print("(a × b) · a:", np.dot(cross, a))   # 0
 print("(a × b) · b:", np.dot(cross, b))   # 0
 
 # Unlike the dot product, the cross product is NOT commutative.
 # Switching the order flips the sign: a × b = -(b × a)
 
-print("\na × b:", np.cross(a, b))      # [0, 0, 1]
-print("b × a:", np.cross(b, a))        # [0, 0, -1]
+print(f"{a} × {b} = {np.cross(a, b)}")      # [0, 0, 1]
+print(f"{b} × {a} = {np.cross(b, a)}")      # [0, 0, -1]
 
-# The magnitude of the cross product equals:
-#   |a × b| = |a| * |b| * sin(theta)
-#
-# This also equals the area of the parallelogram formed by a and b.
-
-a = np.array([3, 0, 0])
-b = np.array([0, 4, 0])
-
-cross = np.cross(a, b)
-area = np.linalg.norm(cross)
-print("\na:", a)
-print("b:", b)
-print("a × b:", cross)                        # [0, 0, 12]
-print("Parallelogram area:", area)             # 12.0
-print("Triangle area:", area / 2)              # 6.0
-
-# np.cross() also works with 2D vectors, returning the scalar z-component
+# np.cross() also works with 2D vectors, returning the +scalar+ z-component
 # of the cross product (as if the vectors had z=0):
 
 a = np.array([1, 2])
 b = np.array([3, 4])
-print("\n2D cross product:")
-print("a:", a)
-print("b:", b)
-print("a × b:", np.cross(a, b))   # 1*4 - 2*3 = -2
+print(f"{a} × {b} = {np.cross(a, b)}")   # 1*4 - 2*3 = -2
 
 # Torque Example
 # Torque is the cross product of the position vector and the force vector:
@@ -824,11 +802,8 @@ r = np.array([0.5, 0, 0])         # Position vector (0.5 m along x-axis)
 F = np.array([0, 10, 0])          # Force vector (10 N along y-axis)
 
 torque = np.cross(r, F)
-print("\nTorque example:")
-print("r:", r, "(m)")
-print("F:", F, "(N)")
-print("Torque (r × F):", torque, "(N·m)")
-print("Torque magnitude:", np.linalg.norm(torque), "N·m")
+print(f"Torque = {r} × {F} = {torque} N·m")
+print(f"Torque magnitude = {np.linalg.norm(torque)} N·m")
 
 
 # ---------------
@@ -861,7 +836,7 @@ print("lambda0 * v0 =", eigenvalues[0] * v0)
 # Here we transform every vector on the unit circle and show that the
 # eigenvectors are the only directions that don't rotate.
 #
-# The plotting below takes advantage of the OOP plotting interface
+# The plotting below takes advantage of the object-oriented (OO) plotting interface
 # in matplotlib, which we will learn about in the next set of lecture notes!
 
 import matplotlib.pyplot as plt
@@ -871,7 +846,7 @@ A = np.array([[2, 1],
 
 eigenvalues, eigenvectors = np.linalg.eig(A)
 
-theta = np.linspace(0, 2 * np.pi, 100)
+theta = np.linspace(0, 2*np.pi, 100)
 circle = np.array([np.cos(theta), np.sin(theta)])
 transformed = A @ circle
 

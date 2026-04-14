@@ -3,7 +3,7 @@
 """
 Topics
 ------
-What is Matplotlib and Basic Plotting
+Basic Plotting
 Customizing Plots (Colors, Markers, Labels)
 Multiple Plots and Subplots
 Different Plot Types (Scatter, Bar, Histogram, Pie)
@@ -13,21 +13,13 @@ Saving Figures
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 print()
-print('What is Matplotlib and Basic Plotting:')
+print('Basic Plotting:')
 print('---------------------------------------')
 
 # Matplotlib is the most widely used library for creating static, animated,
 # and interactive visualizations in Python. The pyplot module provides a
 # MATLAB-like interface for making plots.
-
-# The basic workflow for creating a plot:
-#   1. Prepare your data
-#   2. Create a figure and axes
-#   3. Plot your data
-#   4. Customize the plot (labels, title, etc.)
-#   5. Show or save the plot
 
 # ---------------
 # Simple Line Plot
@@ -56,7 +48,7 @@ plt.show()
 # ---------------
 
 # Matplotlib works seamlessly with NumPy arrays:
-x = np.linspace(0, 2 * np.pi, 100)   # 100 points from 0 to 2*pi
+x = np.linspace(0, 2 * np.pi, 100)
 y = np.sin(x)
 
 plt.plot(x, y)
@@ -65,9 +57,6 @@ plt.show()
 # ---------------
 # Adding Labels and Title
 # ---------------
-
-x = np.linspace(0, 2 * np.pi, 100)
-y = np.sin(x)
 
 plt.plot(x, y)
 plt.xlabel('x (radians)')           # Label for x-axis
@@ -88,11 +77,9 @@ plt.plot(x, np.sin(3*x), label='sin(3x)')
 plt.title('Multiple Lines')
 plt.show()
 
-
 print()
 print('Customizing Plots:')
 print('---------------------------------------')
-
 
 # ---------------
 # Line Styles and Colors
@@ -119,7 +106,7 @@ plt.plot(x, np.cos(x), color='red', linestyle='--', linewidth=1.5)
 plt.title('Keyword Argument Exa/mples')
 plt.show()
 
-# Multiple plots can be defined in a single plot() call:
+# Multiple plots with custom formatting can be defined in a single plot() call:
 xc = x[0:-1:4]
 plt.plot(x, np.sin(x), 'b-', x, np.cos(x), 'ro-', xc, np.sin(xc)*np.cos(xc), 'ms-.')  
 plt.show()
@@ -142,7 +129,7 @@ plt.title('Custom Markers')
 plt.show()
 
 # ---------------
-# Legend
+# Legends
 # ---------------
 
 x = np.linspace(0, 2 * np.pi, 100)
@@ -194,6 +181,10 @@ print('---------------------------------------')
 # Create multiple plots in a single figure using subplot(rows, cols, index)
 # or the more flexible subplots() function.
 
+# Syntax:
+#     plt.subplot(row, column, plot# for current use)
+# where plot# increments row-wise starting in upper left and ending lower right
+
 # Method 1: plt.subplot()
 x = np.linspace(0, 2 * np.pi, 100)
 
@@ -209,6 +200,9 @@ plt.tight_layout()                  # Adjust spacing between subplots
 plt.show()
 
 # Method 2: plt.subplots() - returns figure and axes objects
+#                      ^ plural!
+# (this is part of the object-oriented plot interface that is discussed
+# in more detail below)
 fig, axes = plt.subplots(2, 2)      # 2x2 grid of subplots
 
 axes[0, 0].plot(x, np.sin(x))
@@ -241,6 +235,31 @@ ax.plot(x, np.sin(x))
 ax.set_title('Wide Figure')
 plt.show()
 
+
+print()
+print('Saving Plots:')
+print('---------------------------------------')
+
+# Plots can be saved after calling plt.show() by manually clicking the save icon,
+# or by calling the savefig() method (no need to display the plot):
+
+plt.savefig('plot.png')
+
+# Raster formats:
+#    png — raster, default format
+#    jpg / jpeg — raster, compressed
+#    tiff / tif — raster, high quality
+#    webp — raster, modern web format
+#    raw / rgba — raw pixel data
+# Vector formats:
+#    pdf — vector, great for editing
+#    svg — vector, great for web
+#    eps — vector, PostScript
+#    ps — vector, PostScript
+
+# Common parameters:
+
+plt.savefig('plot.png', dpi=300, bbox_inches='tight', transparent=True, facecolor='white')
 
 
 print()
@@ -364,36 +383,6 @@ plt.title('Fill Between')
 plt.show()
 
 
-
-print()
-print('Saving Figures:')
-print('---------------------------------------')
-
-# ---------------
-# savefig()
-# ---------------
-
-# Save a figure to a file using savefig():
-
-x = np.linspace(0, 2 * np.pi, 100)
-y = np.sin(x)
-
-plt.plot(x, y)
-plt.xlabel('x (radians)')
-plt.ylabel('sin(x)')
-plt.title('Sine Wave')
-
-# Format options:
-# plt.savefig('sine_wave.png')              # PNG format
-# plt.savefig('sine_wave.pdf')              # PDF format
-# plt.savefig('sine_wave.svg')              # SVG format
-
-# Control resolution and quality:
-# plt.savefig('sine_wave_hires.png', dpi=300)   # High resolution
-# plt.savefig('sine_wave_tight.png', bbox_inches='tight')  # Remove extra whitespace
-
-plt.show()
-
 # ---------------
 # Object-Oriented Interface
 # ---------------
@@ -411,7 +400,7 @@ plt.show()
 #   - Axes: a single plot area with its own coordinate system
 #
 # Key differences in method names:
-#   Pyplot              Object-Oriented
+#   Regular             Object-Oriented
 #   ------              ---------------
 #   plt.plot()          ax.plot()
 #   plt.xlabel()        ax.set_xlabel()
@@ -421,6 +410,7 @@ plt.show()
 #   plt.ylim()          ax.set_ylim()
 #   plt.legend()        ax.legend()
 #   plt.grid()          ax.grid()
+#   plt.savefig()       ax.savefig()
 
 # Example using the OO interface:
 fig, ax = plt.subplots()
@@ -433,8 +423,6 @@ ax.set_ylabel('y')
 ax.set_title('Object-Oriented Style')
 ax.legend()
 ax.grid(True)
-
-# fig.savefig('oo_style.png', dpi=150)
 plt.show()
 
 # The OO interface is preferred when:
@@ -444,41 +432,124 @@ plt.show()
 #   - Building complex visualizations
 
 
-"""
-PRACTICE PROBLEMS
+print()
+print('Color Plots:')
+print('---------------------------------------')
 
-Easy
-1. Basic Plot: Create a line plot of the function y = x^2 for x values from
-   -10 to 10.
-2. Labels and Title: Plot sin(x) from 0 to 2*pi with appropriate axis labels
-   and a title.
-3. Multiple Lines: Plot sin(x), cos(x), and tan(x) on the same graph (limit
-   y-axis to [-2, 2] for tan). Add a legend.
-4. Scatter Plot: Create a scatter plot of 30 random (x, y) points.
+# matplotlib.colors is essential for generating color plots such as heatmaps,
+# contour plots, and 2D scalar field visualizations commonly used when working
+# with FEA results, fluid dynamics, sensor data, etc.
 
-Medium
-5. Subplots: Create a 2x2 grid of subplots showing sin(x), cos(x), x^2, and
-   sqrt(x) respectively.
-6. Bar Chart: Create a bar chart showing the average temperature for each month
-   of the year (use made-up data).
-7. Histogram: Generate 500 random numbers from a normal distribution with mean=10
-   and std=2. Plot a histogram with 25 bins.
-8. Customization: Plot y = e^(-x) * sin(2*pi*x) from x=0 to 5 with a red dashed
-   line, grid, and appropriate labels.
-9. Error Bars: Create a plot with error bars for 5 data points. Use random data
-   for y values and errors.
+import matplotlib.colors as mcolors
 
-Hard
-10. Combined Plot: Create a figure with a main plot showing sin(x) and a smaller
-    inset plot (using axes.inset_axes) showing a zoomed-in region.
-11. Dual Y-Axes: Create a plot with two different y-axes (left and right) showing
-    sin(x) on the left axis and x^2 on the right axis. Use ax.twinx().
-12. 3D Surface: Use mpl_toolkits.mplot3d to create a 3D surface plot of
-    z = sin(sqrt(x^2 + y^2)).
-13. Animation Prep: Create a function that generates and saves 10 PNG frames
-    of a sine wave shifting phase from 0 to 2*pi.
-14. Statistical Plot: Create a box plot comparing 4 different datasets (use
-    np.random.randn to generate data with different means).
-15. Custom Styling: Create a professional-looking plot using plt.style.use()
-    (try 'seaborn' or 'ggplot') with custom fonts and colors.
-"""
+# Simulate a 2D temperature field with a hot spot and a cold spot.
+# This mimics the kind of scalar field data engineers work with
+# in thermal analysis, FEA results, or sensor array readings.
+x = np.linspace(-5, 5, 200)
+y = np.linspace(-5, 5, 200)
+X, Y = np.meshgrid(x, y)
+
+# Hot spot centered at (2, 2), cold spot at (-2, -2)
+temp = 50 * np.exp(-((X - 2)**2 + (Y - 2)**2)) \
+     - 30 * np.exp(-((X + 2)**2 + (Y + 2)**2)) \
+     + 20  # ambient baseline of 20 degrees
+
+# --- Example 1: Default normalization ---
+# By default, imshow maps the min value in the data to the bottom
+# of the colormap and the max to the top. This uses the full color
+# range but gives you no control over what value maps to what color.
+fig, axes = plt.subplots(1, 3, figsize=(16, 4))
+
+im0 = axes[0].imshow(temp,
+                     extent=[-5, 5, -5, 5],
+                     origin='lower',
+                     cmap='coolwarm')
+axes[0].set_title('Default Normalize')
+plt.colorbar(im0, ax=axes[0], label='Temp (°C)')
+
+# --- Example 2: Manual normalization with Normalize ---
+# Normalize lets you set explicit vmin and vmax boundaries.
+# Useful when you have a known safe operating range and want
+# the colormap to reflect that range, not the data extremes.
+# Here we set 0-40 as our range — anything above 40 saturates
+# to the top color, making hot spots immediately obvious.
+norm1 = mcolors.Normalize(vmin=0, vmax=40)
+
+im1 = axes[1].imshow(temp, extent=[-5, 5, -5, 5], origin='lower',
+                      cmap='coolwarm', norm=norm1)
+axes[1].set_title('Normalize (vmin=0, vmax=40)')
+plt.colorbar(im1, ax=axes[1], label='Temp (°C)')
+
+# --- Example 3: TwoSlopeNorm for asymmetric data ---
+# TwoSlopeNorm is ideal when your data has a meaningful center
+# point that isn't the midpoint of the range. For example, if
+# 20°C is ambient and you want blue for below-ambient, red for
+# above-ambient, with the white/neutral color pinned at exactly 20.
+# This prevents the colormap from being skewed by an asymmetric
+# range (here the hot spot is stronger than the cold spot).
+norm2 = mcolors.TwoSlopeNorm(vcenter=20, vmin=-10, vmax=50)
+
+im2 = axes[2].imshow(temp, extent=[-5, 5, -5, 5], origin='lower',
+                      cmap='coolwarm', norm=norm2)
+axes[2].set_title('TwoSlopeNorm (center=20°C)')
+plt.colorbar(im2, ax=axes[2], label='Temp (°C)')
+
+for ax in axes:
+    ax.set_xlabel('X position (m)')
+    ax.set_ylabel('Y position (m)')
+
+plt.tight_layout()
+plt.show()
+
+
+print()
+print('3D Plots using mpl_toolkits.mplot3d:')
+print('---------------------------------------')
+
+# pyplot cannot directly generate 3D plots (response surfaces, vector field
+# visualization, etc.).  Instead, use mpl_toolkits.mplot3d to support a third
+# dimension.  We still use pyplot to handle the figure lifecycle (creating,
+# displaying, saving) but leverage mplot3d to create the 3D plots themselves.
+
+from mpl_toolkits.mplot3d import Axes3D
+
+# Create 1D arrays of x and y values
+x = np.linspace(-5, 5, 100)
+y = np.linspace(-5, 5, 100)
+
+# meshgrid converts two 1D arrays into two 2D arrays.
+# X varies along columns, Y varies along rows.
+# This gives us a grid of (x, y) coordinate pairs that
+# plot_surface needs to evaluate z = f(x, y) at every point.
+X, Y = np.meshgrid(x, y)
+
+# Compute z values across the entire grid in one step
+# (no loops needed thanks to NumPy broadcasting)
+R = np.sqrt(X**2 + Y**2)
+Z = np.sin(R)
+
+# Create the figure and add a 3D axes.
+# The projection='3d' argument is provided by mpl_toolkits.mplot3d
+# and tells matplotlib to use 3D axes instead of the default 2D.
+fig = plt.figure(figsize=(10, 7))
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot the surface.
+# cmap='viridis' maps z values to colors using the viridis colormap.
+# Other options include 'plasma', 'coolwarm', 'inferno', etc.
+# See matplotlib.cm for the full list of available colormaps.
+#
+# edgecolor='none' removes the wireframe grid lines on the surface,
+# giving a smooth appearance. Try removing this argument to see the
+# difference — it adds a black wireframe overlay on each grid cell.
+ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
+
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+ax.set_title('z = sin(√(x² + y²))')
+
+plt.tight_layout()
+plt.show()
+
+# Try dragging the plot with the mouse to rotate.
