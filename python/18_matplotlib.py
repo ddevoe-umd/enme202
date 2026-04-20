@@ -71,9 +71,9 @@ plt.show()
 x = np.linspace(0, 2 * np.pi, 100)
 
 # Simply call plot() multiple times before show():
-plt.plot(x, np.sin(x), label='sin(x)')
-plt.plot(x, np.sin(2*x), label='sin(2x)')
-plt.plot(x, np.sin(3*x), label='sin(3x)')
+plt.plot(x, np.sin(x))
+plt.plot(x, np.sin(2*x))
+plt.plot(x, np.sin(3*x))
 plt.title('Multiple Lines')
 plt.show()
 
@@ -94,11 +94,12 @@ x = np.linspace(0, 2 * np.pi, 100)
 # Format string: 'color''marker''linestyle'
 # Colors: 'b' (blue), 'g' (green), 'r' (red), 'c' (cyan),
 #         'm' (magenta), 'y' (yellow), 'k' (black), 'w' (white)
-# Markers: 'o' (circle), 's' (square), '^' (triangle), 'x', '+', '*'
+# Markers (optional): 'o' (circle), 's' (square), '^' (triangle), 'x', '+', '*'
 # Line styles: '-' (solid), '--' (dashed), ':' (dotted), '-.' (dash-dot)
 
-plt.plot(x, np.sin(x), 'b-')        # Blue solid line
-plt.plot(x, np.cos(x), 'r--')       # Red dashed line
+plt.plot(x, np.sin(x), 'b-')        # Blue + solid line
+plt.plot(x, np.cos(x), 'r--')       # Red + dashed line
+plt.plot(x, np.cos(x) * np.sin(x), 'ko-.')  # Black + circles + dash-dot line
 plt.show()
 
 # Use keyword arguments for more control. Here we add the _linewidth_
@@ -123,8 +124,10 @@ plt.plot(x, np.cos(x), 'rs--')      # Red squares with dashed line
 plt.show()
 
 # More marker customization:
-plt.plot(x, np.sin(x), marker='o', markersize=8,
-         markerfacecolor='yellow', markeredgecolor='blue')
+plt.plot(x, np.sin(x), marker='o',
+         markersize=8,
+         markerfacecolor='yellow',
+         markeredgecolor='blue')
 plt.show()
 
 # ---------------
@@ -146,7 +149,7 @@ plt.show()
 
 plt.plot(x, np.sin(x), label='sin(x)')
 plt.plot(x, np.cos(x), label='cos(x)')
-plt.legend(loc='lower left')
+plt.legend(loc='lower right')
 plt.show()
 
 # ---------------
@@ -156,8 +159,8 @@ plt.show()
 x = np.linspace(0, 2 * np.pi, 100)
 
 plt.plot(x, np.sin(x))
-plt.xlim(0, 2 * np.pi)              # Set x-axis limits
-plt.ylim(-1.5, 1.5)                 # Set y-axis limits
+plt.xlim(np.pi/2, 4*np.pi/3)              # Set x-axis limits
+plt.ylim(-1.0, 2.5)                 # Set y-axis limits
 plt.grid(True)                      # Add grid lines
 plt.title('Plot with Grid and Custom Limits')
 plt.show()
@@ -183,7 +186,7 @@ print('---------------------------------------')
 #     plt.subplot(row, column, plot# for current use)
 # where plot# increments row-wise starting in upper left and ending lower right
 
-# Method 1: plt.subplot()
+# Method 1: plt.subplot() -- selects a specific figure panel
 x = np.linspace(0, 2 * np.pi, 100)
 
 plt.subplot(2, 1, 1)                # 2 rows, 1 column, first plot
@@ -197,7 +200,7 @@ plt.title('Cosine')
 plt.tight_layout()                  # Adjust spacing between subplots
 plt.show()
 
-# Method 2: plt.subplots() - returns figure and axes objects
+# Method 2: plt.subplots() -- returns figure and axes objects
 #                      ^ plural!
 # (this is part of the object-oriented plot interface that is discussed
 # in more detail below)
@@ -221,13 +224,13 @@ plt.show()
 
 # You can explore the wide variety of axes methods available for
 # manipulating plots from the official matplotlib site:
-# https://matplotlib.org/stable/api/axes_api.html
+#     https://matplotlib.org/stable/api/axes_api.html
 
 # ---------------
 # Figure Size
 # ---------------
 
-# Control the size of the figure:
+# Control the size of the figure using OO interface:
 fig, ax = plt.subplots(figsize=(10, 4))   # width, height (inches)
 ax.plot(x, np.sin(x))
 ax.set_title('Wide Figure')
