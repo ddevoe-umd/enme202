@@ -104,10 +104,10 @@ print("Linspace:", linspace_arr)
 # ---------------
 
 # Create arrays with random values:
-rand_arr = np.random.rand(3)          # 3 random floats in [0,1] uniform distribution
+rand_arr = np.random.rand(3)          # Uniform distribution in [0,1]
 print("Random (uniform):", rand_arr)
 
-randn_arr = np.random.randn(3)        # 3 random floats in [0,1] normal distribution
+randn_arr = np.random.randn(3)        # Normal distribution in [-inf, inf] with std dev = 1
 print("Random (normal):", randn_arr)
 
 randint_arr = np.random.randint(1, 10, 5)  # 5 random ints in [1,9] uniform distribution
