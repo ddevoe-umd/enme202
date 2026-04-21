@@ -272,9 +272,11 @@ print('---------------------------------------')
 # Scatter Plot
 # ---------------
 
-# Scatter plots show individual data points:
+# Scatter plots show individual data points
+# 50 random values from normal distribution w/ standard deviation of 1:
 x = np.random.randn(50)
 y = np.random.randn(50)
+# 50 random values from uniform distribution in range [0,1]:
 colors = np.random.rand(50)         # Random colors
 sizes = 100 * np.random.rand(50)    # Random sizes
 
@@ -337,20 +339,14 @@ plt.show()
 # Histogram
 # ---------------
 
-# Histograms show the distribution of data:
-data = np.random.randn(1000)        # 1000 random values from normal distribution
+# Histograms show the distribution of data
+# 1000 random values from normal distribution w/ standard deviation of 1:
+data = np.random.randn(1000000)        
 
-plt.hist(data, bins=30)
+plt.hist(data, bins=3000)
 plt.xlabel('Value')
 plt.ylabel('Frequency')
 plt.title('Histogram')
-plt.show()
-
-# Customized histogram:
-plt.hist(data, bins=30, edgecolor='black', alpha=0.7, color='steelblue')
-plt.xlabel('Value')
-plt.ylabel('Frequency')
-plt.title('Customized Histogram')
 plt.show()
 
 # ---------------
