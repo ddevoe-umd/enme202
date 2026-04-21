@@ -124,7 +124,8 @@ plt.plot(x, np.cos(x), 'rs--')      # Red squares with dashed line
 plt.show()
 
 # More marker customization:
-plt.plot(x, np.sin(x), marker='o',
+plt.plot(x, np.sin(x),
+         marker='o',
          markersize=8,
          markerfacecolor='yellow',
          markeredgecolor='blue')
@@ -136,7 +137,7 @@ plt.show()
 
 x = np.linspace(0, 2 * np.pi, 100)
 
-plt.plot(x, np.sin(x), 'b-', label='sin(x)')
+plt.plot(x, np.sin(x), 'b-', label='sin(x)')    # add legend label
 plt.plot(x, np.cos(x), 'r--', label='cos(x)')
 plt.xlabel('x (radians)')
 plt.ylabel('y')
@@ -144,8 +145,8 @@ plt.legend()      # Display the legend (label entries)
 plt.show()
 
 # Legend location can be specified with _loc_ parameter:
-# 'best', 'upper right', 'upper left', 'lower left', 'lower right',
-# 'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
+#     'best', 'upper right', 'upper left', 'lower left', 'lower right',
+#     'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
 
 plt.plot(x, np.sin(x), label='sin(x)')
 plt.plot(x, np.cos(x), label='cos(x)')
@@ -159,7 +160,7 @@ plt.show()
 x = np.linspace(0, 2 * np.pi, 100)
 
 plt.plot(x, np.sin(x))
-plt.xlim(np.pi/2, 4*np.pi/3)              # Set x-axis limits
+plt.xlim(np.pi/2, 4*np.pi/3)        # Set x-axis limits
 plt.ylim(-1.0, 2.5)                 # Set y-axis limits
 plt.grid(True)                      # Add grid lines
 plt.title('Plot with Grid and Custom Limits')
@@ -167,7 +168,7 @@ plt.show()
 
 # Grid customization:
 plt.plot(x, np.sin(x))
-plt.grid(True, linestyle='--', alpha=0.7)   # Dashed grid with transparency
+plt.grid(True, linestyle='--', alpha=0.7)   # Dashed grid with 70% transparency
 plt.show()
 
 
@@ -204,20 +205,20 @@ plt.show()
 #                      ^ plural!
 # (this is part of the object-oriented plot interface that is discussed
 # in more detail below)
-fig, axes = plt.subplots(2, 2)      # 2x2 grid of subplots
+fig, ax = plt.subplots(2, 2)      # 2x2 grid of subplots
 
-axes[0, 0].plot(x, np.sin(x))
-axes[0, 0].set_title('sin(x)')
+ax[0, 0].plot(x, np.sin(x))
+ax[0, 0].set_title('sin(x)')
 
-axes[0, 1].plot(x, np.cos(x))
-axes[0, 1].set_title('cos(x)')
+ax[0, 1].plot(x, np.cos(x))
+ax[0, 1].set_title('cos(x)')
 
-axes[1, 0].plot(x, np.tan(x))
-axes[1, 0].set_ylim(-5, 5)          # Limit y-axis for tangent
-axes[1, 0].set_title('tan(x)')
+ax[1, 0].plot(x, np.tan(x))
+ax[1, 0].set_ylim(-5, 5)          # Limit y-axis for tangent
+ax[1, 0].set_title('tan(x)')
 
-axes[1, 1].plot(x, x**2)
-axes[1, 1].set_title('x^2')
+ax[1, 1].plot(x, x**2)
+ax[1, 1].set_title('x^2')
 
 plt.tight_layout()
 plt.show()
@@ -573,85 +574,8 @@ plt.show()
 
 
 print()
-print('Color Plots:')
+print('3D Plots using meshgrid and plot_surface:')
 print('---------------------------------------')
-
-# matplotlib.colors is essential for generating color plots such as heatmaps,
-# contour plots, and 2D scalar field visualizations commonly used when working
-# with FEA results, fluid dynamics, sensor data, etc.
-
-import matplotlib.colors as mcolors
-
-# Simulate a 2D temperature field with a hot spot and a cold spot.
-# This mimics the kind of scalar field data engineers work with
-# in thermal analysis, FEA results, or sensor array readings.
-x = np.linspace(-5, 5, 200)
-y = np.linspace(-5, 5, 200)
-X, Y = np.meshgrid(x, y)
-
-# Hot spot centered at (2, 2), cold spot at (-2, -2)
-temp = 50 * np.exp(-((X - 2)**2 + (Y - 2)**2)) \
-     - 30 * np.exp(-((X + 2)**2 + (Y + 2)**2)) \
-     + 20  # ambient baseline of 20 degrees
-
-# --- Example 1: Default normalization ---
-# By default, imshow maps the min value in the data to the bottom
-# of the colormap and the max to the top. This uses the full color
-# range but gives you no control over what value maps to what color.
-fig, axes = plt.subplots(1, 3, figsize=(16, 4))
-
-im0 = axes[0].imshow(temp,
-                     extent=[-5, 5, -5, 5],
-                     origin='lower',
-                     cmap='coolwarm')
-axes[0].set_title('Default Normalize')
-plt.colorbar(im0, ax=axes[0], label='Temp (°C)')
-
-# --- Example 2: Manual normalization with Normalize ---
-# Normalize lets you set explicit vmin and vmax boundaries.
-# Useful when you have a known safe operating range and want
-# the colormap to reflect that range, not the data extremes.
-# Here we set 0-40 as our range — anything above 40 saturates
-# to the top color, making hot spots immediately obvious.
-norm1 = mcolors.Normalize(vmin=0, vmax=40)
-
-im1 = axes[1].imshow(temp, extent=[-5, 5, -5, 5], origin='lower',
-                      cmap='coolwarm', norm=norm1)
-axes[1].set_title('Normalize (vmin=0, vmax=40)')
-plt.colorbar(im1, ax=axes[1], label='Temp (°C)')
-
-# --- Example 3: TwoSlopeNorm for asymmetric data ---
-# TwoSlopeNorm is ideal when your data has a meaningful center
-# point that isn't the midpoint of the range. For example, if
-# 20°C is ambient and you want blue for below-ambient, red for
-# above-ambient, with the white/neutral color pinned at exactly 20.
-# This prevents the colormap from being skewed by an asymmetric
-# range (here the hot spot is stronger than the cold spot).
-norm2 = mcolors.TwoSlopeNorm(vcenter=20, vmin=-10, vmax=50)
-
-im2 = axes[2].imshow(temp, extent=[-5, 5, -5, 5], origin='lower',
-                      cmap='coolwarm', norm=norm2)
-axes[2].set_title('TwoSlopeNorm (center=20°C)')
-plt.colorbar(im2, ax=axes[2], label='Temp (°C)')
-
-for ax in axes:
-    ax.set_xlabel('X position (m)')
-    ax.set_ylabel('Y position (m)')
-
-plt.tight_layout()
-plt.show()
-
-
-print()
-print('3D Plots using mpl_toolkits.mplot3d:')
-print('---------------------------------------')
-
-# pyplot cannot directly generate 3D plots (response surfaces, vector field
-# visualization, etc.).  Instead, use mpl_toolkits.mplot3d to support a third
-# dimension.  We still use pyplot to handle the figure lifecycle (creating,
-# displaying, saving) but leverage mplot3d to create the 3D plots themselves.
-
-from mpl_toolkits.mplot3d import Axes3D
 
 # Create 1D arrays of x and y values
 x = np.linspace(-5, 5, 100)
@@ -693,3 +617,73 @@ plt.tight_layout()
 plt.show()
 
 # Try dragging the plot with the mouse to rotate.
+
+
+print()
+print('Color Plots:')
+print('---------------------------------------')
+
+# matplotlib.colors is essential for generating color plots such as heatmaps,
+# contour plots, and 2D scalar field visualizations commonly used when working
+# with FEA results, fluid dynamics, sensor data, etc.
+
+import matplotlib.colors as mcolors
+
+# Simulate a 2D temperature field with a hot spot and a cold spot.
+# This mimics the kind of scalar field data engineers work with
+# in thermal analysis, FEA results, or sensor array readings.
+x = np.linspace(-5, 5, 200)
+y = np.linspace(-5, 5, 200)
+X, Y = np.meshgrid(x, y)
+
+# Hot spot centered at (2, 2), cold spot at (-2, -2)
+temp = 50 * np.exp(-((X - 2)**2 + (Y - 2)**2)) \
+     - 30 * np.exp(-((X + 2)**2 + (Y + 2)**2)) \
+     + 20  # ambient baseline of 20 degrees
+
+# --- Example 1: Default normalization (full color range) ---
+# By default, imshow maps the min value in the data to the bottom
+# of the colormap and the max to the top. This uses the full color
+# range but gives you no control over what value maps to what color.
+fig, axes = plt.subplots(1, 3, figsize=(16, 4))
+
+im0 = axes[0].imshow(temp,
+                     extent=[-5, 5, -5, 5],
+                     origin='lower',
+                     cmap='coolwarm')
+axes[0].set_title('Default Normalize')
+plt.colorbar(im0, ax=axes[0], label='Temp (°C)')
+
+# --- Example 2: Normalize (manual normalization) ---
+# Normalize lets you set explicit vmin and vmax boundaries.
+# Useful when you have a known safe operating range and want
+# the colormap to reflect that range, not the data extremes.
+# Here we set 0-40 as our range — anything above 40 saturates
+# to the top color, making hot spots immediately obvious.
+norm1 = mcolors.Normalize(vmin=0, vmax=40)
+
+im1 = axes[1].imshow(temp, extent=[-5, 5, -5, 5], origin='lower',
+                      cmap='coolwarm', norm=norm1)
+axes[1].set_title('Normalize (vmin=0, vmax=40)')
+plt.colorbar(im1, ax=axes[1], label='Temp (°C)')
+
+# --- Example 3: TwoSlopeNorm (for asymmetric data) ---
+# TwoSlopeNorm is ideal when your data has a meaningful center
+# point that isn't the midpoint of the range. For example, if
+# 20°C is ambient and you want blue for below-ambient, red for
+# above-ambient, with the white/neutral color pinned at exactly 20.
+# This prevents the colormap from being skewed by an asymmetric
+# range (here the hot spot is stronger than the cold spot).
+norm2 = mcolors.TwoSlopeNorm(vcenter=20, vmin=-10, vmax=50)
+
+im2 = axes[2].imshow(temp, extent=[-5, 5, -5, 5], origin='lower',
+                      cmap='coolwarm', norm=norm2)
+axes[2].set_title('TwoSlopeNorm (center=20°C)')
+plt.colorbar(im2, ax=axes[2], label='Temp (°C)')
+
+for ax in axes:
+    ax.set_xlabel('X position (m)')
+    ax.set_ylabel('Y position (m)')
+
+plt.tight_layout()
+plt.show()
