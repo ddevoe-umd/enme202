@@ -520,10 +520,9 @@ R = np.sqrt(X**2 + Y**2)
 Z = np.sin(R)
 
 # Create the figure and add a 3D axes.
-# The projection='3d' argument is provided by mpl_toolkits.mplot3d
-# and tells matplotlib to use 3D axes instead of the default 2D.
-fig = plt.figure(figsize=(10, 7))
-ax = fig.add_subplot(111, projection='3d')
+# The projection='3d' argument tells matplotlib to use 3D axes
+# instead of the default 2D.
+ax = plt.subplot(111, projection='3d')   # subplot returns just the axes object
 
 # Plot the surface.
 # cmap='viridis' maps z values to colors using the viridis colormap.
