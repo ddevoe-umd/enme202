@@ -8,7 +8,7 @@ Customizing Plots (Colors, Markers, Labels)
 Multiple Plots and Subplots
 Different Plot Types (Scatter, Bar, Histogram, Pie, Polar)
 Saving Figures
-"""
+""" 
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -283,10 +283,17 @@ plt.title('Basic Scatter Plot')
 plt.show()
 
 # Scatter plot with color and size variations:
-plt.scatter(x, y, c=colors, s=sizes, alpha=0.6, cmap='viridis')
+plt.scatter(x, y, c=colors, s=sizes, alpha=0.6, edgecolor='black', cmap='viridis')
 plt.colorbar()                      # Add color bar
 plt.title('Scatter Plot with Color and Size')
 plt.show()
+
+# Key scatter plot concepts:
+#   - Use c parameter for color-coding a third variable
+#   - Use s parameter for size-coding (area proportional to value)
+#   - Use alpha for transparency (useful when points overlap)
+#   - Add colorbar() when using color mapping (cmap)
+#   - Use edgecolor to make markers more distinct
 
 # ---------------
 # Bar Chart
@@ -310,12 +317,12 @@ plt.show()
 
 # Grouped bar chart:
 x_pos = np.arange(len(categories))
-values1 = [23, 45, 56, 78, 32]
-values2 = [30, 40, 50, 60, 70]
+y1 = [23, 45, 56, 78, 32]
+y2 = [30, 40, 50, 60, 70]
 width = 0.35
 
-plt.bar(x_pos - width/2, values1, width, label='Group 1')
-plt.bar(x_pos + width/2, values2, width, label='Group 2')
+plt.bar(x_pos - width/2, y1, width, label='Group 1')
+plt.bar(x_pos + width/2, y2, width, label='Group 2')
 plt.xticks(x_pos, categories)
 plt.legend()
 plt.title('Grouped Bar Chart')
@@ -347,7 +354,7 @@ plt.show()
 
 sizes = [35, 25, 20, 15, 5]
 labels = ['Python', 'Java', 'JavaScript', 'C++', 'Other']
-explode = (0.1, 0, 0, 0, 0)         # "Explode" the first slice
+explode = (0.1, 0, 0, 0, 0)         # "Explode" the first slice by 10%
 
 plt.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
         shadow=True, startangle=90)
@@ -428,20 +435,9 @@ r = np.random.random(n_points)
 colors = theta      # Color by angle
 
 plt.subplot(projection='polar')
-plt.scatter(theta, r, c=colors, cmap='hsv', s=50, alpha=0.7)
+plt.scatter(theta, r, c=colors, cmap='hsv', alpha=0.7)
 plt.colorbar(label='Angle (radians)')
 plt.title('Polar Scatter Plot')
-plt.show()
-
-# Customizing polar plots (using the OO interface)
-theta_custom = np.linspace(0, 2*np.pi, 100)
-r_custom = 1 + 0.5*np.cos(theta_custom)
-
-fig, ax = plt.subplots(subplot_kw=dict(projection='polar'))
-ax.plot(theta_custom, r_custom, 'r-', linewidth=3)
-ax.set_ylim(0, 2)           # Set radial limits
-ax.set_title('Customized Polar Plot')
-ax.grid(True)
 plt.show()
 
 # Key concepts for polar plots:
@@ -450,75 +446,6 @@ plt.show()
 #   - Use np.linspace(0, 2*np.pi, N) to create full circle of angles
 #   - Convert degrees to radians: radians = degrees * np.pi/180
 #   - For FFT phase plots: theta = phase, r = frequency (or vice versa)
-
-# ---------------
-# Scatter Plots (Advanced)
-# ---------------
-
-# Basic scatter plot with random data
-np.random.seed(42)  # For reproducible results
-n_points = 50
-x = np.random.randn(n_points)        # Normal distribution
-y = 2*x + np.random.randn(n_points)  # Correlated data with noise
-
-plt.scatter(x, y)
-plt.xlabel('Variable X')
-plt.ylabel('Variable Y')
-plt.title('Basic Scatter Plot')
-plt.grid(True, alpha=0.3)
-plt.show()
-
-# Scatter plot with color-coding and size variation
-# This is common in engineering when you have a third parameter
-# (temperature, pressure, time, etc.) that affects the relationship
-temperature = 20 + 30*np.random.random(n_points)
-stress = 100 + 50*x + 10*temperature + np.random.randn(n_points)*5  # Fn of both x and temperature
-marker_sizes = temperature * 2  # Size proportional to temperature
-
-plt.scatter(x, stress, c=temperature, s=marker_sizes, alpha=0.6, cmap='coolwarm')
-plt.colorbar(label='Temperature (°C)')
-plt.xlabel('Load Factor')
-plt.ylabel('Stress (MPa)')
-plt.title('Stress vs Load\n(color=temperature, size=temperature)')
-plt.grid(True, alpha=0.3)
-plt.show()
-
-# Scatter plot with different marker types for categories
-# Useful when comparing different materials, conditions, or groups
-materials = ['Steel', 'Aluminum', 'Titanium']
-markers = ['o', 's', '^']  # Circle, square, triangle
-colors = ['blue', 'green', 'red']
-
-plt.figure()
-for i, material in enumerate(materials):
-    # Generate data for each material with different properties
-    n_samples = 15
-    strength = np.random.normal(200 + i*300, 50, n_samples)  # Different mean strength
-    cost = np.random.normal(5 + i*10, 2, n_samples)          # Different cost
-
-    plt.scatter(strength, cost, 
-                marker=markers[i], 
-                olor=colors[i],
-                s=80, 
-                alpha=0.7, 
-                label=material, 
-                edgecolor='black')
-
-plt.xlabel('Tensile Strength (MPa)')
-plt.ylabel('Cost ($/kg)')
-plt.title('Material Properties Comparison')
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.show()
-
-# Key scatter plot concepts:
-#   - Use c parameter for color-coding a third variable
-#   - Use s parameter for size-coding (area proportional to value)
-#   - Use alpha for transparency when points overlap
-#   - Use different markers for categorical data
-#   - Add colorbar() when using color mapping
-#   - Use edgecolor to make markers more distinct
-
 
 print()
 print('Object-Oriented Interface:')
