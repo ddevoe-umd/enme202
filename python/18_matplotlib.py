@@ -288,6 +288,11 @@ plt.colorbar()                      # Add color bar
 plt.title('Scatter Plot with Color and Size')
 plt.show()
 
+# A note about colors:
+# cmap='viridis' maps z values to colors using the viridis colormap.
+# Other options include 'plasma', 'coolwarm', 'inferno', etc.
+# See matplotlib.cm for the full list of available colormaps.
+
 # Key scatter plot concepts:
 #   - Use c parameter for color-coding a third variable
 #   - Use s parameter for size-coding (area proportional to value)
@@ -519,16 +524,10 @@ X, Y = np.meshgrid(x, y)
 R = np.sqrt(X**2 + Y**2)
 Z = np.sin(R)
 
-# Create the figure and add a 3D axes.
-# The projection='3d' argument tells matplotlib to use 3D axes
-# instead of the default 2D.
+# Create the 3D axes using the projection='3d' argument
 ax = plt.subplot(111, projection='3d')   # subplot returns just the axes object
 
 # Plot the surface.
-# cmap='viridis' maps z values to colors using the viridis colormap.
-# Other options include 'plasma', 'coolwarm', 'inferno', etc.
-# See matplotlib.cm for the full list of available colormaps.
-#
 # edgecolor='none' removes the wireframe grid lines on the surface,
 # giving a smooth appearance. Try removing this argument to see the
 # difference — it adds a black wireframe overlay on each grid cell.
